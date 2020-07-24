@@ -1,13 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-// import { SplashScreen } from 'expo';
+import { StyleSheet, Text, View, Button } from 'react-native';
 
- const SplashScreen = props => {
+const SplashScreen = props => {
  
   return (
     <View style={styles.container}>
-      <Text>Welcome to {props.title}!</Text>
+      <Text>Welcome to SplashScreen</Text>
+      <Button title="Login" onPress={() => {
+         props.navigation.navigate('Login')
+      }} />
       <StatusBar style="auto" />
     </View>
   );
@@ -16,6 +18,8 @@ import { StyleSheet, Text, View } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 });
 
