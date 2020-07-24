@@ -1,17 +1,26 @@
 import React from 'react';
-import { Image } from 'react-native';
-import { createAppContainer, createStackNavigator } from 'react-navigation';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import SplashScreen from '../screens/SplashScreen';
+import Login from '../screens/LoginScreen';
+import SignUp from '../screens/SignUpScreen';
+import Dashboard from '../screens/Dashboard';
+import UserTerms from '../screens/UserTermsScreen';
 
-import SplashScreen from '../screens/SplashScreen'
+const Stack = createStackNavigator();
 
-const screens = createStackNavigator ({
-    SplashScreen
-}, {
-    defaultNavigationOptions: {
-        headerStyle: {},
-        headerBackImage: <Image />,
-        headerBackTitle: null,
-        headerLeftContainerStyle: {},
-        headerRightContainerStyle: {}
-    }
-});
+const AppNavigation = () => {
+    return (
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen name="Home" component={SplashScreen} />
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Dashboard" component={Dashboard} />
+            <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="UserTerms" component={UserTerms} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      );
+}
+
+export default AppNavigation;
