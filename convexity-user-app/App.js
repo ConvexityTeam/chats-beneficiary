@@ -1,22 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
+
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { AppLoading } from 'expo';
+import { NavigationContainer } from '@react-navigation/native';
 
-import SplashScreen from './screens/SplashScreen'
+// import SplashScreen from './screens/SplashScreen'
+import AppNavigation from './navigation'
 
 export default function App() {
  
   return (
-    <View style={styles.container}>
-      <SplashScreen title={'Convexity'}/>
-      <StatusBar style="auto" />
-    </View>
+      <AppNavigation />
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 50
+    paddingTop: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 });
