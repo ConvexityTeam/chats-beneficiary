@@ -42,7 +42,7 @@ const AppNavigation = () => {
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Home">
             <Stack.Screen name="Home" component={SplashScreen} />
-            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
             <Stack.Screen name="Dashboard" component={Dashboard} options={({ route }) => ({
     headerTitle: getHeaderTitle(route),
   })} />
