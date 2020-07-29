@@ -42,11 +42,11 @@ const AppNavigation = () => {
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Home">
             <Stack.Screen name="Home" component={SplashScreen} />
-            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
             <Stack.Screen name="Dashboard" component={Dashboard} options={({ route }) => ({
     headerTitle: getHeaderTitle(route),
-  })} />
-            <Stack.Screen name="SignUp" component={SignUp} />
+  }), {headerShown: false}} />
+            <Stack.Screen name="SignUp" component={SignUp} options={{headerShown: false}} />
             <Stack.Screen name="UserTerms" component={UserTerms} options={{ title: 'User Terms' }}/>
           </Stack.Navigator>
         </NavigationContainer>
