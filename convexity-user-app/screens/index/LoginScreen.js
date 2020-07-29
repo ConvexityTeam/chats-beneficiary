@@ -1,9 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { TextInput } from 'react-native-paper';
-import { Button } from 'react-native-paper';
-// import { SplashScreen } from 'expo';
+import { StyleSheet, View, Image } from 'react-native';
+import { TextInput, Button, TouchableRipple } from 'react-native-paper';
+import Logo from '../../assets/chats-logo.jpeg'
+
 
  const LoginScreen = props => {
 
@@ -11,6 +11,7 @@ import { Button } from 'react-native-paper';
  
   return (
     <View style={styles.container}>
+      
       <View style={styles.textInput}>
         <TextInput
         mode="outlined"
@@ -31,16 +32,18 @@ import { Button } from 'react-native-paper';
       </View>
       <View style={styles.buttonContainer}>
         <View style={styles.button}>
-          <Button 
-          mode="contained"
-          icon="reminder"
-          color="white"
-          onPress={() => {
-              props.navigation.navigate('Dashboard')
-          }}>Login</Button>
+          <TouchableRipple rippleColor="grey">
+            <Button 
+            mode="contained"
+            icon="reminder"
+            color="white"
+            onPress={() => {
+                props.navigation.navigate('Dashboard')
+            }}>Login</Button>
+          </TouchableRipple>
         </View>
       </View>
-      <Button title="UserTerms" onPress={() => {
+      <Button title="Sign Up" onPress={() => {
           props.navigation.navigate('SignUp')
       }} />
       <StatusBar style="auto" />
@@ -54,7 +57,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flex: 1,
     padding: 10,
-    backgroundColor: "#4C296B"
+    // backgroundColor: "#4C296B"
   },
   textInput: {
     padding: 5,
