@@ -6,6 +6,8 @@ import Login from '../screens/index/LoginScreen';
 import SignUp from '../screens/index/SignUpScreen';
 import Dashboard from '../screens/index/DashboardScreen';
 import UserTerms from '../screens/index/UserTermsScreen';
+import Wallet from '../screens/menu/wallet/WalletScreen';
+import ConvertToken from '../screens/menu/wallet/ConvertTokenScreen';
 
 const Stack = createStackNavigator();
 
@@ -48,6 +50,8 @@ const AppNavigation = () => {
   }), {headerShown: false}} />
             <Stack.Screen name="SignUp" component={SignUp} options={{headerShown: false}} />
             <Stack.Screen name="UserTerms" component={UserTerms} options={{ title: 'User Terms' }}/>
+            <Stack.Screen name="Wallet" component={Wallet} />
+            <Stack.Screen name="ConvertToken" component={ConvertToken}  />
           </Stack.Navigator>
         </NavigationContainer>
       );
