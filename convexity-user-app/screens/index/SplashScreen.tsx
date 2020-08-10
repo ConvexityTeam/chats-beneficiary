@@ -6,7 +6,8 @@ import { StyleSheet, Text, View, Image,
 import Icon from 'react-native-vector-icons/Ionicons';
 import Color from '../../constants/colors';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import LoginScreen from './LoginScreen';
+import AuthScreen from '../user/AuthScreen';
+// import AuthScreen from '../index/DashboardScreen';
 
 const data = [
   {
@@ -66,7 +67,7 @@ export default class SplashScreen extends React.Component {
 
     if (this.state.show_Main_App) {
       return (
-        <LoginScreen />
+        <AuthScreen />
       );
     } else {
       return (
