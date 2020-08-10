@@ -7,6 +7,8 @@ import SignUp from '../screens/index/SignUpScreen';
 import Dashboard from '../screens/index/DashboardScreen';
 import UserTerms from '../screens/index/UserTermsScreen';
 
+import Auth from '../screens/user/AuthScreen';
+
 import Wallet from '../screens/menu/wallet/WalletScreen';
 import ConvertToken from '../screens/menu/wallet/ConvertTokenScreen';
 import OTPConvertToken from '../screens/menu/wallet/OtpConvertTokenScreen';
@@ -62,6 +64,8 @@ const AppNavigation = () => {
   }), {headerShown: false}} />
             <Stack.Screen name="SignUp" component={SignUp} options={{headerShown: false}} />
             <Stack.Screen name="UserTerms" component={UserTerms} options={{ title: 'User Terms' }}/>
+
+            <Stack.Screen name="Auth" component={Auth} options={{headerShown: false}} />
            
             <Stack.Screen name="Wallet" component={Wallet} />
            
