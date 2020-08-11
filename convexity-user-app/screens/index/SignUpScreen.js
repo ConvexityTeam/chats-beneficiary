@@ -1,21 +1,36 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import React, { useReducer } from 'react';
+import { StyleSheet, View, Text, ScrollView, KeyboardAvoidingView, KeyboardAvoidingViewBase } from 'react-native';
 import { TextInput, Button,TouchableRipple } from 'react-native-paper';
+import { useDispatch } from 'react-redux';
+
+import * as authActions from '../../store/actions/auth';
 
  const SplashScreen = props => {
 
-  const [text, setText] = React.useState('');
+  const signupHandler = () => {
+
+  }
  
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+    behavior="padding"
+    keyboardVerticalOffset={10}
+    style={styles.container}>
+      <ScrollView>
       <View style={styles.textInput}>
         <TextInput
+        id="email"
         mode="outlined"
         label="Email"
+        keyboardType="email-address"
         placeholder="Type Email"
-        value={text}
-        onChangeText={text => setText(text)}
+        required
+        email
+        autoCapitalize="none"
+        errorText="Please enter a Valid email address"
+        onValueChange={() => {}}
+        initialValue=""
         />
       </View>
        <View style={styles.textInput}>
@@ -23,26 +38,33 @@ import { TextInput, Button,TouchableRipple } from 'react-native-paper';
         mode="outlined"
         label="Phone"
         placeholder="Type Phone"
-        value={text}
-        onChangeText={text => setText(text)}
+        onValueChange={() => {}}
+        initialValue=""
         />
       </View>
       <View style={styles.textInput}>
         <TextInput
+          id="password"
           mode="outlined" 
           label="Password"
           placeholder="Type Password"
-          value={text}
-          onChangeText={text => setText(text)}
+          keyboardType="default"
+          secureTextEntry
+          required
+          minLength={5}
+          errorText="Please Enter more than 5 characters!"
+          onValueChange={() => {}}
+          initialValue=""
         />
       </View>
       <View style={styles.textInput}>
         <TextInput
+
         mode="outlined"
         label="Location"
         placeholder="Type Location"
-        value={text}
-        onChangeText={text => setText(text)}
+        onValueChange={() => {}}
+        initialValue=""
         />
       </View>
       <View style={styles.buttonContainer}>
@@ -65,7 +87,8 @@ import { TextInput, Button,TouchableRipple } from 'react-native-paper';
           props.navigation.navigate('UserTerms')
       }} />
       <StatusBar style="auto" />
-    </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -73,7 +96,8 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     flex: 1,
-    padding: 10,
+    paddingTop: 50,
+    alignItems: 'center'
     // backgroundColor: "#4C296B"
   },
   textInput: {
