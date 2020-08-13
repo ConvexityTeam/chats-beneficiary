@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { TouchableOpacity, ScrollView, View, TextInput, KeyboardAvoidingView, Text, StyleSheet, StatusBar } from 'react-native';
 import Color from '../../constants/colors'
 import { useNavigation } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import { Button } from 'react-native-paper';
 
 const AuthScreen = props => {
