@@ -1,12 +1,18 @@
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
+import { createStore, combineReducers, applyMiddleware, } from 'redux';
+import { Provider } from 'react-redux';
+import ReduxThunk from 'redux-thunk';
+// import store from './store/reducers';
 
+import rootReducer from './store/reducers/auth';
 
 import AppNavigation from './navigation'
+
+import authReducer from './store/reducers/auth'
 
 
 const fetchFonts = () => {
@@ -16,6 +22,12 @@ const fetchFonts = () => {
     'inter-regular': require('./assets/fonts/Inter-Regular.ttf')
   })
 }
+
+const rootReducers = combineReducers({
+  auth: authReducer
+})
+//  applyMiddleware(ReduxThunk)
+const store = createStore(rootReducers, applyMiddleware(ReduxThunk))
 
 export default function App() {
 
@@ -33,7 +45,9 @@ export default function App() {
  
   return (
     <PaperProvider>
-      <AppNavigation />
+      <Provider store={store}>
+       <AppNavigation />
+      </Provider>
     </PaperProvider>
   );
 }
