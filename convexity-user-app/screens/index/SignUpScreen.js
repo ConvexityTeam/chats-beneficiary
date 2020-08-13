@@ -1,21 +1,76 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useReducer } from 'react';
+import React, { useReducer, useCallback } from 'react';
 import { StyleSheet, View, Text, ScrollView, KeyboardAvoidingView, KeyboardAvoidingViewBase } from 'react-native';
 import { TextInput, Button,TouchableRipple } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 
 import * as authActions from '../../store/actions/auth';
 
+const formReducer = (state, action) => {
+  if (action.type === FORM_INPUT_UPDATE) {
+    const updatedValues = {
+      ...state.inputValues,
+      [action.input]: action.value
+    };
+    const updatedValidities = {
+      ...state.inputValidities,
+      [action.input]: action.isValid
+    };
+    let updatedFormIsValid = true;
+    for (const key in updatedValidities) {
+      updatedFormIsValid = updatedFormIsValid && updatedValidities[key];
+    }
+    return {
+      formIsValid: updatedFormIsValid,
+      inputValidities: updatedValidities,
+      inputValues: updatedValues
+    };
+  }
+  return state;
+};
+
  const SplashScreen = props => {
 
-  const signupHandler = () => {
+  const dispatch = useDispatch();
 
-  }
+  const [formState, dispatchFormState] = useReducer(formReducer, {
+    inputValues: {
+      email: '',
+      password: ''
+    },
+    inputValidities: {
+      email: false,
+      password: false
+    },
+    formIsValid: false
+  });
+
+  const signupHandler = () => {
+    dispatch(
+      authActions.signup(
+        formState.inputValues.email,
+        formState.inputValues.password
+      )
+    );
+  };
+
+  const inputChangeHandler = useCallback(
+    (inputIdentifier, inputValue, inputValidity) => {
+      dispatchFormState({
+        type: FORM_INPUT_UPDATE,
+        value: inputValue,
+        isValid: inputValidity,
+        input: inputIdentifier
+      });
+    },
+    [dispatchFormState]
+  );
+
  
   return (
     <KeyboardAvoidingView
     behavior="padding"
-    keyboardVerticalOffset={10}
+    keyboardVerticalOffset={50}
     style={styles.container}>
       <ScrollView>
       <View style={styles.textInput}>
@@ -29,11 +84,11 @@ import * as authActions from '../../store/actions/auth';
         email
         autoCapitalize="none"
         errorText="Please enter a Valid email address"
-        onValueChange={() => {}}
+        onInputChange={inputChangeHandler}
         initialValue=""
         />
       </View>
-       <View style={styles.textInput}>
+       {/* <View style={styles.textInput}>
         <TextInput
         mode="outlined"
         label="Phone"
@@ -41,7 +96,7 @@ import * as authActions from '../../store/actions/auth';
         onValueChange={() => {}}
         initialValue=""
         />
-      </View>
+      </View> */}
       <View style={styles.textInput}>
         <TextInput
           id="password"
@@ -53,11 +108,11 @@ import * as authActions from '../../store/actions/auth';
           required
           minLength={5}
           errorText="Please Enter more than 5 characters!"
-          onValueChange={() => {}}
+          onInputChange={inputChangeHandler}
           initialValue=""
         />
       </View>
-      <View style={styles.textInput}>
+      {/* <View style={styles.textInput}>
         <TextInput
 
         mode="outlined"
@@ -66,7 +121,7 @@ import * as authActions from '../../store/actions/auth';
         onValueChange={() => {}}
         initialValue=""
         />
-      </View>
+      </View> */}
       <View style={styles.buttonContainer}>
         <View style={styles.button}>
           <TouchableRipple rippleColor="grey">
@@ -74,9 +129,7 @@ import * as authActions from '../../store/actions/auth';
             mode="contained"
             icon="reminder"
             color="white"
-            onPress={() => {
-                props.navigation.navigate('Dashboard')
-            }}>Sign Up (New User)</Button>
+            onPress={signupHandler}>Sign Up (New User)</Button>
           </TouchableRipple>
         </View>
       </View>
