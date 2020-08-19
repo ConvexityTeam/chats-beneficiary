@@ -7,7 +7,7 @@ import SignUp from '../screens/index/SignUpScreen';
 import Dashboard from '../screens/index/DashboardScreen';
 import UserTerms from '../screens/index/UserTermsScreen';
 
-import Auth from '../screens/user/AuthScreen';
+import Auth from '../screens/index/AuthScreen';
 
 import Wallet from '../screens/menu/wallet/WalletScreen';
 import ConvertToken from '../screens/menu/wallet/ConvertTokenScreen';
