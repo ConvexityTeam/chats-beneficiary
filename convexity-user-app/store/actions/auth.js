@@ -1,6 +1,8 @@
 export const SIGNUP = 'SIGNUP';
 export const LOGIN = 'LOGIN';
 
+export const LOGOUT = 'LOGOUT';
+
 export const signup = (email, password) => {
   // console.log("email");
   // console.log(email);
@@ -31,7 +33,7 @@ export const signup = (email, password) => {
     
     const resData = await response.json();
     console.log(resData);
-    dispatch({ type: SIGNUP });
+    dispatch({ type: SIGNUP, token: resData.idToken, userId: resData.localId });
   };
 };
 
@@ -66,7 +68,10 @@ export const login = (email, password) => {
   
       const resData = await response.json();
       console.log(resData);
-      dispatch({ type: LOGIN });
+      dispatch({ type: LOGIN, token: resData.idToken, userId: resData.localId });
     };
   };
   
+  export const logout = () => {
+    return { type: LOGOUT };
+  };
