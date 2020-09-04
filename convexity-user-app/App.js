@@ -6,9 +6,6 @@ import * as Font from 'expo-font';
 import { createStore, combineReducers, applyMiddleware, } from 'redux';
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
-// import store from './store/reducers';
-
-import rootReducer from './store/reducers/auth';
 
 import AppNavigation from './navigation'
 
@@ -19,14 +16,21 @@ const fetchFonts = () => {
   return Font.loadAsync({
     'inter-black': require('./assets/fonts/Inter-Black.ttf'),
     'inter-bold': require('./assets/fonts/Inter-Bold.ttf'),
-    'inter-regular': require('./assets/fonts/Inter-Regular.ttf')
+    'inter-regular': require('./assets/fonts/Inter-Regular.ttf'),
+    'gilroy-bold': require('./assets/fonts/Gilroy-Bold.ttf'),
+    'gilroy-heavy': require('./assets/fonts/Gilroy-Heavy.ttf'),
+    'gilroy-light': require('./assets/fonts/Gilroy-Light.ttf'),
+    'gilroy-medium': require('./assets/fonts/Gilroy-Medium.ttf'),
+    'gilroy-regular': require('./assets/fonts/Gilroy-Regular.ttf')
   })
 }
 
 const rootReducers = combineReducers({
   auth: authReducer
 })
-//  applyMiddleware(ReduxThunk)
+//const store = createStore(() => {}, applyMiddleware(ReduxThunk)) - Revert here
+
+// const store = createStore(authReducer)
 const store = createStore(rootReducers, applyMiddleware(ReduxThunk))
 
 export default function App() {
