@@ -6,10 +6,12 @@ import {
   StyleSheet,
   Button,
   ActivityIndicator,
-  Alert
+  Alert, TouchableOpacity, Text
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native'
+
 
 import Input from '../../components/UI/Input';
 import Card from '../../components/UI/Card';
@@ -42,6 +44,7 @@ const formReducer = (state, action) => {
 };
 
 const AuthScreen = props => {
+  const navigation = useNavigation()
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
   const [isSignup, setIsSignup] = useState(false);
@@ -82,10 +85,12 @@ const AuthScreen = props => {
     setIsLoading(true);
     try {
       await dispatch(action);
+      navigation.navigate('Dashboard')
     } catch (err) {
       setError(err.message);
+      setIsLoading(false);
     }
-    setIsLoading(false);
+    
   };
 
   const inputChangeHandler = useCallback(
@@ -106,7 +111,8 @@ const AuthScreen = props => {
       keyboardVerticalOffset={50}
       style={styles.screen}
     >
-      <LinearGradient colors={['#ffedff', '#ffe3ff']} style={styles.gradient}>
+      {/* <LinearGradient colors={['#ffedff', '#ffe3ff']} style={styles.gradient}> */}
+        <View style={styles.gradient}>
         <Card style={styles.authContainer}>
           <ScrollView>
             <Input
@@ -132,29 +138,40 @@ const AuthScreen = props => {
               onInputChange={inputChangeHandler}
               initialValue=""
             />
-            <View style={styles.buttonContainer}>
-              {isLoading ? (
-                <ActivityIndicator size="small" color={Colors.primary} />
-              ) : (
-                <Button
-                  title={isSignup ? 'Sign Up' : 'Login'}
-                  color={Colors.primary}
-                  onPress={authHandler}
-                />
-              )}
+            <View style={{alignItems: 'flex-end', paddingEnd: 10, paddingTop: 10}}>
+              <Text>Forgot Password?</Text>
             </View>
             <View style={styles.buttonContainer}>
-              <Button
-                title={`Switch to ${isSignup ? 'Login' : 'Sign Up'}`}
+              {isLoading ? (
+                <ActivityIndicator size="small" color={Colors.purple} />
+              ) : (
+                <View style={styles.buttonPurple}>
+                <Button
+                  title={isSignup ? 'Sign Up' : 'Login'}
+                  color={Colors.purple}
+                  onPress={authHandler}
+                />
+                </View>
+              )}
+            </View>
+            <View style={styles.signup}>
+              {/* <Button
+                title={`Dont have an account? ${isSignup ? 'Login' : 'Sign Up'}`}
                 color={Colors.accent}
                 onPress={() => {
                   setIsSignup(prevState => !prevState);
                 }}
-              />
+              /> */}
+              <TouchableOpacity onPress={() => {
+                  setIsSignup(prevState => !prevState);
+                }}>
+                <Text>{`Dont have an account? ${isSignup ? 'Login' : 'Sign Up'}`}</Text>
+              </TouchableOpacity>
             </View>
           </ScrollView>
         </Card>
-      </LinearGradient>
+        </View>
+      {/* </LinearGradient> */}
     </KeyboardAvoidingView>
   );
 };
@@ -169,17 +186,25 @@ const styles = StyleSheet.create({
   },
   gradient: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    
   },
   authContainer: {
-    width: '80%',
-    maxWidth: 400,
-    maxHeight: 400,
-    padding: 20
+    width: '100%',
+    height: '60%',
+    padding: 20,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30, 
+    position: 'absolute',
+    bottom: 0,
   },
   buttonContainer: {
-    marginTop: 10
+    marginTop: 10,
+    padding: 10,
+    borderRadius: 10
+  },
+  signup: {
+    paddingTop: 15,
+    paddingLeft: 80
   }
 });
 
