@@ -2,26 +2,30 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image,
   StatusBar,
-  SafeAreaView } from 'react-native';
+  SafeAreaView, ImageBackground } from 'react-native';
+import { Button } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/Ionicons';
 import Color from '../../constants/colors';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import AuthScreen from '../user/AuthScreen';
-// import AuthScreen from '../index/DashboardScreen';
+import AuthScreen from '../index/AuthScreen';
+// import AuthScreen from '../menu/HomeScreen';
 
 const data = [
   {
-    title: 'Title 1',
-    image: require('../../assets/manWorkingonAnalytics.png'),
+    title: 'Simple And Easy',
+    text: 'Easy and straightforward onboarding process',
+    // image: require('../../assets/whitebg.png'),
     bg: '#59b2ab',
   },
   {
-    title: 'Title 2',
+    title: 'Safe and Secure',
+    text: 'CHATS is and secured to set up encrypted security using Blockchain',
     image: require('../../assets/womanUsingPhone.png'),
     bg: '#febe29',
   },
   {
-    title: 'Rocket guy',
+    title: 'Pay Money Instantly',
+    text: 'Transfer instantly between vendors and beneficiaries',
     image: require('../../assets/momAndDaughter.png'),
     bg: '#22bcb5',
   },
@@ -54,8 +58,18 @@ export default class SplashScreen extends React.Component {
           backgroundColor: item.bg,
         }}>
         <SafeAreaView style={styles.slide}>
+          {/* <ImageBackground source={item.image} style={styles.image}> */}
           <Text style={styles.title}>{item.title}</Text>
-          <Image source={item.image} style={styles.image} />
+          <Text style={styles.subtitle}>{item.text}</Text>
+          
+          <Button uppercase={false} style={styles.buttonPurple}>            
+            <Text style={styles.buttonText}>Sign Up</Text>
+          </Button>
+          <Button uppercase={false} style={styles.buttonWhite}>            
+            <Text style={styles.buttonText}>Login</Text>
+          </Button>
+          
+          {/* </ImageBackground> */}
         </SafeAreaView>
       </View>
     );
@@ -106,11 +120,58 @@ const styles = StyleSheet.create({
     width: 320,
     height: 320,
     marginTop: 32,
+    resizeMode: "cover",
+    justifyContent: "center"
   },
   title: {
+    fontFamily: "gilroy-bold",
+    fontSize: 24,
+    color: 'white',
+    textAlign: 'center',
+    paddingTop: 300
+  },
+  subtitle: {
+    fontFamily: "gilroy-medium",
     fontSize: 18,
     color: 'white',
     textAlign: 'center',
+    paddingBottom: 100
+  },
+  buttonPurple: {
+    flexDirection: "row", 
+    justifyContent: "space-between", 
+    width: "97%",
+    height: 50,
+    margin: 3,
+    paddingTop: 15,
+    paddingBottom: 15,
+    paddingLeft: 160,
+    paddingRight: 135,
+    alignItems: "center",
+    
+    borderRadius: 10,
+    backgroundColor: '#492954'
+  },
+  buttonWhite: {
+    flexDirection: "row", 
+    justifyContent: "space-between", 
+    width: "97%",
+    height: 50,
+    margin: 3,
+    paddingTop: 15,
+    paddingBottom: 15,
+    paddingLeft: 160,
+    paddingRight: 135,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: '#FFFFFF',
+    borderRadius: 10,
+  },
+  buttonText : {
+    fontFamily: "gilroy-regular", 
+    fontSize: 16, 
+    lineHeight: 25, 
+    color: '#fff'
   },
 });
 
