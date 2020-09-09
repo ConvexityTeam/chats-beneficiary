@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { Button } from 'react-native-paper';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faCreditCard, faMoneyBill,faChartBar, faCog, faExchangeAlt, faUniversity } from '@fortawesome/free-solid-svg-icons'
+import { faCreditCard, faMoneyBill,faChartBar, faCog, faExchangeAlt, faUniversity, faArrowUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import Colors from '../../constants/colors';
 import { TouchableRipple } from 'react-native-paper';
 
@@ -10,85 +11,49 @@ const HomeScreen = ( props) => {
 
     return (
       <View style={styles.container}>
+        
+        
         <View style={styles.header}>
+        <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
+          <Image source={require('../../assets/icons/menu-open.png')}></Image>
+          </TouchableOpacity>
+          <View style={{paddingLeft: 20}}>
         <Text style={{
-            fontSize: 30,
-            fontFamily: 'inter-bold'
-            }}>Dashboard</Text>
+            fontSize: 24,
+            fontFamily: 'gilroy-bold'
+            }}>Home</Text>
+            </View>
+        </View>
+        <View style={styles.one}>
+          <View style={styles.daily}>
+            <Text>Daily</Text>
+            <FontAwesomeIcon icon={ faChevronDown } style={{color: '#222222'}} />
+          </View>
+          <View style={{paddingLeft: 10}}><Text>7th Dec.</Text></View>
         </View>
           <View style={styles.name}>
-            <Text style={{color: Colors.purple, fontFamily: 'inter-regular', lineHeight: 24, fontSize: 18, fontStyle: "normal"}}>Emmanuel Oaikhenan</Text>
-            <Text style={{fontFamily: "inter-bold", fontSize: 14, lineHeight: 15}}>Balance: 15,000 NGNT</Text>
-          </View>
-
-          <View style={{flexDirection: "row", 
-          justifyContent: "space-evenly"}}>
-            <TouchableOpacity onPress={() => {
-                props.navigation.navigate('ConvertToken')
-            }} >
-              <View style={styles.card}>
-                <FontAwesomeIcon icon={ faExchangeAlt } style={{color: Colors.purple}} />
-                <Text style={styles.text}>Convert</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => {
-                props.navigation.navigate('WithdrawToBank')
-            }} >
-              <View style={styles.card}>
-                <FontAwesomeIcon icon={ faUniversity } style={{color: Colors.purple}} />
-                <Text style={styles.text}>Withdraw</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => {
-                props.navigation.navigate('Pay')
-            }} >
-              <View style={styles.card}>
-                <FontAwesomeIcon icon={ faMoneyBill } style={{color: Colors.purple}} />
-                <Text style={styles.text}>Pay</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-
-          <View style={{flexDirection: "row", justifyContent: "space-evenly"}}>
-
-          <TouchableOpacity onPress={() => {
-                props.navigation.navigate('Wallet')
-            }} >
-            <View style={styles.card}>
-            <FontAwesomeIcon icon={ faCreditCard } style={{color: Colors.purple}} />
-            
-              <Text style={styles.text} >Wallet</Text>
-             
-            </View>
-            </TouchableOpacity>
-
-            <View style={styles.card}>
-            <FontAwesomeIcon icon={ faChartBar } style={{color: Colors.purple}} />
-              <Text style={styles.text}>Analytics</Text>
-            </View>
-            <View style={styles.card}>
-              <FontAwesomeIcon icon={ faCog } style={{color: Colors.purple}} />
-              <Text style={styles.text}>Settings</Text>
-            </View>
-          </View>
-          <View style={{paddingTop: 100}}>
-            <View style={styles.name}>
-              <Text style={{fontFamily: "inter-bold", fontSize: 22, lineHeight: 27, fontStyle: "normal"}}>Transactions</Text>
-              <Text style={{fontFamily: "inter-regular", fontSize: 12, lineHeight: 15, fontStyle: "normal"}}>View All</Text>
-            </View>
             <View>
-            <View style={styles.notice}>            
-              <Text style={styles.textPersonTxn}>Emmanuel Oaikhenan</Text>
-              <Text style={styles.textTxnAmount}>3000 NGNT</Text>
+            <Text style={{color: '#222222', fontFamily: 'gilroy-regular', lineHeight: 24, fontSize: 24, fontStyle: "normal"}}>$12,500.00</Text>
             </View>
-            <View style={styles.notice}> 
-              <Text style={styles.textPersonTxn}>Emmanuel Oaikhenan</Text>
-              <Text style={styles.textTxnAmount}>3000 NGNT</Text>
+            <View style={{paddingLeft: 5, paddingBottom: 3}}>
+              <Text style={{color: '#00C2A8'}}>2.5%</Text></View>
+            <View style={{paddingLeft: 5, paddingBottom: 3}}>
+            <FontAwesomeIcon icon={ faArrowUp } style={{color: '#00C2A8', width: 16, height: 16}} />
             </View>
-            <View style={styles.notice}> 
-              <Text style={styles.textPersonTxn}>Emmanuel Oaikhenan</Text>
-              <Text style={styles.textTxnAmount}>3000 NGNT</Text>
+          </View>
+          <View style={styles.name}>
+            <Text style={{fontFamily: "gilroy-regular", fontSize: 14, lineHeight: 15, color: '#555555'}}>Total balance</Text>
+          </View>
+          <View style={{flexDirection: "row", justifyContent: "center", paddingTop: 250}}>
+            <View style={styles.card}>
+            {/* <FontAwesomeIcon icon={ faChartBar } style={{color: Colors.purple}} /> */}
+              <Text style={styles.text}>Monthly Income</Text>
+              <Text style={styles.text2}>$25,000</Text>
             </View>
+            <View style={styles.card}>
+              {/* <FontAwesomeIcon icon={ faCog } style={{color: Colors.purple}} /> */}
+              <Text style={styles.text}>Monthly Expemses</Text>
+              <Text style={styles.text2}>$15,000</Text>
             </View>
           </View>
       </View>
@@ -98,34 +63,61 @@ const HomeScreen = ( props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 50
+    paddingTop: 30,
+    backgroundColor: '#fff'
   },
- 
   header: {
-    padding: 10
+    paddingLeft: 20,
+    paddingRight: 20,
+    flexDirection: "row", 
+  },
+  one: {
+    paddingTop: 30,
+    paddingBottom: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
+    marginRight: 20,
+    flexDirection: "row", 
+    // justifyContent: "space-between",
+    alignItems: "center", 
   },
   name: {
-    padding: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+    marginRight: 20,
     flexDirection: "row", 
-    justifyContent: "space-between", 
+    // justifyContent: "space-between",
+    alignItems: "center", 
+  },
+  daily: {
+    margin: 0,
+    paddingLeft: 5,
+    width: 67,
+    height: 33,
+    borderRadius: 5,
+    backgroundColor: '#EFEBF9',
+    
+    flexDirection: "row",
+    justifyContent: "space-evenly",
     alignItems: "center", 
   },
   card: {
-    margin: 3,
-    padding: 3,
-    width: 100,
-    height: 90,  
+    margin: 10,
+    padding: 0,
+    width: 150,
+    height: 150,  
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 1,
     },
-    justifyContent: "center", 
+    // justifyContent: "center", 
     alignItems: "center",
     shadowOpacity: 0.25,
     shadowRadius: 2,
     elevation: 4,
-    borderRadius: 4,
+    borderRadius: 5,
+    backgroundColor: '#fff'
   },
   notice: {
     flexDirection: "row", 
@@ -147,8 +139,16 @@ const styles = StyleSheet.create({
     borderRadius: 2
   },
   text: {
-    fontFamily: 'inter-regular', 
-    paddingTop: 10
+    fontFamily: 'gilroy-regular', 
+    color: '#333333',
+    fontSize: 14,
+    paddingTop: 25
+  },
+  text2: {
+    fontFamily: 'gilroy-medium', 
+    color: '#333333',
+    fontSize: 18,
+    paddingTop: 1
   },
   textPersonTxn : {
     fontFamily: "inter-regular", 
