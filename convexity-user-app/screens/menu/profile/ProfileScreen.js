@@ -34,7 +34,7 @@ import {  faChevronRight } from '@fortawesome/free-solid-svg-icons'
                   fontFamily: 'gilroy-regular'
                   }}>User Name</Text>
         </View>
-        <View style={{padding: 20}}>
+        <View style={{paddingTop: 30, paddingLeft: 20, paddingRight: 40}}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
             <Text style={{
                     fontSize: 16,
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // justifyContent: 'center',
-    padding: 10
+    paddingTop: 30
     // alignItems: 'center'
   },
   header: {
