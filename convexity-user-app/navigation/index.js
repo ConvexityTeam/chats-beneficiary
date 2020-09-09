@@ -77,7 +77,7 @@ const AppNavigation = () => {
             <Stack.Screen name="OTPWithdrawToBank" component={OTPWithdrawToBank} options={{ title: 'Withdraw To Bank OTP' }} />
             <Stack.Screen name="WithdrawToBankSuccess" component={WithdrawToBankSuccess} options={{ title: 'Withdraw To Bank Successful' }} />
 
-            <Stack.Screen name="Pay" component={Pay} />
+            <Stack.Screen name="Pay" component={Pay} options={{ title: 'QR Code' }}/>
             <Stack.Screen name="QRScanning" component={QRScanning} options={{ title: 'QR Scanning' }} />
             <Stack.Screen name="ConfirmPaymentDetails" component={ConfirmPaymentDetails} options={{ title: 'Confirm Payment Details' }} />
             <Stack.Screen name="OTPScreen" component={OTPScreen} options={{ title: 'Enter OTP' }} />
