@@ -107,8 +107,8 @@ const AuthScreen = props => {
 
   return (
     <KeyboardAvoidingView
-      behavior="padding"
-      keyboardVerticalOffset={50}
+      behavior={"padding"}
+      keyboardVerticalOffset={5}
       style={styles.screen}
     >
       {/* <LinearGradient colors={['#ffedff', '#ffe3ff']} style={styles.gradient}> */}
@@ -182,7 +182,9 @@ AuthScreen.navigationOptions = {
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-end'
   },
   gradient: {
     flex: 1,
