@@ -15,7 +15,7 @@ import {  faChevronRight } from '@fortawesome/free-solid-svg-icons'
             <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
               <Image source={require('../../../assets/icons/menu-open.png')}></Image>
             </TouchableOpacity>
-            <View style={{paddingLeft: 20}}>
+            <View style={{paddingLeft: 5}}>
               <Text style={{
                   fontSize: 24,
                   fontFamily: 'gilroy-bold'
@@ -92,11 +92,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // justifyContent: 'center',
-    paddingTop: 30
+    paddingTop: 10
     // alignItems: 'center'
   },
   header: {
-    paddingLeft: 20,
+    paddingLeft: 10,
     paddingRight: 20,
     flexDirection: "row", 
   },

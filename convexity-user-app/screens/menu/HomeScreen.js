@@ -17,7 +17,7 @@ const HomeScreen = ( props) => {
         <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
           <Image source={require('../../assets/icons/menu-open.png')}></Image>
           </TouchableOpacity>
-          <View style={{paddingLeft: 20}}>
+          <View style={{paddingLeft: 5}}>
         <Text style={{
             fontSize: 24,
             fontFamily: 'gilroy-bold'
@@ -63,12 +63,12 @@ const HomeScreen = ( props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 30,
+    paddingTop: 10,
     backgroundColor: '#fff'
   },
   header: {
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingLeft: 10,
+    paddingRight: 10,
     flexDirection: "row", 
   },
   one: {

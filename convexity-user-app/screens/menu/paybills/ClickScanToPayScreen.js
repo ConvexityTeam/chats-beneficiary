@@ -15,7 +15,7 @@ import {  faQrcode, faBarcode } from '@fortawesome/free-solid-svg-icons'
         <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
           <Image source={require('../../../assets/icons/menu-open.png')}></Image>
           </TouchableOpacity>
-          <View style={{paddingLeft: 20}}>
+          <View style={{paddingLeft: 10}}>
         <Text style={{
             fontSize: 24,
             fontFamily: 'gilroy-bold'
@@ -75,11 +75,11 @@ import {  faQrcode, faBarcode } from '@fortawesome/free-solid-svg-icons'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 30,
+    paddingTop: 10,
     backgroundColor: '#fff'
   },
   header: {
-    paddingLeft: 20,
+    paddingLeft: 10,
     paddingRight: 20,
     flexDirection: "row", 
   },
