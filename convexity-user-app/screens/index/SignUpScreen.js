@@ -1,10 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useReducer, useCallback } from 'react';
-import { StyleSheet, View, Text, ScrollView, KeyboardAvoidingView, KeyboardAvoidingViewBase } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity, KeyboardAvoidingView, KeyboardAvoidingViewBase } from 'react-native';
 import { TextInput, Button,TouchableRipple } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
+import Input from '../../components/UI/Input';
+import Card from '../../components/UI/Card';
+import Colors from '../../constants/colors';
 
 import * as authActions from '../../store/actions/auth';
+
+const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 
 const formReducer = (state, action) => {
   if (action.type === FORM_INPUT_UPDATE) {
@@ -29,17 +34,23 @@ const formReducer = (state, action) => {
   return state;
 };
 
- const SplashScreen = props => {
+ const SignUpScreen = props => {
 
   const dispatch = useDispatch();
 
   const [formState, dispatchFormState] = useReducer(formReducer, {
     inputValues: {
+      firstName: '',
+      lastName: '',
       email: '',
+      phoneNumber: '',
       password: ''
     },
     inputValidities: {
+      firstName: false,
+      lastName: false,
       email: false,
+      phoneNumber: false, 
       password: false
     },
     formIsValid: false
@@ -48,7 +59,10 @@ const formReducer = (state, action) => {
   const signupHandler = () => {
     dispatch(
       authActions.signup(
+        formState.inputValues.firstName,
+        formState.inputValues.lastName ,
         formState.inputValues.email,
+        formState.inputValues.phoneNumber,
         formState.inputValues.password
       )
     );
@@ -68,98 +82,156 @@ const formReducer = (state, action) => {
 
  
   return (
-    <KeyboardAvoidingView
-    behavior="padding"
-    keyboardVerticalOffset={50}
-    style={styles.container}>
-      <ScrollView>
-      <View style={styles.textInput}>
-        <TextInput
-        id="email"
-        mode="outlined"
-        label="Email"
-        keyboardType="email-address"
-        placeholder="Type Email"
-        required
-        email
-        autoCapitalize="none"
-        errorText="Please enter a Valid email address"
-        onInputChange={inputChangeHandler}
-        initialValue=""
-        />
-      </View>
-       {/* <View style={styles.textInput}>
-        <TextInput
-        mode="outlined"
-        label="Phone"
-        placeholder="Type Phone"
-        onValueChange={() => {}}
-        initialValue=""
-        />
-      </View> */}
-      <View style={styles.textInput}>
-        <TextInput
-          id="password"
-          mode="outlined" 
-          label="Password"
-          placeholder="Type Password"
-          keyboardType="default"
-          secureTextEntry
-          required
-          minLength={5}
-          errorText="Please Enter more than 5 characters!"
-          onInputChange={inputChangeHandler}
-          initialValue=""
-        />
-      </View>
-      {/* <View style={styles.textInput}>
-        <TextInput
-
-        mode="outlined"
-        label="Location"
-        placeholder="Type Location"
-        onValueChange={() => {}}
-        initialValue=""
-        />
-      </View> */}
-      <View style={styles.buttonContainer}>
-        <View style={styles.button}>
-          <TouchableRipple rippleColor="grey">
-            <Button 
-            mode="contained"
-            icon="reminder"
-            color="white"
-            onPress={signupHandler}>Sign Up (New User)</Button>
-          </TouchableRipple>
+<KeyboardAvoidingView
+      behavior={Platform.OS == "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={5}
+      style={styles.screen}
+    >
+      {/* <LinearGradient colors={['#ffedff', '#ffe3ff']} style={styles.gradient}> */}
+        <View style={styles.gradient}>
+        <Card style={styles.authContainer}>
+          <ScrollView>
+          <Input
+              id="firstName"
+              label="First Name"
+              keyboardType="default"
+              required
+              email
+              autoCapitalize="none"
+              // errorText="Please enter a valid email address."
+              // onInputChange={inputChangeHandler}
+              // initialValue=""
+            />
+            <Input
+              id="lastName"
+              label="Last Name"
+              keyboardType="default"
+              required
+              email
+              autoCapitalize="none"
+              // errorText="Please enter a valid email address."
+              // onInputChange={inputChangeHandler}
+              // initialValue=""
+            />
+            <Input
+              id="email"
+              label="E-Mail"
+              keyboardType="email-address"
+              required
+              email
+              autoCapitalize="none"
+              errorText="Please enter a valid email address."
+              onInputChange={inputChangeHandler}
+              initialValue=""
+            />
+            <Input
+              id="phoneNumber"
+              label="Phone Number"
+              keyboardType="default"
+              required
+              email
+              autoCapitalize="none"
+              // errorText="Please enter a valid email address."
+              // onInputChange={inputChangeHandler}
+              // initialValue=""
+            />
+            <Input
+              id="password"
+              label="Password"
+              keyboardType="default"
+              secureTextEntry
+              required
+              minLength={5}
+              autoCapitalize="none"
+              errorText="Please enter a valid password."
+              onInputChange={inputChangeHandler}
+              initialValue=""
+            />
+           
+            {/* <View style={styles.buttonContainer}>
+              {isLoading ? (
+                <ActivityIndicator size="small" color={Colors.purple} />
+              ) : (
+                <View style={styles.buttonPurple}>
+                <Button
+                  title={isSignup ? 'Sign Up' : 'Login'}
+                  color={Colors.purple}
+                  onPress={authHandler}
+                />
+                </View>
+              )}
+            </View> */}
+            <View style={styles.signup}>
+              {/* <Button uppercase={false} style={styles.buttonPurple}>             */}
+                <Text style={styles.buttonText}>Sign Up</Text>
+              {/* </Button> */}
+              {/* <Button
+                title={`Dont have an account? ${isSignup ? 'Login' : 'Sign Up'}`}
+                color={Colors.accent}
+                onPress={() => {
+                  setIsSignup(prevState => !prevState);
+                }}
+              /> */}
+              {/* <TouchableOpacity onPress={() => {
+                  setIsSignup(prevState => !prevState);
+                }}>
+                <Text>{`Dont have an account? ${isSignup ? 'Login' : 'Sign Up'}`}</Text>
+              </TouchableOpacity> */}
+            </View>
+          </ScrollView>
+        </Card>
         </View>
-      </View>
-      <Button title="User Terms" onPress={() => {
-          props.navigation.navigate('Login')
-      }}><Text style={styles.text}>Login (Existing User?)</Text></Button>
-      <Button color="white" onPress={() => {
-          props.navigation.navigate('UserTerms')
-      }} />
-      <StatusBar style="auto" />
-      </ScrollView>
+      {/* </LinearGradient> */}
     </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
+  screen: {
     flex: 1,
-    paddingTop: 50,
-    alignItems: 'center'
-    // backgroundColor: "#4C296B"
   },
-  textInput: {
-    padding: 5,
-    margin: 5
+  gradient: {
+    flex: 1,
+    
   },
-  buttonContainer: { flexDirection: "row", justifyContent: "center", paddingTop: 50 },
-  button: { width: "80%", margin: 10, color: "white" },
-  // text: { color: "white" }
+  authContainer: {
+    width: '100%',
+    height: '100%',
+    padding: 20,
+    // borderTopLeftRadius: 30,
+    // borderTopRightRadius: 30, 
+    position: 'absolute',
+    bottom: 0,
+  },
+  signup: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingBottom: 96,
+  },
+  buttonPurple: {
+    flexDirection: "row", 
+    justifyContent: "space-between", 
+    width: "97%",
+    height: 50,
+    margin: 3,
+    paddingTop: 15,
+    paddingBottom: 15,
+    paddingLeft: 160,
+    paddingRight: 135,
+    alignItems: "center",
+    
+    borderRadius: 10,
+    backgroundColor: '#492954'
+  },
+  
+  buttonText : {
+    fontFamily: "gilroy-regular", 
+    fontSize: 16, 
+    lineHeight: 25, 
+    color: '#000'
+  },
+  
 });
 
-export default SplashScreen;
+export default SignUpScreen;
