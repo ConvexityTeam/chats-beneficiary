@@ -59,9 +59,7 @@ const AppNavigation = () => {
           <Stack.Navigator initialRouteName="Home">
             <Stack.Screen name="Home" component={SplashScreen} options={{headerShown: false}} />
             <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
-            <Stack.Screen name="Dashboard" component={Dashboard} options={({ route }) => ({
-    headerTitle: getHeaderTitle(route),
-  }), {headerShown: false}} />
+            <Stack.Screen name="Dashboard" component={Dashboard} options={({ route }) => ({ headerTitle: getHeaderTitle(route),}), {headerShown: false}} />
             <Stack.Screen name="SignUp" component={SignUp} options={{headerShown: false}} />
             <Stack.Screen name="UserTerms" component={UserTerms} options={{ title: 'User Terms' }}/>
 
