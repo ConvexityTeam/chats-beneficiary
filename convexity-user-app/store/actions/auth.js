@@ -3,7 +3,7 @@ export const LOGIN = 'LOGIN';
 
 export const LOGOUT = 'LOGOUT';
 
-export const signup = (firstName, lastName, email, phoneNumber, password) => {
+export const signup = (first_name, last_name, email, phone, password) => {
   // console.log("email");
   // console.log(email);
   return async dispatch => {
@@ -16,28 +16,37 @@ export const signup = (firstName, lastName, email, phoneNumber, password) => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          firstName: firstName,
-          lastName: lastName,
+          first_name: first_name,
+          last_name: last_name,
           email: email,
-          phoneNumber: phoneNumber,
+          phone: phone,
           password: password,
-          returnSecureToken: true
+          // returnSecureToken: true
         })
       });
+    
+    if(first_name.trim() || last_name.trim() || !email.trim() || !phone.trim() || !password.trim()) {
+      const message = 'Please fill missing form details!';
+      throw new Error(message);
+    }
 
     if (!response.ok) {
-        const errorResData = await response.json();
-        const errorId = errorResData.error.message;
-        let message = 'Something went wrong!';
-        if (errorId === 'EMAIL_EXISTS') {
-          message = 'This email is already registered!';
-        }
-        throw new Error(message);
+        const resData = await response.json();
+        // const errorId = resData.error.message;
+        // let message = 'Something went wrong!';
+        // if (errorId === 'EMAIL_EXISTS') {
+        //   message = 'This email is already registered!';
+        // }
+        console.log(resData.message, resData.status, resData)
+        throw new Error(resData.message);
     }
     
     const resData = await response.json();
     console.log(resData);
-    dispatch({ type: SIGNUP, token: resData.idToken, userId: resData.localId });
+    dispatch({ type: SIGNUP, 
+      // token: resData.token, 
+      // userId: resData.localId 
+    });
   };
 };
 
@@ -58,22 +67,27 @@ export const login = (email, password) => {
           })
         }
       );
-  
+      
+      if(!email.trim() || !password.trim()) {
+        const message = 'Please fill missing form details!';
+        throw new Error(message);
+      }
+
       if (!response.ok) {
-        const errorResData = await response.json();
-        // const errorId = errorResData.error.message;
-        // let message = 'Something went wrong!';
+        const resData = await response.json();
+        // const errorId = resData.error.message;
+        // let message = 'Please fill form details!';
         // if (errorId === 'EMAIL_NOT_FOUND') {
         //   message = 'This user is not registered!';
         // } else if (errorId === 'INVALID_PASSWORD') {
         //   message = 'This password is not valid!';
         // }
-        console.log(errorResData.message, errorResData.status)
-        throw new Error(errorResData.message);
+        console.log(resData.message, resData.status, resData)
+        throw new Error(resData.message);
       }
   
       const resData = await response.json();
-      console.log(resData);
+      console.log(resData, resData.message, resData.status, resData.code, resData.data.userId);
       dispatch({ type: LOGIN, 
                   token: resData.token, 
                   // userId: resData.user.id 
