@@ -23,6 +23,7 @@ import ConfirmPaymentDetails from '../screens/menu/paybills/ConfirmPaymentDetail
 import OTPScreen from '../screens/menu/paybills/OtpScreen';
 import PaymentSuccess from '../screens/menu/paybills/PaymentSuccessScreen';
 
+
 const Stack = createStackNavigator();
 
 /*
@@ -47,8 +48,8 @@ function getHeaderTitle(route) {
       return 'Notifications';
     case 'Settings':
       return 'Settings';
-    case 'Vendors':
-      return 'Vendor';
+    case 'Cash For Work':
+      return 'CashForWork';
   }
 }
 
@@ -80,6 +81,7 @@ const AppNavigation = () => {
             <Stack.Screen name="ConfirmPaymentDetails" component={ConfirmPaymentDetails} options={{ title: 'Confirm Payment Details' }} />
             <Stack.Screen name="OTPScreen" component={OTPScreen} options={{ title: 'Enter OTP' }} />
             <Stack.Screen name="PaymentSuccess" component={PaymentSuccess} options={{ title: 'Payment Successful' }} />
+            {/* <Stack.Screen name="CashForWork" component={CashForWork} options={{ title: 'Cash For Work' }} /> */}
           </Stack.Navigator>
         </NavigationContainer>
       );

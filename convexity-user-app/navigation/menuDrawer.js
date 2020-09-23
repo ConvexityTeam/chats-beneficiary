@@ -10,7 +10,7 @@ import {
 } from '@react-navigation/drawer';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faHome, faWallet, faChartBar, faCog, faQrcode, faUser, faSignOutAlt, faHeadset, faUniversity, faBell, faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faWallet, faChartBar, faCog, faQrcode, faUser, faSignOutAlt, faHeadset, faUniversity, faBell, faHardHat, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
 
 import { useDispatch } from 'react-redux';
@@ -22,7 +22,8 @@ import PayBills from '../screens/menu/paybills/ClickScanToPayScreen';
 import Wallet from '../screens/menu/wallet/WalletScreen';
 import Notifications from '../screens/menu/notifications/NotificationScreen'; 
 import AppSettings from '../screens/menu/settings/AppSettingScreen'; 
-import Vendor from '../screens/menu/vendor/ClickScanToPayVendorScreen'; 
+// import Vendor from '../screens/menu/vendor/ClickScanToPayVendorScreen'; 
+import CashForWork from '../screens/CashForWork'
 // import { logout } from '../store/actions/auth';
 
 // const Dashboard = ({ navigation }) => {
@@ -68,7 +69,7 @@ const CustomDrawerContent = props=> {
       </View> */}
       <View style={styles.header}>
         <FontAwesomeIcon icon={ faHeadset } style={{color: '#000'}} />
-        <View style={{paddingLeft: 10}}>
+        <View style={{paddingLeft: 13}}>
           <DrawerItem
             label="Contact Us"
             onPress={() => props.navigation.navigate('Dashboard', { screen: 'Profile' })}
@@ -84,14 +85,14 @@ const Drawer = createDrawerNavigator();
 
 function MenuDrawer() {
   return (
-    <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
+    <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />} drawerStyle={{paddingTop: 30}}>
       <Drawer.Screen name="Dashboard" component={Home} options={{ title: 'Home', drawerIcon: config => <FontAwesomeIcon icon={ faHome } style={{color: '#000'}} /> }} />
       <Drawer.Screen name="Wallet" component={Wallet} options={{
             drawerIcon: config => <FontAwesomeIcon icon={ faWallet } style={{color: '#000'}} /> }} />
       <Drawer.Screen name="Generate/Scan QR Code" component={PayBills} options={{drawerIcon: config => <FontAwesomeIcon icon={ faQrcode } style={{color: '#000'}} />}} />
       <Drawer.Screen name="Notifications" component={Notifications} options={{drawerIcon: config => <FontAwesomeIcon icon={ faBell } style={{color: '#000'}} />}} />
       <Drawer.Screen name="Profile" component={Profile} options={{drawerIcon: config => <FontAwesomeIcon icon={ faUser } style={{color: '#000'}} />}} />
-      {/* <Drawer.Screen name="Vendors" component={Vendor} /> */}
+      <Drawer.Screen name="Cash For Work" component={CashForWork} options={{drawerIcon: config => <FontAwesomeIcon icon={ faHardHat } style={{color: '#000'}} />}} />
       <Drawer.Screen name="Settings" component={AppSettings} options={{drawerIcon: config => <FontAwesomeIcon icon={ faCog } style={{color: '#000'}} />}} />
       <Drawer.Screen name="Logout" component={LogOut} options={{drawerIcon: config => <FontAwesomeIcon icon={ faSignOutAlt } style={{color: '#000'}} />}} /> 
     </Drawer.Navigator>
