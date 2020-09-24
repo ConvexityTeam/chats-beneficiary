@@ -25,7 +25,7 @@ export const signup = (first_name, last_name, email, phone, password) => {
         })
       });
     
-    if(first_name.trim() || last_name.trim() || !email.trim() || !phone.trim() || !password.trim()) {
+    if(!first_name.trim() || !last_name.trim() || !email.trim() || !phone.trim() || !password.trim()) {
       const message = 'Please fill missing form details!';
       throw new Error(message);
     }
