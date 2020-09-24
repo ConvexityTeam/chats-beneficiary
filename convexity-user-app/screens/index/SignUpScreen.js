@@ -1,8 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useReducer, useCallback } from 'react';
-import { StyleSheet, View, Text, ScrollView, TouchableOpacity, KeyboardAvoidingView, KeyboardAvoidingViewBase } from 'react-native';
-import { TextInput, Button,TouchableRipple } from 'react-native-paper';
+import React, { useState, useEffect, useReducer, useCallback } from 'react';
+import { StyleSheet, View, Text,  ScrollView, TouchableOpacity, KeyboardAvoidingView, Alert, ActivityIndicator,} from 'react-native';
+import { TextInput, TouchableRipple, Button } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native'
+
 import Input from '../../components/UI/Input';
 import Card from '../../components/UI/Card';
 import Colors from '../../constants/colors';
@@ -35,37 +37,83 @@ const formReducer = (state, action) => {
 };
 
  const SignUpScreen = props => {
-
+  const navigation = useNavigation()
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
+  const [isSignup, setIsSignup] = useState(false);
   const dispatch = useDispatch();
 
   const [formState, dispatchFormState] = useReducer(formReducer, {
     inputValues: {
-      firstName: '',
-      lastName: '',
+      first_name: '',
+      last_name: '',
       email: '',
-      phoneNumber: '',
+      phone: '',
       password: ''
     },
     inputValidities: {
-      firstName: false,
-      lastName: false,
+      first_name: false,
+      last_name: false,
       email: false,
-      phoneNumber: false, 
+      phone: false, 
       password: false
     },
     formIsValid: false
   });
 
-  const signupHandler = () => {
-    dispatch(
-      authActions.signup(
-        formState.inputValues.firstName,
-        formState.inputValues.lastName ,
-        formState.inputValues.email,
-        formState.inputValues.phoneNumber,
-        formState.inputValues.password
-      )
-    );
+  useEffect(() => {
+    if (error) {
+      Alert.alert('An Error Occurred!', error, [{ text: 'Okay' }]);
+    }
+  }, [error]);
+
+  // const authHandler = async () => {
+    
+  //   let action;
+  //   if (isSignup) {
+  //     action = authActions.signup(
+  //       formState.inputValues.first_name,
+  //       formState.inputValues.last_name ,
+  //       formState.inputValues.email,
+  //       formState.inputValues.phone,
+  //       formState.inputValues.password
+  //     );
+  //   } else {
+  //     action = authActions.login(
+  //       formState.inputValues.email,
+  //       formState.inputValues.password
+  //     );
+  //   }
+  //   setError(null);
+  //   setIsLoading(true);
+  //   try {
+  //     await dispatch(action);
+  //     navigation.navigate('Dashboard')
+  //   } catch (err) {
+  //     setError(err.message);
+  //     setIsLoading(false);
+  //   }
+    
+  // };
+
+  const authHandler = async () => {
+    setError(null);
+    setIsLoading(true);
+    try { 
+      await dispatch(
+        authActions.signup(
+          formState.inputValues.first_name,
+          formState.inputValues.last_name ,
+          formState.inputValues.email,
+          formState.inputValues.phone,
+          formState.inputValues.password
+        )
+      );
+      navigation.navigate('Profile')
+    } catch (err){
+      setError(err.message);
+      setIsLoading(false);
+    }
   };
 
   const inputChangeHandler = useCallback(
@@ -79,39 +127,38 @@ const formReducer = (state, action) => {
     },
     [dispatchFormState]
   );
-
  
   return (
-<KeyboardAvoidingView
-      behavior={Platform.OS == "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={5}
-      style={styles.screen}
-    >
+    <KeyboardAvoidingView
+          behavior={Platform.OS == "ios" ? "padding" : "height"}
+          keyboardVerticalOffset={5}
+          style={styles.screen}
+        >
       {/* <LinearGradient colors={['#ffedff', '#ffe3ff']} style={styles.gradient}> */}
         <View style={styles.gradient}>
         <Card style={styles.authContainer}>
           <ScrollView>
           <Input
-              id="firstName"
+              id="first_name"
               label="First Name"
               keyboardType="default"
               required
               email
               autoCapitalize="none"
               // errorText="Please enter a valid email address."
-              // onInputChange={inputChangeHandler}
-              // initialValue=""
+              onInputChange={inputChangeHandler}
+              initialValue=""
             />
             <Input
-              id="lastName"
+              id="last_name"
               label="Last Name"
               keyboardType="default"
               required
               email
               autoCapitalize="none"
               // errorText="Please enter a valid email address."
-              // onInputChange={inputChangeHandler}
-              // initialValue=""
+              onInputChange={inputChangeHandler}
+              initialValue=""
             />
             <Input
               id="email"
@@ -125,15 +172,15 @@ const formReducer = (state, action) => {
               initialValue=""
             />
             <Input
-              id="phoneNumber"
+              id="phone"
               label="Phone Number"
               keyboardType="default"
               required
               email
               autoCapitalize="none"
               // errorText="Please enter a valid email address."
-              // onInputChange={inputChangeHandler}
-              // initialValue=""
+              onInputChange={inputChangeHandler}
+              initialValue=""
             />
             <Input
               id="password"
@@ -147,36 +194,15 @@ const formReducer = (state, action) => {
               onInputChange={inputChangeHandler}
               initialValue=""
             />
-           
-            {/* <View style={styles.buttonContainer}>
-              {isLoading ? (
-                <ActivityIndicator size="small" color={Colors.purple} />
-              ) : (
-                <View style={styles.buttonPurple}>
-                <Button
-                  title={isSignup ? 'Sign Up' : 'Login'}
-                  color={Colors.purple}
-                  onPress={authHandler}
-                />
-                </View>
-              )}
-            </View> */}
-            <View style={styles.signup}>
-              {/* <Button uppercase={false} style={styles.buttonPurple}>             */}
-                <Text style={styles.buttonText}>Sign Up</Text>
-              {/* </Button> */}
-              {/* <Button
-                title={`Dont have an account? ${isSignup ? 'Login' : 'Sign Up'}`}
-                color={Colors.accent}
-                onPress={() => {
-                  setIsSignup(prevState => !prevState);
-                }}
-              /> */}
-              {/* <TouchableOpacity onPress={() => {
-                  setIsSignup(prevState => !prevState);
-                }}>
-                <Text>{`Dont have an account? ${isSignup ? 'Login' : 'Sign Up'}`}</Text>
-              </TouchableOpacity> */}
+            <View style={styles.button}>
+                {isLoading ? ( 
+                  <ActivityIndicator size="small" color={Colors.purple} />
+                ) : (
+                  <Button uppercase={false} mode="contained" color='#492954' onPress={authHandler}>
+                    <Text style={styles.buttonText}>Sign Up</Text>
+                  </Button>
+                )}
+              
             </View>
           </ScrollView>
         </Card>
@@ -189,6 +215,7 @@ const formReducer = (state, action) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
+    
   },
   gradient: {
     flex: 1,
@@ -197,39 +224,38 @@ const styles = StyleSheet.create({
   authContainer: {
     width: '100%',
     height: '100%',
-    padding: 20,
+    paddingTop: 50,
+    paddingLeft: 20,
+    paddingRight: 20
     // borderTopLeftRadius: 30,
     // borderTopRightRadius: 30, 
-    position: 'absolute',
-    bottom: 0,
+    // position: 'absolute',
+    // bottom: 0,
   },
   signup: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     paddingBottom: 96,
+    
   },
-  buttonPurple: {
-    flexDirection: "row", 
-    justifyContent: "space-between", 
+  button: {
+    marginTop: 10,
+    paddingTop: 10,
+    paddingLeft: 5,
+    paddingRight: 5,
+    borderRadius: 10,
     width: "97%",
     height: 50,
-    margin: 3,
-    paddingTop: 15,
-    paddingBottom: 15,
-    paddingLeft: 160,
-    paddingRight: 135,
-    alignItems: "center",
     
-    borderRadius: 10,
-    backgroundColor: '#492954'
   },
   
   buttonText : {
     fontFamily: "gilroy-regular", 
     fontSize: 16, 
     lineHeight: 25, 
-    color: '#000'
+    color: '#fff'
+    
   },
   
 });
