@@ -80,6 +80,7 @@ const formReducer = (state, action) => {
     setError(null);
     setIsLoading(true);
     try {
+      
       await dispatch(action);
       navigation.navigate('Dashboard')
     } catch (err) {
@@ -144,7 +145,7 @@ const formReducer = (state, action) => {
               ) : (
                 <View style={styles.buttonPurple}>
                 <Button
-                  title={isSignup ? 'Sign Up' : 'Login'}
+                  title="Login"
                   color={Colors.purple}
                   onPress={authHandler}
                 />
