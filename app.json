@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "convexity-user-app",
+    "slug": "convexity-user-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/chats-name-logo.png",
+    "splash": {
+      "image": "./assets/chats-name-logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
