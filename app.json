@@ -4,9 +4,9 @@
     "slug": "convexity-user-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/chats-name-logo.png",
+    "icon": "./assets/icons/chatsIconWhite.png",
     "splash": {
-      "image": "./assets/chats-name-logo.png",
+      "image": "./assets/icons/chatsTransparent.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,6 +21,9 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "android": {
+      "package": "com.emmaodia.convexityuserapp"
     }
   }
 }
