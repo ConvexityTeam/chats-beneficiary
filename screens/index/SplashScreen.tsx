@@ -21,13 +21,13 @@ const data = [
   {
     title: 'Safe and Secure',
     text: 'CHATS is and secured to set up encrypted security using Blockchain',
-    image: require('../../assets/womanUsingPhone.png'),
+    // image: require('../../assets/womanUsingPhone.png'),
     bg: '#febe29',
   },
   {
     title: 'Pay Money Instantly',
     text: 'Transfer instantly between vendors and beneficiaries',
-    image: require('../../assets/momAndDaughter.png'),
+    // image: require('../../assets/momAndDaughter.png'),
     bg: '#22bcb5',
   },
 ];
@@ -63,10 +63,10 @@ export default class SplashScreen extends React.Component {
           <Text style={styles.title}>{item.title}</Text>
           <Text style={styles.subtitle}>{item.text}</Text>
           
-          <Button uppercase={false} style={styles.buttonPurple}>            
+          <Button uppercase={false} style={styles.buttonPurple} onPress={() => this.props.navigation.navigate('SignUp')}>            
             <Text style={styles.buttonText}>Sign Up</Text>
           </Button>
-          <Button uppercase={false} style={styles.buttonWhite} >            
+          <Button uppercase={false} style={styles.buttonWhite} onPress={() => this.props.navigation.navigate('Login')}>            
             <Text style={styles.buttonText}>Login</Text>
           </Button>
           
@@ -92,11 +92,15 @@ export default class SplashScreen extends React.Component {
             keyExtractor={this._keyExtractor}
             renderItem={this._renderItem}
             // bottomButton
-            showSkipButton
-            showPrevButton
+            // showSkipButton
+            // showPrevButton
             data={data}
-            onDone={this.on_Done_all_slides}
-            onSkip={this.on_Skip_slides}
+            dotStyle={{backgroundColor: 'rgba(0, 0, 0, .2)', paddingLeft: '10%' }}
+            activeDotStyle={{backgroundColor: '#492954', paddingLeft: '10%'}}
+            showNextButton={false}
+            showDoneButton={false}
+            // onDone={this.on_Done_all_slides}
+            // onSkip={this.on_Skip_slides}
           />
         </View>
       );
