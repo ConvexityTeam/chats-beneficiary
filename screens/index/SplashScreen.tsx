@@ -15,20 +15,20 @@ const data = [
   {
     title: 'Simple And Easy',
     text: 'Easy and straightforward onboarding process',
-    // image: require('../../assets/whitebg.png'),
-    bg: '#59b2ab',
+    image: require('../../assets/girlalone.png'),
+    // bg: '#59b2ab',
   },
   {
     title: 'Safe and Secure',
     text: 'CHATS is and secured to set up encrypted security using Blockchain',
-    // image: require('../../assets/womanUsingPhone.png'),
-    bg: '#febe29',
+    image: require('../../assets/guyalone.png'),
+    // bg: '#febe29',
   },
   {
     title: 'Pay Money Instantly',
     text: 'Transfer instantly between vendors and beneficiaries',
-    // image: require('../../assets/momAndDaughter.png'),
-    bg: '#22bcb5',
+    image: require('../../assets/guyandgirl.png'),
+    // bg: '#22bcb5',
   },
 ];
 
@@ -59,7 +59,7 @@ export default class SplashScreen extends React.Component {
           backgroundColor: item.bg,
         }}>
         <SafeAreaView style={styles.slide}>
-          {/* <ImageBackground source={item.image} style={styles.image}> */}
+          <ImageBackground source={item.image} style={styles.image}>
           <Text style={styles.title}>{item.title}</Text>
           <Text style={styles.subtitle}>{item.text}</Text>
           
@@ -70,7 +70,7 @@ export default class SplashScreen extends React.Component {
             <Text style={styles.buttonText}>Login</Text>
           </Button>
           
-          {/* </ImageBackground> */}
+          </ImageBackground>
         </SafeAreaView>
       </View>
     );
@@ -95,7 +95,7 @@ export default class SplashScreen extends React.Component {
             // showSkipButton
             // showPrevButton
             data={data}
-            dotStyle={{backgroundColor: 'rgba(0, 0, 0, .2)', paddingLeft: '10%' }}
+            dotStyle={{backgroundColor: '#fff', paddingLeft: '10%' }}
             activeDotStyle={{backgroundColor: '#492954', paddingLeft: '10%'}}
             showNextButton={false}
             showDoneButton={false}
@@ -122,9 +122,9 @@ const styles = StyleSheet.create({
     paddingBottom: 96, // Add padding to offset large buttons and pagination in bottom of page
   },
   image: {
-    width: 320,
-    height: 320,
-    marginTop: 32,
+    width: '100%',
+    height: 815,
+    // marginTop: 150,
     resizeMode: "cover",
     justifyContent: "center"
   },
@@ -145,24 +145,23 @@ const styles = StyleSheet.create({
   buttonPurple: {
     flexDirection: "row", 
     // justifyContent: "center", 
-    width: "97%",
+    width: "95%",
     height: 50,
-    // margin: 3,
+    margin: "2.5%",
     paddingTop: 15,
     paddingBottom: 15,
     paddingLeft: '35%',
     paddingRight: 100,
     alignItems: "center",
-    
     borderRadius: 10,
     backgroundColor: '#492954'
   },
   buttonWhite: {
     flexDirection: "row", 
     // justifyContent: "space-between", 
-    width: "97%",
+    width: "95%",
     height: 50,
-    margin: 3,
+    margin: "2.5%",
     paddingTop: 15,
     paddingBottom: 15,
     paddingLeft: '35%',
