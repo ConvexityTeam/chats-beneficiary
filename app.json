@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/icons/chatsIconWhite.png",
     "splash": {
-      "image": "./assets/icons/chatsTransparent.png",
+      "image": "./assets/icons/chatsSplash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
