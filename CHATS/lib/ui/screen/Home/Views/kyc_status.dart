@@ -1,9 +1,10 @@
 import 'dart:convert';
 
-import 'package:CHATS/ui/shared/BTN.dart';
-import 'package:CHATS/ui/shared/TEXT.dart';
-import 'package:CHATS/ui/shared/ui_helper.dart';
+import 'package:CHATS/ChatsMain/ui/shared/BTN.dart';
+import 'package:CHATS/ChatsMain/ui/shared/TEXT.dart';
+import 'package:CHATS/ChatsMain/ui/shared/ui_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
 class KYCstatus extends StatefulWidget {
@@ -64,7 +65,7 @@ class _KYCstatusState extends State<KYCstatus> {
         // Text(model.signUpErrorMessage, style: TextStyle(color: Colors.red)),
         GestureDetector(
             child: _buildCard(
-                Icons.upload_outlined,
+                Image.asset("assets/upload_icon.png"),
                 'Upload Picture',
                 'Upload a clear picture showing your face. Avoid group picture',
                 height,
@@ -84,7 +85,7 @@ class _KYCstatusState extends State<KYCstatus> {
             }),
         GestureDetector(
             child: _buildCard(
-                Icons.upload_outlined,
+                Image.asset("assets/upload_icon.png"),
                 'Upload Valid ID',
                 'National ID, Drivers’ License, Intl. Passport',
                 height,
@@ -104,7 +105,15 @@ class _KYCstatusState extends State<KYCstatus> {
             }),
 
         GestureDetector(
-            child: _buildCard(Icons.lock, 'Verify NIN/BVN', ' ', height, false),
+            child: _buildCard(
+                Icon(
+                  FontAwesomeIcons.microscope,
+                  color: Constants.kpurple2,
+                ),
+                'Verify NIN/BVN',
+                ' ',
+                height,
+                false),
             onTap: () async {
               // FilePickerResult result = await FilePicker.platform.pickFiles(type: FileType.custom, allowedExtensions: ['jpg', 'png']);
 
@@ -141,12 +150,13 @@ class _KYCstatusState extends State<KYCstatus> {
   }
 
   Container _buildCard(
-      IconData icon, String title, String body, double height, bool uploaded) {
+      Widget icon, String title, String body, double height, bool uploaded) {
     return Container(
       padding: EdgeInsets.only(top: 18, bottom: 18),
       child: ListTile(
         isThreeLine: true,
-        leading: Icon(icon, color: Constants.purple, size: height * 2),
+        // leading: Icon(icon, color: Constants.purple, size: height * 2),
+        leading: icon,
         title: TEXT(
           text: title,
           fontFamily: 'Gilroy-Medium',
@@ -175,9 +185,10 @@ class _KYCstatusState extends State<KYCstatus> {
               right: BorderSide.none),
           boxShadow: [
             BoxShadow(
-                color: Color.fromRGBO(174, 174, 192, 1),
-                spreadRadius: 0.4,
-                blurRadius: 20)
+              color: Color.fromRGBO(174, 174, 192, 1),
+              // spreadRadius: 0.4,
+              blurRadius: 10,
+            )
           ]),
     );
   }

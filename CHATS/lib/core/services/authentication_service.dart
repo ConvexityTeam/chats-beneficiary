@@ -1,11 +1,10 @@
 import 'dart:convert';
-
-import 'package:CHATS/core/models/user_model.dart';
-import 'package:CHATS/core/services/base_service.dart';
+import 'package:CHATS/ChatsMain/core/models/beneficiary_user_model.dart';
+import 'package:CHATS/ChatsMain/core/services/base_service.dart';
 import 'package:http/http.dart' as http;
 
 class AuthenticationService extends BaseService {
-  Future<Map<String, dynamic>> register(UserModel userObj) async {
+  Future<Map<String, dynamic>> register(BeneficiaryUserModel userObj) async {
     try {
       final response = await http.post("$authUrl/register",
           body: jsonEncode(userObj.toJson()), headers: header);

@@ -24,8 +24,8 @@ dependencies:
 
   cupertino_icons: ^1.0.0
 
-  build_runner: ^1.7.3
-  json_serializable: ^3.3.0
+  build_runner: ^1.11.1
+  json_serializable: ^3.5.1
 
   date_format: ^1.0.8
   # file_picker: ^2.1.4
@@ -38,12 +38,14 @@ dependencies:
   # file_picker: ^2.1.4
   path_provider: ^1.6.11
   flutter_spinkit: ^4.1.2+1
-  flutter_barcode_scanner: ^1.0.1
+  flutter_barcode_scanner: ^1.0.2
   fl_chart: ^0.12.1
+  
 
   path:
 
   google_fonts: ^1.1.0
+  analyzer: ^0.41.2
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +54,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/
+    - icons/
     - assets/images/
     - assets/icons/
 

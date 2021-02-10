@@ -1,10 +1,14 @@
-import 'package:CHATS/locator.dart';
-import 'package:CHATS/ui/screen/router.dart' as router;
+import 'package:CHATS/ChatsMain/locator.dart';
+import 'package:CHATS/Vendor/locator.dart';
+import 'package:CHATS/general_locator.dart';
+import 'package:CHATS/major_splash_screen.dart';
 import "package:flutter/material.dart";
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  newSetUpLocator();
   setUpLocator();
+  setUpVendorLocator();
   runApp(MyApp());
 }
 
@@ -18,8 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
       ),
-      onGenerateRoute: router.Router.generateRoute,
-      initialRoute: 'splash',
+      home: MajorSplashScreen(),
     );
   }
 }
