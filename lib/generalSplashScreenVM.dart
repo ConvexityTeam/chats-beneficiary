@@ -1,17 +1,16 @@
 import 'package:CHATS/ChatsMain/ui/screen/splashscreen.dart';
-import 'package:CHATS/descision_page.dart';
-import 'package:CHATS/general_base_provider_model.dart';
+import 'package:CHATS/screens/descision_page.dart';
+import 'package:CHATS/providers/general_base_provider_model.dart';
 import 'package:flutter/material.dart';
 
 import 'Vendor/main.dart';
-import 'general_locator.dart';
-import 'general_sharedPref.dart';
+import 'domain/general_locator.dart';
+import 'domain/general_sharedPref.dart';
 
 class GSplashScreenViewModel extends GBaseProviderModel {
   final keyStore = newLocator<GSharedPref>();
 // setViewState(ViewState.IDLE);
   Future startUp(BuildContext context) async {
-    print('i am called');
     if (await keyStore.myOption == 'non') {
       // print(await keyStore.myOption == 'non');
       await Future.delayed(Duration(seconds: 4));
