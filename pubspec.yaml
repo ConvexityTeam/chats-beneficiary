@@ -40,7 +40,6 @@ dependencies:
   flutter_spinkit: ^4.1.2+1
   flutter_barcode_scanner: ^1.0.2
   fl_chart: ^0.12.1
-  
 
   path:
 
