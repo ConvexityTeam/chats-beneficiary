@@ -1,6 +1,6 @@
-import 'package:CHATS/ChatsMain/locator.dart';
-import 'package:CHATS/Vendor/locator.dart';
+import 'package:CHATS/domain/locator.dart';
 import 'package:CHATS/domain/general_locator.dart';
+import 'package:CHATS/router.dart';
 import 'package:CHATS/screens/splash/major_splash_screen.dart';
 import "package:flutter/material.dart";
 
@@ -8,7 +8,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   newSetUpLocator();
   setUpLocator();
-  setUpVendorLocator();
+  // setUpVendorLocator();
   runApp(MyApp());
 }
 
@@ -18,10 +18,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      onGenerateRoute: CustomRouter.generateRoute,
       title: 'CHATS',
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
       ),
+      initialRoute: 'onboard',
       home: MajorSplashScreen(),
     );
   }

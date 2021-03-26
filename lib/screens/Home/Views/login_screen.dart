@@ -1,9 +1,9 @@
-import 'package:CHATS/ChatsMain/ui/shared/BTN.dart';
-import 'package:CHATS/ChatsMain/ui/shared/TEXT.dart';
-import 'package:CHATS/ChatsMain/ui/shared/TF.dart';
-import 'package:CHATS/ChatsMain/ui/shared/ui_helper.dart';
-import 'package:CHATS/ChatsMain/ui/viewModels/base_view_model.dart';
-import 'package:CHATS/ChatsMain/ui/viewModels/sign_upVM.dart';
+import 'package:ui/shared/BTN.dart';
+import 'package:ui/shared/CustomText.dart';
+import 'package:ui/shared/TF.dart';
+import 'package:ui/shared/ui_helper.dart';
+import 'package:ui/viewModels/base_view_model.dart';
+import 'package:ui/viewModels/sign_upVM.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Center(
-                                  child: TEXT(
+                                  child: CustomText(
                                 edgeInset: EdgeInsets.all(0),
                                 text: provider.errorMessage,
                                 color: Colors.red,
@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               )),
                               TF(
                                 controller: emailController,
-                                label: TEXT(
+                                label: CustomText(
                                   text: 'Email / Phone Number',
                                   fontFamily: 'Gilroy-Medium',
                                 ),
@@ -60,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               TF(
                                 controller: passController,
                                 isPassword: hidePassword,
-                                label: TEXT(
+                                label: CustomText(
                                   text: 'Password',
                                   fontFamily: 'Gilroy-Medium',
                                 ),
@@ -82,14 +82,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                               ),
                               GestureDetector(
-                                  child: TEXT(
+                                  child: CustomText(
                                 text: 'Forgot Password?',
                                 color: Colors.black,
                               )),
                               BTN(
                                   children: [
                                     Expanded(
-                                        child: TEXT(
+                                        child: CustomText(
                                             text: 'Log in',
                                             color: Colors.black,
                                             textAlign: TextAlign.center,
@@ -119,9 +119,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  TEXT(text: "Don't have an account? "),
+                                  CustomText(text: "Don't have an account? "),
                                   GestureDetector(
-                                    child: TEXT(
+                                    child: CustomText(
                                       text: 'Sign up',
                                       color: Constants.purple,
                                     ),

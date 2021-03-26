@@ -1,19 +1,19 @@
 // import 'dart:io';
 
-// import 'package:CHATS/core/utils/otp_pin.dart';
+// import 'package:CHATS/CHATS/utils/otp_pin.dart';
 
 // import 'package:file_picker/file_picker.dart';
 
-// import 'package:CHATS/Chats%20Main/core/models/bene_user.dart';
+// import 'package:CHATS/Chats%20Main/CHATS/models/bene_user.dart';
 
-import 'package:CHATS/ChatsMain/core/models/beneficiary_user_model.dart';
+import 'package:CHATS/models/beneficiary_user_model.dart';
 import 'package:CHATS/utils/otp_pin.dart';
-import 'package:CHATS/ChatsMain/ui/shared/BTN.dart';
-import 'package:CHATS/ChatsMain/ui/shared/TEXT.dart';
-import 'package:CHATS/ChatsMain/ui/shared/TF.dart';
-import 'package:CHATS/ChatsMain/ui/shared/ui_helper.dart';
-import 'package:CHATS/ChatsMain/ui/viewModels/base_view_model.dart';
-import 'package:CHATS/ChatsMain/ui/viewModels/sign_upVM.dart';
+import 'package:ui/shared/BTN.dart';
+import 'package:ui/shared/CustomText.dart';
+import 'package:ui/shared/TF.dart';
+import 'package:ui/shared/ui_helper.dart';
+import 'package:ui/viewModels/base_view_model.dart';
+import 'package:ui/viewModels/sign_upVM.dart';
 import 'package:flutter/material.dart';
 // import 'package:pin_entry_text_field/pin_entry_text_field.dart';
 
@@ -116,7 +116,7 @@ class _SignUpViewState extends State<SignUpView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          TEXT(
+          CustomText(
             text: 'Personal Information',
             fontFamily: 'Gilroy-bold',
             fontSize: smallH * 1.5,
@@ -130,7 +130,7 @@ class _SignUpViewState extends State<SignUpView> {
             validateFn: (val) {
               if (val.isEmpty) return 'Cannot be empty';
             },
-            label: TEXT(
+            label: CustomText(
               text: 'First Name',
               fontSize: 16,
               fontFamily: 'Gilroy-Medium',
@@ -142,7 +142,7 @@ class _SignUpViewState extends State<SignUpView> {
             onSaved: (val) {
               userModel.last_name = val;
             },
-            label: TEXT(
+            label: CustomText(
               text: 'Last Name',
               fontSize: 16,
               fontFamily: 'Gilroy-Medium',
@@ -157,7 +157,7 @@ class _SignUpViewState extends State<SignUpView> {
             onSaved: (val) {
               userModel.email = val;
             },
-            label: TEXT(
+            label: CustomText(
               text: 'Email',
               fontSize: 16,
               fontFamily: 'Gilroy-Medium',
@@ -172,7 +172,7 @@ class _SignUpViewState extends State<SignUpView> {
             onSaved: (val) {
               userModel.phone = val;
             },
-            label: TEXT(
+            label: CustomText(
               text: 'Phone Number',
               fontSize: 16,
               fontFamily: 'Gilroy-Medium',
@@ -184,7 +184,7 @@ class _SignUpViewState extends State<SignUpView> {
           ),
           BTN(
               children: [
-                TEXT(
+                CustomText(
                   text: 'Next',
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
@@ -202,9 +202,9 @@ class _SignUpViewState extends State<SignUpView> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TEXT(text: "Already have an account?"),
+              CustomText(text: "Already have an account?"),
               GestureDetector(
-                child: TEXT(
+                child: CustomText(
                   text: 'Log in',
                   color: Constants.purple,
                 ),
@@ -225,13 +225,13 @@ class _SignUpViewState extends State<SignUpView> {
       children: [
         Column(
           children: [
-            TEXT(
+            CustomText(
               text: 'OTP Verification',
               fontFamily: 'Gilroy-bold',
               fontSize: height * 1.5,
               edgeInset: EdgeInsets.only(bottom: height * 1.3),
             ),
-            TEXT(
+            CustomText(
               text: 'Enter the OTP sent to ********353',
               fontWeight: FontWeight.w300,
               edgeInset: EdgeInsets.only(bottom: height * 1.3),
@@ -249,12 +249,12 @@ class _SignUpViewState extends State<SignUpView> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TEXT(
+              CustomText(
                 text: "Didn't receive the OTP?  ",
                 fontSize: height / 1.5,
               ),
               GestureDetector(
-                  child: TEXT(
+                  child: CustomText(
                       text: "Resend SMS",
                       color: Constants.purple,
                       fontSize: height / 1.5),
@@ -262,12 +262,12 @@ class _SignUpViewState extends State<SignUpView> {
             ],
           ),
         ),
-        TEXT(text: "Wrong phone number?", fontSize: height / 1.5),
+        CustomText(text: "Wrong phone number?", fontSize: height / 1.5),
         BTN(
             margin: EdgeInsets.only(top: height * 3),
             children: [
               Expanded(
-                  child: TEXT(
+                  child: CustomText(
                 text: 'Verify',
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -315,7 +315,7 @@ class _SignUpViewState extends State<SignUpView> {
       child: ListTile(
         isThreeLine: true,
         leading: Icon(icon, color: Constants.purple, size: height * 2),
-        title: TEXT(
+        title: CustomText(
           text: title,
           fontFamily: 'Gilroy-Medium',
           fontSize: 16,
@@ -329,7 +329,7 @@ class _SignUpViewState extends State<SignUpView> {
                     color: Constants.purple),
               )
             : Text(''),
-        subtitle: TEXT(
+        subtitle: CustomText(
             text: body, fontSize: 12, color: Color.fromRGBO(85, 85, 85, 1)),
       ),
       margin: EdgeInsets.only(bottom: height),

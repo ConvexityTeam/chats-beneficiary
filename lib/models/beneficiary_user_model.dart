@@ -1,7 +1,5 @@
-import 'package:json_annotation/json_annotation.dart';
 part 'beneficiary_user_model.g.dart';
 
-@JsonSerializable()
 class BeneficiaryUserModel {
   String referal_id = "";
   String OrganisationId = "2";

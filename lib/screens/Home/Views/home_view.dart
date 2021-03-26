@@ -1,5 +1,5 @@
 import 'package:CHATS/utils/colors.dart';
-import 'package:CHATS/ChatsMain/ui/screen/Home/Views/drawer_view.dart';
+import 'package:ui/screen/Home/Views/drawer_view.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 

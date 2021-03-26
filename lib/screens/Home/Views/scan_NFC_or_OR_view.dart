@@ -1,6 +1,6 @@
 import 'package:CHATS/utils/ui_helper.dart';
-import 'package:CHATS/ChatsMain/ui/screen/Home/Views/drawer_view.dart';
-import 'package:CHATS/ChatsMain/ui/screen/router.dart';
+import 'package:ui/screen/Home/Views/drawer_view.dart';
+import 'package:ui/screen/router.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../utils/colors.dart';

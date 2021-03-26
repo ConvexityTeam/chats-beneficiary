@@ -1,14 +1,13 @@
-import 'package:CHATS/ChatsMain/main.dart';
-import 'package:CHATS/ChatsMain/ui/shared/BTN.dart';
-import 'package:CHATS/ChatsMain/ui/shared/TEXT.dart';
-import 'package:CHATS/Vendor/main.dart';
+import 'package:ui/shared/BTN.dart';
+import 'package:ui/shared/CustomText.dart';
+import 'package:main.dart';
 import 'package:CHATS/domain/general_locator.dart';
 import 'package:CHATS/domain/general_sharedPref.dart';
 import 'package:CHATS/domain/local_storage.dart';
 import 'package:CHATS/models/user_type.dart';
 import 'package:flutter/material.dart';
 
-import '../ChatsMain/ui/shared/ui_helper.dart';
+import '../../../ChatsMain/ui/shared/ui_helper.dart';
 
 class DescisionPage extends StatefulWidget {
   @override
@@ -40,7 +39,7 @@ class _DescisionPageState extends State<DescisionPage> {
               ),
             ),
             SizedBox(height: 10),
-            TEXT(
+            CustomText(
               text: "Sign Up As !",
               fontFamily: 'Gilroy-bold',
               fontSize: 25,
@@ -58,7 +57,7 @@ class _DescisionPageState extends State<DescisionPage> {
               },
               children: [
                 Image.asset("icons/profile.png"),
-                TEXT(
+                CustomText(
                   text: "Vendor",
                   fontFamily: 'Gilroy-bold',
                   fontSize: 25,
@@ -79,7 +78,7 @@ class _DescisionPageState extends State<DescisionPage> {
               },
               children: [
                 Image.asset("icons/profile.png"),
-                TEXT(
+                CustomText(
                   color: Colors.white,
                   text: "Beneficiary",
                   fontFamily: 'Gilroy-bold',

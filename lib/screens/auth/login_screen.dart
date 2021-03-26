@@ -1,9 +1,9 @@
-import 'package:CHATS/ChatsMain/ui/shared/BTN.dart';
-import 'package:CHATS/ChatsMain/ui/shared/TEXT.dart';
-import 'package:CHATS/ChatsMain/ui/shared/TF.dart';
-import 'package:CHATS/ChatsMain/ui/shared/ui_helper.dart';
-import 'package:CHATS/Vendor/ui/view_model/base_view_model.dart';
-import 'package:CHATS/Vendor/ui/view_model/sign_upVM.dart';
+import 'package:CHATS/screens/home/view_models/base_view_model.dart';
+import 'package:CHATS/screens/home/view_models/sign_upVM.dart';
+import 'package:CHATS/utils/custom_btn.dart';
+import 'package:CHATS/utils/custom_text_field.dart';
+import 'package:CHATS/utils/text.dart';
+import 'package:CHATS/utils/ui_helper.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -45,15 +45,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Center(
-                                      child: TEXT(
+                                      child: CustomText(
                                     edgeInset: EdgeInsets.all(0),
                                     text: provider.errorMessage,
                                     color: Colors.red,
                                     fontSize: 12,
                                   )),
-                                  TF(
+                                  CustomTextField(
                                     controller: emailController,
-                                    label: TEXT(
+                                    label: CustomText(
                                       text: 'Email / Phone Number',
                                       fontFamily: 'Gilroy-Medium',
                                     ),
@@ -61,10 +61,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                       if (val.isEmpty) return 'Cannot be empty';
                                     },
                                   ),
-                                  TF(
+                                  CustomTextField(
                                     controller: passController,
                                     isPassword: hidePassword,
-                                    label: TEXT(
+                                    label: CustomText(
                                       text: 'Password',
                                       fontFamily: 'Gilroy-Medium',
                                     ),
@@ -86,14 +86,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                     },
                                   ),
                                   GestureDetector(
-                                      child: TEXT(
+                                      child: CustomText(
                                     text: 'Forgot Password?',
                                     color: Colors.black,
                                   )),
-                                  BTN(
+                                  CustomButton(
                                       children: [
                                         Expanded(
-                                            child: TEXT(
+                                            child: CustomText(
                                                 text: 'Log in',
                                                 color: Colors.white,
                                                 textAlign: TextAlign.center,
@@ -125,9 +125,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      TEXT(text: "Don't have an account? "),
+                                      CustomText(
+                                          text: "Don't have an account? "),
                                       GestureDetector(
-                                        child: TEXT(
+                                        child: CustomText(
                                           text: 'Sign up',
                                           color: Constants.purple,
                                         ),

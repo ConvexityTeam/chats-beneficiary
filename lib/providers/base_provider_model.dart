@@ -1,4 +1,4 @@
-// import 'package:CHATS/Chats%20Main/core/constants/view_state.dart';
+// import 'package:CHATS/Chats%20Main/CHATS/constants/view_state.dart';
 import 'package:CHATS/utils/view_state.dart';
 import 'package:flutter/material.dart';
 

@@ -1,8 +1,8 @@
-import 'package:CHATS/ChatsMain/ui/shared/ui_helper.dart';
-import 'package:CHATS/ChatsMain/ui/viewModels/base_view_model.dart';
-import 'package:CHATS/ChatsMain/ui/viewModels/sign_upVM.dart';
-import 'package:CHATS/ChatsMain/ui/widgets/custom_carousel.dart';
-import 'package:CHATS/ChatsMain/ui/widgets/rectanguler_round.dart';
+import 'package:ui/shared/ui_helper.dart';
+import 'package:ui/viewModels/base_view_model.dart';
+import 'package:ui/viewModels/sign_upVM.dart';
+import 'package:ui/widgets/custom_carousel.dart';
+import 'package:ui/widgets/rectanguler_round.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingScreen extends StatefulWidget {

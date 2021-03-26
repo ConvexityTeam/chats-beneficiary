@@ -1,7 +1,7 @@
-import 'package:CHATS/ChatsMain/ui/shared/ui_helper.dart';
+import 'package:CHATS/utils/ui_helper.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../utils/colors.dart';
+import '../../utils/colors.dart';
 
 class CustomButton extends StatelessWidget {
   final Function onPressed;

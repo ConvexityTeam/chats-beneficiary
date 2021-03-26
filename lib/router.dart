@@ -1,18 +1,16 @@
-import 'package:CHATS/ChatsMain/ui/screen/Home/Views/payment_confirmation_view.dart';
-import 'package:CHATS/ChatsMain/ui/screen/Home/Views/scan_QR_view.dart';
-import 'package:CHATS/ChatsMain/ui/screen/bvn_verification_form.dart';
-import 'package:CHATS/ChatsMain/ui/screen/login_screen.dart';
-import 'package:CHATS/ChatsMain/ui/screen/onboard_screen.dart';
-import 'package:CHATS/ChatsMain/ui/screen/sign-up.dart';
-import 'package:CHATS/ChatsMain/ui/screen/splashscreen.dart';
-// import 'package:CHATS/ui/screen/Home/Views/kyc_status.dart';
+import 'package:CHATS/screens/auth/login_screen.dart';
+import 'package:CHATS/screens/auth/sign_up_screen.dart';
+import 'package:CHATS/screens/home/Views/bvn_verification_form.dart';
+import 'package:CHATS/screens/home/Views/onboard_screen.dart';
+import 'package:CHATS/screens/home/views/home_view.dart';
+import 'package:CHATS/screens/home/views/notifications_view.dart';
+import 'package:CHATS/screens/home/views/payment_confirmation_view.dart';
+import 'package:CHATS/screens/home/views/pofile_view.dart';
+import 'package:CHATS/screens/home/views/scan_NFC_or_OR_view.dart';
+import 'package:CHATS/screens/home/views/scan_QR_view.dart';
+import 'package:CHATS/screens/home/views/splashscreen.dart';
+import 'package:CHATS/screens/home/views/wallet_view.dart';
 import 'package:flutter/material.dart';
-
-import 'Home/Views/home_view.dart';
-import 'Home/Views/notifications_view.dart';
-import 'Home/Views/pofile_view.dart';
-import 'Home/Views/scan_NFC_or_OR_view.dart';
-import 'Home/Views/wallet_view.dart';
 
 /// here we have the routes  in static variable so it is easy for us to change
 const String splash = 'splash';
@@ -31,7 +29,7 @@ const String paymentConfirmation = "paymentConfirmation";
 const String kycStatus = 'kycStatus';
 const String bvnVerification = 'bvnVerification';
 
-class Router {
+class CustomRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case paymentConfirmation:

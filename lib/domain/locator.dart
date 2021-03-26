@@ -1,5 +1,5 @@
-import 'package:CHATS/ChatsMain/ui/viewModels/sign_upVM.dart';
-import 'package:CHATS/ChatsMain/ui/viewModels/splash_screenVM.dart';
+import 'package:CHATS/screens/home/view_models/sign_upVM.dart';
+import 'package:CHATS/screens/home/view_models/splash_screenVM.dart';
 import 'package:get_it/get_it.dart';
 import '../providers/base_provider_model.dart';
 import '../services/local_storage_service.dart';

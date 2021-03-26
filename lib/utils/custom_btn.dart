@@ -1,8 +1,8 @@
-import 'package:CHATS/ChatsMain/ui/shared/ui_helper.dart';
+import 'package:CHATS/utils/ui_helper.dart';
 import 'package:flutter/material.dart';
 
-class BTN extends StatelessWidget {
-  BTN(
+class CustomButton extends StatelessWidget {
+  CustomButton(
       {this.bgColor,
       @required this.children,
       @required this.onTap,

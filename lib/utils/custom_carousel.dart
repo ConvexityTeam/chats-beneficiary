@@ -1,4 +1,4 @@
-import 'package:CHATS/ChatsMain/ui/shared/ui_helper.dart';
+import 'package:CHATS/utils/ui_helper.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 

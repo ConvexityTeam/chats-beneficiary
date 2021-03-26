@@ -1,11 +1,11 @@
 import 'dart:convert';
 // import 'dart:io';
-import 'package:CHATS/ChatsMain/core/models/beneficiary_user_model.dart';
+import 'package:CHATS/models/beneficiary_user_model.dart';
 import 'package:CHATS/providers/base_provider_model.dart';
-import 'package:CHATS/ChatsMain/core/services/authentication_service.dart';
+import 'package:CHATS/services/authentication_service.dart';
 import 'package:CHATS/services/local_storage_service.dart';
 import 'package:CHATS/domain/locator.dart';
-import 'package:CHATS/ChatsMain/ui/shared/ui_helper.dart';
+import 'package:ui/shared/ui_helper.dart';
 import 'package:flutter/widgets.dart';
 
 class SignUpVM extends BaseProviderModel {

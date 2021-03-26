@@ -1,5 +1,5 @@
-import 'package:CHATS/ChatsMain/ui/screen/login_screen.dart';
-import 'package:CHATS/ChatsMain/ui/screen/router.dart';
+import 'package:ui/screen/login_screen.dart';
+import 'package:ui/screen/router.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

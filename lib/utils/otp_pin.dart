@@ -1,6 +1,6 @@
 library pin_entry_text_field;
 
-import 'package:CHATS/ChatsMain/ui/shared/ui_helper.dart';
+import 'package:CHATS/utils/ui_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

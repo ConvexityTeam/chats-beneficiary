@@ -1,8 +1,8 @@
-import 'package:CHATS/ChatsMain/ui/shared/BTN.dart';
-import 'package:CHATS/ChatsMain/ui/shared/TEXT.dart';
-import 'package:CHATS/ChatsMain/ui/shared/ui_helper.dart';
-import 'package:CHATS/ChatsMain/ui/viewModels/base_view_model.dart';
-import 'package:CHATS/ChatsMain/ui/viewModels/sign_upVM.dart';
+import 'package:ui/shared/BTN.dart';
+import 'package:ui/shared/CustomText.dart';
+import 'package:ui/shared/ui_helper.dart';
+import 'package:ui/viewModels/base_view_model.dart';
+import 'package:ui/viewModels/sign_upVM.dart';
 import 'package:flutter/material.dart';
 
 class VerifyFPView extends StatefulWidget {
@@ -28,7 +28,7 @@ class _VerifyFPViewState extends State<VerifyFPView> {
                         ),
                         onPressed: () {},
                       ),
-                      TEXT(
+                      CustomText(
                         text: 'Verify Fingerprint',
                         color: Constants.purple,
                       )
@@ -37,11 +37,11 @@ class _VerifyFPViewState extends State<VerifyFPView> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      TEXT(
+                      CustomText(
                         text: 'Place your Thumb on the',
                         color: Constants.purple,
                       ),
-                      TEXT(
+                      CustomText(
                         text: 'Fingerprint sensor',
                         color: Constants.purple,
                       )
@@ -50,7 +50,7 @@ class _VerifyFPViewState extends State<VerifyFPView> {
                   BTN(
                       margin: EdgeInsets.only(),
                       children: [
-                        TEXT(
+                        CustomText(
                           text: 'Verify',
                           color: Colors.white,
                           edgeInset: EdgeInsets.all(0.0),

@@ -1,6 +1,6 @@
 import 'dart:ui';
-import 'package:CHATS/ChatsMain/ui/viewModels/base_view_model.dart';
-import 'package:CHATS/ChatsMain/ui/viewModels/splash_screenVM.dart';
+import 'package:ui/viewModels/base_view_model.dart';
+import 'package:ui/viewModels/splash_screenVM.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {

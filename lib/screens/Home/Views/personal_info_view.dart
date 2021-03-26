@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:CHATS/ChatsMain/ui/shared/BTN.dart';
-import 'package:CHATS/ChatsMain/ui/shared/TEXT.dart';
-import 'package:CHATS/ChatsMain/ui/shared/ui_helper.dart';
+import 'package:ui/shared/BTN.dart';
+import 'package:ui/shared/CustomText.dart';
+import 'package:ui/shared/ui_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -55,7 +55,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        TEXT(
+        CustomText(
           text: 'Identity Verification',
           fontFamily: 'Gilroy-bold',
           fontSize: height,
@@ -112,7 +112,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
           margin: EdgeInsets.only(top: height * 3),
           children: [
             Expanded(
-                child: TEXT(
+                child: CustomText(
               text: 'Verify',
               color: Colors.black,
               fontWeight: FontWeight.bold,
@@ -145,7 +145,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
       child: ListTile(
         isThreeLine: true,
         leading: Icon(icon, color: Constants.purple, size: height * 2),
-        title: TEXT(
+        title: CustomText(
           text: title,
           fontFamily: 'Gilroy-Medium',
           fontSize: 16,
@@ -159,7 +159,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                     color: Constants.purple),
               )
             : Text(''),
-        subtitle: TEXT(
+        subtitle: CustomText(
             text: body, fontSize: 12, color: Color.fromRGBO(85, 85, 85, 1)),
       ),
       margin: EdgeInsets.only(bottom: height),

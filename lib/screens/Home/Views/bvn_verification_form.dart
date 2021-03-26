@@ -1,7 +1,7 @@
-import 'package:CHATS/ChatsMain/ui/shared/BTN.dart';
-import 'package:CHATS/ChatsMain/ui/shared/TEXT.dart';
-import 'package:CHATS/ChatsMain/ui/shared/TF.dart';
-import 'package:CHATS/ChatsMain/ui/viewModels/base_view_model.dart';
+import 'package:ui/shared/BTN.dart';
+import 'package:ui/shared/CustomText.dart';
+import 'package:ui/shared/TF.dart';
+import 'package:ui/viewModels/base_view_model.dart';
 import 'package:flutter/material.dart';
 
 class BVNVerificationScreen extends StatelessWidget {
@@ -27,7 +27,7 @@ class BVNVerificationScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      TEXT(
+                      CustomText(
                         text: 'BVN Validation',
                         fontFamily: 'Gilroy-bold',
                         fontSize: smallH * 1.5,
@@ -39,7 +39,7 @@ class BVNVerificationScreen extends StatelessWidget {
                         // validateFn: (val) {
                         //   if (val.isEmpty) return 'Cannot be empty';
                         // },
-                        label: TEXT(
+                        label: CustomText(
                           text: 'BVN-11 Digits',
                           fontSize: 16,
                           fontFamily: 'Gilroy-Medium',
@@ -48,7 +48,7 @@ class BVNVerificationScreen extends StatelessWidget {
                       ),
                       BTN(
                           children: [
-                            TEXT(
+                            CustomText(
                               text: 'Submit',
                               fontWeight: FontWeight.bold,
                               color: Colors.black,

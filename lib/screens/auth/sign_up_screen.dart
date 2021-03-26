@@ -1,16 +1,11 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:CHATS/ChatsMain/core/utils/otp_pin.dart';
-import 'package:CHATS/ChatsMain/ui/shared/BTN.dart';
-import 'package:CHATS/ChatsMain/ui/shared/TEXT.dart';
-import 'package:CHATS/ChatsMain/ui/shared/TF.dart';
-import 'package:CHATS/ChatsMain/ui/shared/ui_helper.dart';
-import 'package:CHATS/Vendor/models/vendor_user_model.dart';
-import 'package:CHATS/Vendor/ui/view_model/base_view_model.dart';
-import 'package:CHATS/Vendor/ui/view_model/sign_upVM.dart';
+import 'package:CHATS/screens/home/view_models/base_view_model.dart';
+import 'package:CHATS/screens/home/view_models/sign_upVM.dart';
+import 'package:CHATS/utils/custom_text_field.dart';
+import 'package:CHATS/utils/otp_pin.dart';
+import 'package:CHATS/utils/text.dart';
+import 'package:CHATS/utils/ui_helper.dart';
+import 'package:CHATS/widgets/home/custom_button.dart';
 import 'package:flutter/material.dart';
-// import 'package:pin_entry_text_field/pin_entry_text_field.dart';
 import 'package:image_picker/image_picker.dart';
 
 class SignUpView extends StatefulWidget {
@@ -65,7 +60,7 @@ class _SignUpViewState extends State<SignUpView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          TEXT(
+          CustomText(
             text: 'Vendor Information',
             fontFamily: 'Gilroy-bold',
             fontSize: smallH * 1.5,
@@ -74,13 +69,13 @@ class _SignUpViewState extends State<SignUpView> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TEXT(
+              CustomText(
                 text: 'Logged In ',
                 fontFamily: 'Gilroy-bold',
                 fontSize: 20,
               ),
               GestureDetector(
-                child: TEXT(
+                child: CustomText(
                   text: 'Change Account?',
                   fontFamily: 'Gilroy-bold',
                   color: Constants.newPurple,
@@ -93,27 +88,27 @@ class _SignUpViewState extends State<SignUpView> {
           SizedBox(
             height: smallH,
           ),
-          TF(
+          CustomTextField(
             controller: firstNameController,
             onSaved: (val) {
-              userModel.first_name = val;
+              // userModel.first_name = val;
             },
             validateFn: (val) {
               if (val.isEmpty) return 'Cannot be empty';
             },
-            label: TEXT(
+            label: CustomText(
               text: 'Business Name',
               fontSize: 16,
               fontFamily: 'Gilroy-Medium',
             ),
             hintText: 'CHAT',
           ),
-          TF(
+          CustomTextField(
             controller: lastNameController,
             onSaved: (val) {
-              userModel.last_name = val;
+              // userModel.last_name = val;
             },
-            label: TEXT(
+            label: CustomText(
               text: 'Email',
               fontSize: 16,
               fontFamily: 'Gilroy-Medium',
@@ -123,12 +118,12 @@ class _SignUpViewState extends State<SignUpView> {
             },
             hintText: 'example@example.com',
           ),
-          TF(
+          CustomTextField(
             controller: emailController,
             onSaved: (val) {
-              userModel.email = val;
+              // userModel.email = val;
             },
-            label: TEXT(
+            label: CustomText(
               text: 'Phone Number',
               fontSize: 16,
               fontFamily: 'Gilroy-Medium',
@@ -138,34 +133,35 @@ class _SignUpViewState extends State<SignUpView> {
             },
             hintText: '081000XXXXX',
           ),
-          TF(
+          CustomTextField(
             controller: phoneController,
             onSaved: (val) {
-              userModel.phone = val;
+              // userModel.phone = val;
             },
-            label: TEXT(text: 'BVN', fontSize: 16, fontFamily: 'Gilroy-Medium'),
+            label: CustomText(
+                text: 'BVN', fontSize: 16, fontFamily: 'Gilroy-Medium'),
             validateFn: (val) {
               if (val.isEmpty) return 'Cannot be empty';
             },
             hintText: '123XXXXXX',
           ),
-          BTN(
-              margin: EdgeInsets.only(right: 0, left: 0, top: smallH),
-              children: [
-                TEXT(
-                    text: 'Submit',
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    edgeInset: EdgeInsets.all(0.0))
-              ],
-              onTap: () {
-                myKey.currentState.save();
-                if (myKey.currentState.validate()) {
-                  setState(() {
-                    _formStage = 2;
-                  });
-                }
-              })
+          // BTN(
+          //     margin: EdgeInsets.only(right: 0, left: 0, top: smallH),
+          //     children: [
+          //       CustomText(
+          //           text: 'Submit',
+          //           fontWeight: FontWeight.bold,
+          //           color: Colors.white,
+          //           edgeInset: EdgeInsets.all(0.0))
+          //     ],
+          //     onTap: () {
+          //       myKey.currentState.save();
+          //       if (myKey.currentState.validate()) {
+          //         setState(() {
+          //           _formStage = 2;
+          //         });
+          //       }
+          //     })
         ],
       ),
     );
@@ -177,13 +173,13 @@ class _SignUpViewState extends State<SignUpView> {
       children: [
         Column(
           children: [
-            TEXT(
+            CustomText(
               text: 'OTP Verification',
               fontFamily: 'Gilroy-bold',
               fontSize: height * 1.5,
               edgeInset: EdgeInsets.only(bottom: height * 1.3),
             ),
-            TEXT(
+            CustomText(
               text: 'Enter the OTP sent to ********353',
               fontWeight: FontWeight.w300,
               edgeInset: EdgeInsets.only(bottom: height * 1.3),
@@ -201,12 +197,12 @@ class _SignUpViewState extends State<SignUpView> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TEXT(
+              CustomText(
                 text: "Didn't receive the OTP?  ",
                 fontSize: height / 1.5,
               ),
               GestureDetector(
-                  child: TEXT(
+                  child: CustomText(
                       text: "Resend SMS",
                       color: Constants.purple,
                       fontSize: height / 1.5),
@@ -214,32 +210,32 @@ class _SignUpViewState extends State<SignUpView> {
             ],
           ),
         ),
-        TEXT(text: "Wrong phone number?", fontSize: height / 1.5),
-        BTN(
-            margin: EdgeInsets.only(top: height * 3),
-            children: [
-              Expanded(
-                  child: TEXT(
-                text: 'Verify',
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                textAlign: TextAlign.center,
-                edgeInset: EdgeInsets.all(0.0),
-              )),
-              SizedBox(
-                  height: 18,
-                  width: 18,
-                  child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                          !model.savingUser ? Constants.purple : Colors.black)))
-            ],
-            onTap: () {
-              model.register(userModel, context);
-            },
-            mainAxisAlignment: model.savingUser
-                ? MainAxisAlignment.end
-                : MainAxisAlignment.center)
+        CustomText(text: "Wrong phone number?", fontSize: height / 1.5),
+        // CustomButton(
+        //     margin: EdgeInsets.only(top: height * 3),
+        //     children: [
+        //       Expanded(
+        //           child: CustomText(
+        //         text: 'Verify',
+        //         color: Colors.black,
+        //         fontWeight: FontWeight.bold,
+        //         textAlign: TextAlign.center,
+        //         edgeInset: EdgeInsets.all(0.0),
+        //       )),
+        //       SizedBox(
+        //           height: 18,
+        //           width: 18,
+        //           child: CircularProgressIndicator(
+        //               strokeWidth: 2,
+        //               valueColor: AlwaysStoppedAnimation<Color>(
+        //                   !model.savingUser ? Constants.purple : Colors.black)))
+        //     ],
+        //     onTap: () {
+        //       model.register(userModel, context);
+        //     },
+        //     mainAxisAlignment: model.savingUser
+        //         ? MainAxisAlignment.end
+        //         : MainAxisAlignment.center)
       ],
     );
   }
@@ -269,7 +265,7 @@ class _SignUpViewState extends State<SignUpView> {
   TextEditingController passwordController =
       new TextEditingController(text: '');
 
-  VendorUserModel userModel = new VendorUserModel();
+  // VendorUserModel userModel = new VendorUserModel();
 
   final myKey = GlobalKey<FormState>();
   int _formStage = 1;

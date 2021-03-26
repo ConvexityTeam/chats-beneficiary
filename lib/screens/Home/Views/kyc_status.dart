@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:CHATS/ChatsMain/ui/shared/BTN.dart';
-import 'package:CHATS/ChatsMain/ui/shared/TEXT.dart';
-import 'package:CHATS/ChatsMain/ui/shared/ui_helper.dart';
+import 'package:ui/shared/BTN.dart';
+import 'package:ui/shared/CustomText.dart'CustomText
+import 'package:ui/shared/ui_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -56,7 +56,7 @@ class _KYCstatusState extends State<KYCstatus> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        TEXT(
+        CustomTextomText(
           text: 'Identity Verification',
           fontFamily: 'Gilroy-bold',
           fontSize: height,
@@ -123,7 +123,7 @@ class _KYCstatusState extends State<KYCstatus> {
           margin: EdgeInsets.only(top: height * 2, bottom: 10),
           children: [
             Expanded(
-                child: TEXT(
+                child: CustomTextomText(
               text: 'Verify',
               color: Colors.black,
               fontWeight: FontWeight.bold,
@@ -157,7 +157,7 @@ class _KYCstatusState extends State<KYCstatus> {
         isThreeLine: true,
         // leading: Icon(icon, color: Constants.purple, size: height * 2),
         leading: icon,
-        title: TEXT(
+        title: CustomTextomText(
           text: title,
           fontFamily: 'Gilroy-Medium',
           fontSize: 16,
@@ -171,7 +171,7 @@ class _KYCstatusState extends State<KYCstatus> {
                     color: Constants.purple),
               )
             : Text(''),
-        subtitle: TEXT(
+        subtitle: CustomTextomText(
             text: body, fontSize: 12, color: Color.fromRGBO(85, 85, 85, 1)),
       ),
       margin: EdgeInsets.only(bottom: height),

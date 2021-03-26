@@ -1,9 +1,10 @@
-import 'package:CHATS/ChatsMain/ui/shared/TEXT.dart';
-import 'package:CHATS/ChatsMain/ui/shared/ui_helper.dart';
+import 'package:CHATS/utils/text.dart';
+import 'package:CHATS/utils/ui_helper.dart';
+
 import 'package:flutter/material.dart';
 
-class TF extends StatelessWidget {
-  TF(
+class CustomTextField extends StatelessWidget {
+  CustomTextField(
       {@required this.controller,
       @required this.label,
       this.hintText,
@@ -40,7 +41,7 @@ class TF extends StatelessWidget {
   final EdgeInsets padding;
   final Function(String value) onSaved;
   final InputBorder inputBorder;
-  final TEXT label;
+  final CustomText label;
 
   @override
   Widget build(BuildContext context) {

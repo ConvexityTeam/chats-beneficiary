@@ -1,4 +1,4 @@
-import 'package:CHATS/ChatsMain/ui/screen/Home/Widgets/custom_button.dart';
+import 'package:ui/screen/Home/Widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class PaymentConfirmationView extends StatelessWidget {

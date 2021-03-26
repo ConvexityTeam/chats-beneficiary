@@ -1,7 +1,6 @@
-import 'package:CHATS/ChatsMain/main.dart';
-import 'package:CHATS/Vendor/main.dart';
-import 'package:CHATS/screens/descision_page.dart';
-import 'package:CHATS/generalSplashScreenVM.dart';
+import 'package:main.dart';
+import 'package:CHATS/screens/home/views/descision_page.dart';
+import 'package:CHATS/general_splash_screenVM.dart';
 import 'package:CHATS/general_base_view_model.dart';
 import 'package:CHATS/domain/local_storage.dart';
 import 'package:CHATS/models/user_type.dart';
