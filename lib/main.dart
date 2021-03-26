@@ -1,7 +1,7 @@
 import 'package:CHATS/ChatsMain/locator.dart';
 import 'package:CHATS/Vendor/locator.dart';
-import 'package:CHATS/general_locator.dart';
-import 'package:CHATS/major_splash_screen.dart';
+import 'package:CHATS/domain/general_locator.dart';
+import 'package:CHATS/screens/splash/major_splash_screen.dart';
 import "package:flutter/material.dart";
 
 void main() {

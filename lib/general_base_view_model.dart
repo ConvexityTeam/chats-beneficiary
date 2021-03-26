@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'general_base_provider_model.dart';
-import 'general_locator.dart';
+import 'providers/general_base_provider_model.dart';
+import 'domain/general_locator.dart';
 
 class GBaseViewModel<T extends GBaseProviderModel> extends StatefulWidget {
   final Widget Function(BuildContext context, T provider, Widget child) builder;
