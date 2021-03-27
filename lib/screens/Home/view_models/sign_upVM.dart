@@ -119,7 +119,6 @@ class SignUpVM extends BaseProviderModel {
 
   register(BeneficiaryUserModel model, BuildContext context) async {
     // model.profile_pic = profilePicture;
-    print(jsonEncode(model.toJson()));
     savingUser = true;
     signUpErrorMessage = '';
     notifyListeners();
