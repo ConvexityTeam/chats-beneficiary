@@ -1,21 +1,12 @@
-// import 'dart:io';
-
-// import 'package:CHATS/CHATS/utils/otp_pin.dart';
-
-// import 'package:file_picker/file_picker.dart';
-
-// import 'package:CHATS/Chats%20Main/CHATS/models/bene_user.dart';
-
 import 'package:CHATS/models/beneficiary_user_model.dart';
+import 'package:CHATS/screens/home/view_models/base_view_model.dart';
+import 'package:CHATS/screens/home/view_models/sign_upVM.dart';
+import 'package:CHATS/utils/custom_btn.dart';
+import 'package:CHATS/utils/custom_text_field.dart';
 import 'package:CHATS/utils/otp_pin.dart';
-import 'package:ui/shared/BTN.dart';
-import 'package:ui/shared/CustomText.dart';
-import 'package:ui/shared/TF.dart';
-import 'package:ui/shared/ui_helper.dart';
-import 'package:ui/viewModels/base_view_model.dart';
-import 'package:ui/viewModels/sign_upVM.dart';
+import 'package:CHATS/utils/text.dart';
+import 'package:CHATS/utils/ui_helper.dart';
 import 'package:flutter/material.dart';
-// import 'package:pin_entry_text_field/pin_entry_text_field.dart';
 
 class SignUpView extends StatefulWidget {
   @override
@@ -122,7 +113,7 @@ class _SignUpViewState extends State<SignUpView> {
             fontSize: smallH * 1.5,
             edgeInset: EdgeInsets.only(bottom: smallH * 2),
           ),
-          TF(
+          CustomTextField(
             controller: firstNameController,
             onSaved: (val) {
               userModel.first_name = val;
@@ -137,7 +128,7 @@ class _SignUpViewState extends State<SignUpView> {
             ),
             hintText: 'Juliana',
           ),
-          TF(
+          CustomTextField(
             controller: lastNameController,
             onSaved: (val) {
               userModel.last_name = val;
@@ -152,7 +143,7 @@ class _SignUpViewState extends State<SignUpView> {
             },
             hintText: 'Orji',
           ),
-          TF(
+          CustomTextField(
             controller: emailController,
             onSaved: (val) {
               userModel.email = val;
@@ -167,7 +158,7 @@ class _SignUpViewState extends State<SignUpView> {
             },
             hintText: 'Julianamonday@gmail.com',
           ),
-          TF(
+          CustomTextField(
             controller: phoneController,
             onSaved: (val) {
               userModel.phone = val;
@@ -182,7 +173,7 @@ class _SignUpViewState extends State<SignUpView> {
             },
             hintText: '09065233507',
           ),
-          BTN(
+          CustomButton(
               children: [
                 CustomText(
                   text: 'Next',
@@ -263,7 +254,7 @@ class _SignUpViewState extends State<SignUpView> {
           ),
         ),
         CustomText(text: "Wrong phone number?", fontSize: height / 1.5),
-        BTN(
+        CustomButton(
             margin: EdgeInsets.only(top: height * 3),
             children: [
               Expanded(

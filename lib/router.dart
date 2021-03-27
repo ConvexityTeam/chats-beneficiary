@@ -5,7 +5,7 @@ import 'package:CHATS/screens/home/Views/onboard_screen.dart';
 import 'package:CHATS/screens/home/views/home_view.dart';
 import 'package:CHATS/screens/home/views/notifications_view.dart';
 import 'package:CHATS/screens/home/views/payment_confirmation_view.dart';
-import 'package:CHATS/screens/home/views/pofile_view.dart';
+import 'package:CHATS/screens/home/views/profile_view.dart';
 import 'package:CHATS/screens/home/views/scan_NFC_or_OR_view.dart';
 import 'package:CHATS/screens/home/views/scan_QR_view.dart';
 import 'package:CHATS/screens/home/views/splashscreen.dart';

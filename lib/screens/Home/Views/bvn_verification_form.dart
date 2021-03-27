@@ -1,7 +1,7 @@
-import 'package:ui/shared/BTN.dart';
-import 'package:ui/shared/CustomText.dart';
-import 'package:ui/shared/TF.dart';
-import 'package:ui/viewModels/base_view_model.dart';
+import 'package:CHATS/screens/home/view_models/base_view_model.dart';
+import 'package:CHATS/utils/custom_text_field.dart';
+import 'package:CHATS/utils/text.dart';
+import 'package:CHATS/widgets/home/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class BVNVerificationScreen extends StatelessWidget {
@@ -33,7 +33,7 @@ class BVNVerificationScreen extends StatelessWidget {
                         fontSize: smallH * 1.5,
                         edgeInset: EdgeInsets.only(bottom: smallH * 2),
                       ),
-                      TF(
+                      CustomTextField(
                         controller: firstNameController,
                         onSaved: (val) {},
                         // validateFn: (val) {
@@ -46,20 +46,21 @@ class BVNVerificationScreen extends StatelessWidget {
                         ),
                         hintText: '1209065233507',
                       ),
-                      BTN(
-                          children: [
-                            CustomText(
-                              text: 'Submit',
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                              edgeInset: EdgeInsets.all(0.0),
-                            )
-                          ],
-                          onTap: () {
-                            // myKey.currentState.save();
-                            // if (myKey.currentState.validate()) {}
-                            Navigator.pop(context);
-                          }),
+                      CustomButton(
+                          // children: [
+                          //   CustomText(
+                          //     text: 'Submit',
+                          //     fontWeight: FontWeight.bold,
+                          //     color: Colors.black,
+                          //     edgeInset: EdgeInsets.all(0.0),
+                          //   )
+                          // ],
+                          // onTap: () {
+                          //   // myKey.currentState.save();
+                          //   // if (myKey.currentState.validate()) {}
+                          //   Navigator.pop(context);
+                          // }
+                          ),
                     ],
                   ))
             ],

@@ -1,9 +1,9 @@
-import 'package:ui/shared/BTN.dart';
-import 'package:ui/shared/CustomText.dart';
-import 'package:ui/shared/TF.dart';
-import 'package:ui/shared/ui_helper.dart';
-import 'package:ui/viewModels/base_view_model.dart';
-import 'package:ui/viewModels/sign_upVM.dart';
+import 'package:CHATS/screens/home/view_models/base_view_model.dart';
+import 'package:CHATS/screens/home/view_models/sign_upVM.dart';
+import 'package:CHATS/utils/custom_text_field.dart';
+import 'package:CHATS/utils/text.dart';
+import 'package:CHATS/utils/ui_helper.dart';
+import 'package:CHATS/widgets/home/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 color: Colors.red,
                                 fontSize: 12,
                               )),
-                              TF(
+                              CustomTextField(
                                 controller: emailController,
                                 label: CustomText(
                                   text: 'Email / Phone Number',
@@ -57,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   if (val.isEmpty) return 'Cannot be empty';
                                 },
                               ),
-                              TF(
+                              CustomTextField(
                                 controller: passController,
                                 isPassword: hidePassword,
                                 label: CustomText(
@@ -86,36 +86,38 @@ class _LoginScreenState extends State<LoginScreen> {
                                 text: 'Forgot Password?',
                                 color: Colors.black,
                               )),
-                              BTN(
-                                  children: [
-                                    Expanded(
-                                        child: CustomText(
-                                            text: 'Log in',
-                                            color: Colors.black,
-                                            textAlign: TextAlign.center,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                            edgeInset: EdgeInsets.all(0.0))),
-                                    SizedBox(
-                                        height: 18,
-                                        width: 18,
-                                        child: CircularProgressIndicator(
-                                            strokeWidth: 2,
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                                    !provider.isBusy
-                                                        ? Constants.purple
-                                                        : Colors.black)))
-                                  ],
-                                  onTap: () {
-                                    if (myKey.currentState.validate()) {
-                                      provider.login(emailController.text,
-                                          passController.text, context);
-                                    }
-                                  },
-                                  mainAxisAlignment: provider.isBusy
-                                      ? MainAxisAlignment.end
-                                      : MainAxisAlignment.center),
+                              CustomButton(
+                                  // children: [
+                                  //   Expanded(
+                                  //       child: CustomText(
+                                  //           text: 'Log in',
+                                  //           color: Colors.black,
+                                  //           textAlign: TextAlign.center,
+                                  //           fontWeight: FontWeight.bold,
+                                  //           fontSize: 16,
+                                  //           edgeInset: EdgeInsets.all(0.0))),
+                                  //   SizedBox(
+                                  //       height: 18,
+                                  //       width: 18,
+                                  //       child: CircularProgressIndicator(
+                                  //           strokeWidth: 2,
+                                  //           valueColor:
+                                  //               AlwaysStoppedAnimation<Color>(
+                                  //                   !provider.isBusy
+                                  //                       ? Constants.purple
+                                  //                       : Colors.black)))
+                                  // ],
+                                  // onTap: () {
+                                  //   if (myKey.currentState.validate()) {
+                                  //     provider.login(emailController.text,
+                                  //         passController.text, context);
+                                  //   }
+                                  // },
+
+                                  // mainAxisAlignment: provider.isBusy
+                                  //     ? MainAxisAlignment.end
+                                  //     : MainAxisAlignment.center
+                                  ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [

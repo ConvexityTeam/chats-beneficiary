@@ -1,9 +1,9 @@
+import 'package:CHATS/router.dart';
+import 'package:CHATS/screens/home/views/drawer_view.dart';
 import 'package:CHATS/utils/ui_helper.dart';
-import 'package:ui/screen/Home/Views/drawer_view.dart';
-import 'package:ui/screen/router.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../utils/colors.dart';
+import '../../../utils/colors.dart';
 
 class ScanNFCOrQRView extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();

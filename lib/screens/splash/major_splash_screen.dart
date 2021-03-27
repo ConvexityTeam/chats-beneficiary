@@ -1,6 +1,4 @@
-import 'package:main.dart';
 import 'package:CHATS/screens/home/views/descision_page.dart';
-import 'package:CHATS/general_splash_screenVM.dart';
 import 'package:CHATS/general_base_view_model.dart';
 import 'package:CHATS/domain/local_storage.dart';
 import 'package:CHATS/models/user_type.dart';
@@ -26,11 +24,11 @@ class _MajorSplashScreenState extends State<MajorSplashScreen> {
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => DescisionPage()));
     } else if (user == userType[UserType.Non_Vendor]) {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => NonVendorApp()));
+      // Navigator.of(context)
+      //     .pushReplacement(MaterialPageRoute(builder: (_) => NonVendorApp()));
     } else if (user == userType[UserType.Vendor]) {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => VendorApp()));
+      // Navigator.of(context)
+      //     .pushReplacement(MaterialPageRoute(builder: (_) => VendorApp()));
     } else {
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => DescisionPage()));
@@ -40,7 +38,7 @@ class _MajorSplashScreenState extends State<MajorSplashScreen> {
 //provider.startUp,
   @override
   Widget build(BuildContext context) {
-    return GBaseViewModel<GSplashScreenViewModel>(
+    return GBaseViewModel(
       providerReady: (provider) => {},
       builder: (context, provider, child) => Scaffold(
         backgroundColor: Colors.black,

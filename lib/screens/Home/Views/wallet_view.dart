@@ -1,5 +1,5 @@
+import 'package:CHATS/screens/home/views/drawer_view.dart';
 import 'package:CHATS/utils/ui_helper.dart';
-import 'package:ui/screen/Home/Views/drawer_view.dart';
 import 'package:flutter/material.dart';
 
 class WalletView extends StatelessWidget {

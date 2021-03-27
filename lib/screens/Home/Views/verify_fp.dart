@@ -1,8 +1,8 @@
-import 'package:ui/shared/BTN.dart';
-import 'package:ui/shared/CustomText.dart';
-import 'package:ui/shared/ui_helper.dart';
-import 'package:ui/viewModels/base_view_model.dart';
-import 'package:ui/viewModels/sign_upVM.dart';
+import 'package:CHATS/screens/home/view_models/base_view_model.dart';
+import 'package:CHATS/screens/home/view_models/sign_upVM.dart';
+import 'package:CHATS/utils/text.dart';
+import 'package:CHATS/utils/ui_helper.dart';
+import 'package:CHATS/widgets/home/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class VerifyFPView extends StatefulWidget {
@@ -47,18 +47,19 @@ class _VerifyFPViewState extends State<VerifyFPView> {
                       )
                     ],
                   ),
-                  BTN(
-                      margin: EdgeInsets.only(),
-                      children: [
-                        CustomText(
-                          text: 'Verify',
-                          color: Colors.white,
-                          edgeInset: EdgeInsets.all(0.0),
-                        )
-                      ],
-                      onTap: () {
-                        setState(() {});
-                      }),
+                  CustomButton(
+                      // margin: EdgeInsets.only(),
+                      // children: [
+                      //   CustomText(
+                      //     text: 'Verify',
+                      //     color: Colors.white,
+                      //     edgeInset: EdgeInsets.all(0.0),
+                      //   )
+                      // ],
+                      // onTap: () {
+                      //   setState(() {});
+                      // }
+                      ),
                 ],
               ),
             ));

@@ -5,7 +5,7 @@ import 'package:CHATS/providers/base_provider_model.dart';
 import 'package:CHATS/services/authentication_service.dart';
 import 'package:CHATS/services/local_storage_service.dart';
 import 'package:CHATS/domain/locator.dart';
-import 'package:ui/shared/ui_helper.dart';
+import 'package:CHATS/utils/ui_helper.dart';
 import 'package:flutter/widgets.dart';
 
 class SignUpVM extends BaseProviderModel {

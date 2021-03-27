@@ -145,7 +145,7 @@ class _SignUpViewState extends State<SignUpView> {
             },
             hintText: '123XXXXXX',
           ),
-          // BTN(
+          // CustomButton(
           //     margin: EdgeInsets.only(right: 0, left: 0, top: smallH),
           //     children: [
           //       CustomText(

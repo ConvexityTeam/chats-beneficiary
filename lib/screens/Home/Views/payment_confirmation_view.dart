@@ -1,4 +1,4 @@
-import 'package:ui/screen/Home/Widgets/custom_button.dart';
+import 'package:CHATS/utils/custom_btn.dart';
 import 'package:flutter/material.dart';
 
 class PaymentConfirmationView extends StatelessWidget {
@@ -142,11 +142,11 @@ class PaymentConfirmationView extends StatelessWidget {
           SizedBox(height: 10),
           Center(
             child: CustomButton(
-              onPressed: () {
-                print("Confirmation ");
-              },
-              title: "Confirm Transaction",
-            ),
+                // onPressed: () {
+                //   print("Confirmation ");
+                // },
+                // title: "Confirm Transaction",
+                ),
           )
         ],
       ),

@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:ui/shared/BTN.dart';
-import 'package:ui/shared/CustomText.dart'CustomText
-import 'package:ui/shared/ui_helper.dart';
+import 'package:CHATS/utils/text.dart';
+import 'package:CHATS/utils/ui_helper.dart';
+import 'package:CHATS/widgets/home/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -56,7 +56,7 @@ class _KYCstatusState extends State<KYCstatus> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        CustomTextomText(
+        CustomText(
           text: 'Identity Verification',
           fontFamily: 'Gilroy-bold',
           fontSize: height,
@@ -119,32 +119,32 @@ class _KYCstatusState extends State<KYCstatus> {
 
               Navigator.pushNamed(context, 'bvnVerification');
             }),
-        BTN(
-          margin: EdgeInsets.only(top: height * 2, bottom: 10),
-          children: [
-            Expanded(
-                child: CustomTextomText(
-              text: 'Verify',
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              textAlign: TextAlign.center,
-              edgeInset: EdgeInsets.all(0.0),
-            )),
-            // SizedBox(
-            //   height: 18,
-            //   width: 18,
-            //   child: CircularProgressIndicator(
-            //       strokeWidth: 2,
-            //       valueColor:
-            //           AlwaysStoppedAnimation<Color>(
-            //               !model.savingUser
-            //                   ? Constants.purple
-            //                   : Colors.black)))
-          ],
-          onTap: () {
-            // model.register(userModel, context);
-          },
-        )
+        CustomButton(
+            // margin: EdgeInsets.only(top: height * 2, bottom: 10),
+            // children: [
+            //   Expanded(
+            //       child: CustomText(
+            //     text: 'Verify',
+            //     color: Colors.black,
+            //     fontWeight: FontWeight.bold,
+            //     textAlign: TextAlign.center,
+            //     edgeInset: EdgeInsets.all(0.0),
+            //   )),
+            //   // SizedBox(
+            //   //   height: 18,
+            //   //   width: 18,
+            //   //   child: CircularProgressIndicator(
+            //   //       strokeWidth: 2,
+            //   //       valueColor:
+            //   //           AlwaysStoppedAnimation<Color>(
+            //   //               !model.savingUser
+            //   //                   ? Constants.purple
+            //   //                   : Colors.black)))
+            // ],
+            // onTap: () {
+            //   // model.register(userModel, context);
+            // },
+            )
       ],
     );
   }
@@ -157,7 +157,7 @@ class _KYCstatusState extends State<KYCstatus> {
         isThreeLine: true,
         // leading: Icon(icon, color: Constants.purple, size: height * 2),
         leading: icon,
-        title: CustomTextomText(
+        title: CustomText(
           text: title,
           fontFamily: 'Gilroy-Medium',
           fontSize: 16,
@@ -171,7 +171,7 @@ class _KYCstatusState extends State<KYCstatus> {
                     color: Constants.purple),
               )
             : Text(''),
-        subtitle: CustomTextomText(
+        subtitle: CustomText(
             text: body, fontSize: 12, color: Color.fromRGBO(85, 85, 85, 1)),
       ),
       margin: EdgeInsets.only(bottom: height),

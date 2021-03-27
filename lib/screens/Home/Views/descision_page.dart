@@ -1,13 +1,10 @@
-import 'package:ui/shared/BTN.dart';
-import 'package:ui/shared/CustomText.dart';
-import 'package:main.dart';
+import 'package:CHATS/utils/text.dart';
+import 'package:CHATS/widgets/home/custom_button.dart';
 import 'package:CHATS/domain/general_locator.dart';
 import 'package:CHATS/domain/general_sharedPref.dart';
 import 'package:CHATS/domain/local_storage.dart';
 import 'package:CHATS/models/user_type.dart';
 import 'package:flutter/material.dart';
-
-import '../../../ChatsMain/ui/shared/ui_helper.dart';
 
 class DescisionPage extends StatefulWidget {
   @override
@@ -45,47 +42,48 @@ class _DescisionPageState extends State<DescisionPage> {
               fontSize: 25,
             ),
             SizedBox(height: 10),
-            BTN(
-              bgColor: Constants.purple,
-              borderRadius: 10,
-              onTap: () {
+            CustomButton(
+              // bgColor: Constants.purple,
+              // borderRadius: 10,
+              onPressed: () {
                 LocalStorage().saveUser(userType[UserType.Vendor]);
                 print("Saved");
                 // locator.setUserOption('vendor');
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (_) => VendorApp()));
+                // Navigator.of(context).pushReplacement(
+                //     MaterialPageRoute(builder: (_) => VendorApp()));
               },
-              children: [
-                Image.asset("icons/profile.png"),
-                CustomText(
-                  text: "Vendor",
-                  fontFamily: 'Gilroy-bold',
-                  fontSize: 25,
-                  color: Colors.white,
-                ),
-              ],
+              title: '',
+              // children: [
+              //   Image.asset("icons/profile.png"),
+              //   CustomText(
+              //     text: "Vendor",
+              //     fontFamily: 'Gilroy-bold',
+              //     fontSize: 25,
+              //     color: Colors.white,
+              //   ),
+              // ],
             ),
-            BTN(
-              bgColor: Constants.purple,
-              borderRadius: 10,
-              onTap: () {
-                LocalStorage().saveUser(userType[UserType.Non_Vendor]);
-                // LocalStorage().saveUser(UserType.Non_Vendor);
-                print("Saved");
-                // locator.setUserOption('beneficiaries');
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (_) => NonVendorApp()));
-              },
-              children: [
-                Image.asset("icons/profile.png"),
-                CustomText(
-                  color: Colors.white,
-                  text: "Beneficiary",
-                  fontFamily: 'Gilroy-bold',
-                  fontSize: 25,
+            CustomButton(
+                // bgColor: Constants.purple,
+                // borderRadius: 10,
+                // onTap: () {
+                //   LocalStorage().saveUser(userType[UserType.Non_Vendor]);
+                //   // LocalStorage().saveUser(UserType.Non_Vendor);
+                //   print("Saved");
+                //   // locator.setUserOption('beneficiaries');
+                //   Navigator.of(context).pushReplacement(
+                //       MaterialPageRoute(builder: (_) => NonVendorApp()));
+                // },
+                // children: [
+                //   Image.asset("icons/profile.png"),
+                //   CustomText(
+                //     color: Colors.white,
+                //     text: "Beneficiary",
+                //     fontFamily: 'Gilroy-bold',
+                //     fontSize: 25,
+                //   ),
+                // ],
                 ),
-              ],
-            ),
           ]),
     ));
   }
