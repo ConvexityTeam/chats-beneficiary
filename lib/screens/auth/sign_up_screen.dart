@@ -4,9 +4,7 @@ import 'package:CHATS/utils/custom_text_field.dart';
 import 'package:CHATS/utils/otp_pin.dart';
 import 'package:CHATS/utils/text.dart';
 import 'package:CHATS/utils/ui_helper.dart';
-import 'package:CHATS/widgets/home/custom_button.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class SignUpView extends StatefulWidget {
   @override
