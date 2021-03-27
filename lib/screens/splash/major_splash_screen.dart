@@ -1,7 +1,6 @@
-import 'package:CHATS/screens/home/views/descision_page.dart';
 import 'package:CHATS/general_base_view_model.dart';
 import 'package:CHATS/domain/local_storage.dart';
-import 'package:CHATS/models/user_type.dart';
+import 'package:CHATS/screens/home/views/home_view.dart';
 import 'package:flutter/material.dart';
 
 class MajorSplashScreen extends StatefulWidget {
@@ -19,20 +18,8 @@ class _MajorSplashScreenState extends State<MajorSplashScreen> {
   _checkUserStatus() async {
     LocalStorage localStorage = new LocalStorage();
     String user = await localStorage.checkUserType();
-    if (user == userType[UserType.Non]) {
-      // !handle here
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => DescisionPage()));
-    } else if (user == userType[UserType.Non_Vendor]) {
-      // Navigator.of(context)
-      //     .pushReplacement(MaterialPageRoute(builder: (_) => NonVendorApp()));
-    } else if (user == userType[UserType.Vendor]) {
-      // Navigator.of(context)
-      //     .pushReplacement(MaterialPageRoute(builder: (_) => VendorApp()));
-    } else {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => DescisionPage()));
-    }
+    Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (_) => HomeView()));
   }
 
 //provider.startUp,

@@ -1,7 +1,7 @@
 import 'package:CHATS/screens/home/view_models/base_view_model.dart';
 import 'package:CHATS/utils/custom_text_field.dart';
 import 'package:CHATS/utils/text.dart';
-import 'package:CHATS/widgets/home/custom_button.dart';
+import 'package:CHATS/widgets/custom_btn.dart';
 import 'package:flutter/material.dart';
 
 class BVNVerificationScreen extends StatelessWidget {
@@ -47,20 +47,19 @@ class BVNVerificationScreen extends StatelessWidget {
                         hintText: '1209065233507',
                       ),
                       CustomButton(
-                          // children: [
-                          //   CustomText(
-                          //     text: 'Submit',
-                          //     fontWeight: FontWeight.bold,
-                          //     color: Colors.black,
-                          //     edgeInset: EdgeInsets.all(0.0),
-                          //   )
-                          // ],
-                          // onTap: () {
-                          //   // myKey.currentState.save();
-                          //   // if (myKey.currentState.validate()) {}
-                          //   Navigator.pop(context);
-                          // }
-                          ),
+                          children: [
+                            CustomText(
+                              text: 'Submit',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              edgeInset: EdgeInsets.all(0.0),
+                            )
+                          ],
+                          onTap: () {
+                            // myKey.currentState.save();
+                            // if (myKey.currentState.validate()) {}
+                            Navigator.pop(context);
+                          }),
                     ],
                   ))
             ],

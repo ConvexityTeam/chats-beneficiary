@@ -1,7 +1,7 @@
 import 'package:CHATS/models/beneficiary_user_model.dart';
 import 'package:CHATS/screens/home/view_models/base_view_model.dart';
 import 'package:CHATS/screens/home/view_models/sign_upVM.dart';
-import 'package:CHATS/utils/custom_btn.dart';
+import 'package:CHATS/widgets/custom_btn.dart';
 import 'package:CHATS/utils/custom_text_field.dart';
 import 'package:CHATS/utils/otp_pin.dart';
 import 'package:CHATS/utils/text.dart';

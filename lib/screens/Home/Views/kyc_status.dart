@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:CHATS/utils/text.dart';
 import 'package:CHATS/utils/ui_helper.dart';
-import 'package:CHATS/widgets/home/custom_button.dart';
+import 'package:CHATS/widgets/custom_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -120,31 +120,31 @@ class _KYCstatusState extends State<KYCstatus> {
               Navigator.pushNamed(context, 'bvnVerification');
             }),
         CustomButton(
-            // margin: EdgeInsets.only(top: height * 2, bottom: 10),
-            // children: [
-            //   Expanded(
-            //       child: CustomText(
-            //     text: 'Verify',
-            //     color: Colors.black,
-            //     fontWeight: FontWeight.bold,
-            //     textAlign: TextAlign.center,
-            //     edgeInset: EdgeInsets.all(0.0),
-            //   )),
-            //   // SizedBox(
-            //   //   height: 18,
-            //   //   width: 18,
-            //   //   child: CircularProgressIndicator(
-            //   //       strokeWidth: 2,
-            //   //       valueColor:
-            //   //           AlwaysStoppedAnimation<Color>(
-            //   //               !model.savingUser
-            //   //                   ? Constants.purple
-            //   //                   : Colors.black)))
-            // ],
-            // onTap: () {
-            //   // model.register(userModel, context);
-            // },
-            )
+          margin: EdgeInsets.only(top: height * 2, bottom: 10),
+          children: [
+            Expanded(
+                child: CustomText(
+              text: 'Verify',
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              textAlign: TextAlign.center,
+              edgeInset: EdgeInsets.all(0.0),
+            )),
+            // SizedBox(
+            //   height: 18,
+            //   width: 18,
+            //   child: CircularProgressIndicator(
+            //       strokeWidth: 2,
+            //       valueColor:
+            //           AlwaysStoppedAnimation<Color>(
+            //               !model.savingUser
+            //                   ? Constants.purple
+            //                   : Colors.black)))
+          ],
+          onTap: () {
+            // model.register(userModel, context);
+          },
+        )
       ],
     );
   }

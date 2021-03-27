@@ -2,10 +2,7 @@ import 'package:CHATS/router.dart';
 import 'package:CHATS/screens/auth/login_screen.dart';
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class AppDrawer extends StatelessWidget {
-  // GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  // AppDrawer({@required this.scaffoldKey});
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -38,7 +35,6 @@ class AppDrawer extends StatelessWidget {
                 Text(
                   "Home",
                   style: TextStyle(
-                    // color: Colors.black,
                     fontWeight: FontWeight.w400,
                     fontSize: 15,
                     fontFamily: "Gilroy-Regular",
@@ -46,18 +42,6 @@ class AppDrawer extends StatelessWidget {
                 ),
               ]),
             ),
-            // child: ListTile(
-            //   title: Text(
-            //     "Home",
-            //     style: TextStyle(
-            //       // color: Colors.black,
-            //       fontWeight: FontWeight.w400,
-            //       fontSize: 15,
-            //       fontFamily: "Gilroy-Regular",
-            //     ),
-            //   ),
-            //   leading: Image.asset("assets/cl_home.png"),
-            // ),
           ),
           SizedBox(height: 25),
           InkWell(
@@ -79,36 +63,12 @@ class AppDrawer extends StatelessWidget {
                     ),
                   ),
                 ]),
-              )
-              // child: ListTile(
-              //   title: Text(
-              //     "Wallet",
-              //     style: TextStyle(
-              //       fontWeight: FontWeight.w400,
-              //       fontSize: 15,
-              //       fontFamily: "Gilroy-Regular",
-              //     ),
-              //   ),
-              //   leading: Image.asset("assets/wallet.png"),
-              // ),
-              ),
+              )),
           SizedBox(height: 25),
           InkWell(
             onTap: () {
               Navigator.pushReplacementNamed(context, scanNFCOrQR);
             },
-            //   child: ListTile(
-            //     title: Text(
-            //       "Generate/Scan QR code",
-            //       style: TextStyle(
-            //         fontWeight: FontWeight.w400,
-            //         fontSize: 15,
-            //         fontFamily: "Gilroy-Regular",
-            //       ),
-            //     ),
-            //     leading: Image.asset("assets/barcode.png"),
-            //   ),
-            // ),
             child: Container(
               child: Row(children: [
                 SizedBox(width: 10),
@@ -131,17 +91,6 @@ class AppDrawer extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(context, notification);
             },
-            // child: ListTile(
-            //   title: Text(
-            //     "Notifications",
-            //     style: TextStyle(
-            //       fontWeight: FontWeight.w400,
-            //       fontSize: 15,
-            //       fontFamily: "Gilroy-Regular",
-            //     ),
-            //   ),
-            //   leading: Image.asset("assets/notifications.png"),
-            // ),
             child: Container(
               child: Row(children: [
                 SizedBox(width: 10),
@@ -150,7 +99,6 @@ class AppDrawer extends StatelessWidget {
                 Text(
                   "Notifications",
                   style: TextStyle(
-                    // color: Colors.black,
                     fontWeight: FontWeight.w400,
                     fontSize: 15,
                     fontFamily: "Gilroy-Regular",
@@ -164,17 +112,6 @@ class AppDrawer extends StatelessWidget {
             onTap: () {
               Navigator.pushReplacementNamed(context, profile);
             },
-            // child: ListTile(
-            //   title: Text(
-            //     "Profile",
-            //     style: TextStyle(
-            //       fontWeight: FontWeight.w400,
-            //       fontSize: 15,
-            //       fontFamily: "Gilroy-Regular",
-            //     ),
-            //   ),
-            //   leading: Image.asset("assets/profile.png"),
-            // ),
             child: Container(
               child: Row(children: [
                 SizedBox(width: 10),
@@ -183,7 +120,6 @@ class AppDrawer extends StatelessWidget {
                 Text(
                   "Profile",
                   style: TextStyle(
-                    // color: Colors.black,
                     fontWeight: FontWeight.w400,
                     fontSize: 15,
                     fontFamily: "Gilroy-Regular",
@@ -195,19 +131,8 @@ class AppDrawer extends StatelessWidget {
           SizedBox(height: 25),
           InkWell(
             onTap: () {
-              // Navigator.pushReplacementNamed(context, scanCode);
+              Navigator.pushReplacementNamed(context, scanCode);
             },
-            // child: ListTile(
-            //   title: Text(
-            //     "Contact Us",
-            //     style: TextStyle(
-            //       fontWeight: FontWeight.w400,
-            //       fontSize: 15,
-            //       fontFamily: "Gilroy-Regular",
-            //     ),
-            //   ),
-            //   leading: Image.asset("assets/contact.png"),
-            // ),
             child: Container(
               child: Row(children: [
                 SizedBox(width: 10),
@@ -251,20 +176,6 @@ class AppDrawer extends StatelessWidget {
                   ),
                   (route) => false);
             },
-            // child: ListTile(
-            //   title: Text(
-            //     "Log Out",
-            //     style: TextStyle(
-            //       fontWeight: FontWeight.w400,
-            //       fontSize: 15,
-            //       fontFamily: "Gilroy-Regular",
-            //     ),
-            //   ),
-            //   leading: Icon(Icons.power_settings_new, color: Colors.red),
-            //   onTap: () {
-            //     Navigator.pushReplacementNamed(context, 'login');
-            //   },
-            // ),
             child: Container(
               child: Row(children: [
                 SizedBox(width: 10),
