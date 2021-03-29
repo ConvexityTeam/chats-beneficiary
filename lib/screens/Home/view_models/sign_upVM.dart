@@ -105,7 +105,7 @@ class SignUpVM extends BaseProviderModel {
     await _authenticationService.login(email, password).then((value) {
       // Sends user to homepage if credentials are correct
       if (value['code'] == 200) {
-        Navigator.pushReplacementNamed(context, '/');
+        Navigator.pushReplacementNamed(context, '/home');
       } else {
         errorMessage = value['message'];
         print(value['code']);
@@ -124,7 +124,7 @@ class SignUpVM extends BaseProviderModel {
     notifyListeners();
     await _authenticationService.register(model).then((value) {
       if (value['code'] == 201) {
-        Navigator.pushReplacementNamed(context, '/');
+        Navigator.pushReplacementNamed(context, '/home');
       } else {
         signUpErrorMessage = value['message'];
       }
