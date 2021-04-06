@@ -173,6 +173,21 @@ class _SignUpViewState extends State<SignUpView> {
             },
             hintText: '09065233507',
           ),
+          CustomTextField(
+            controller: phoneController,
+            onSaved: (val) {
+              userModel.phone = val;
+            },
+            label: CustomText(
+              text: 'Password',
+              fontSize: 16,
+              fontFamily: 'Gilroy-Medium',
+            ),
+            validateFn: (val) {
+              if (val.isEmpty) return 'Cannot be empty';
+            },
+            hintText: 'Vend3cret',
+          ),
           CustomButton(
               children: [
                 CustomText(

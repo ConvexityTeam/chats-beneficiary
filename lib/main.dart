@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
       ),
-      // initialRoute: 'onboard',
-      home: HomeView(),
+      initialRoute: 'onboard',
+      home: MajorSplashScreen(),
     );
   }
 }

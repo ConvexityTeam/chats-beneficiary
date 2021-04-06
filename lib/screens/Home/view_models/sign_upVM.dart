@@ -2,10 +2,11 @@ import 'dart:convert';
 // import 'dart:io';
 import 'package:CHATS/models/beneficiary_user_model.dart';
 import 'package:CHATS/providers/base_provider_model.dart';
-import 'package:CHATS/services/authentication_service.dart';
+import 'package:CHATS/api/authentication_service.dart';
 import 'package:CHATS/services/local_storage_service.dart';
 import 'package:CHATS/domain/locator.dart';
 import 'package:CHATS/utils/ui_helper.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 class SignUpVM extends BaseProviderModel {
@@ -122,16 +123,20 @@ class SignUpVM extends BaseProviderModel {
     savingUser = true;
     signUpErrorMessage = '';
     notifyListeners();
-    await _authenticationService.register(model).then((value) {
+    try {
+      Map<String, dynamic> value =
+          await AuthenticationService().register(model);
+
       if (value['code'] == 201) {
         Navigator.pushReplacementNamed(context, '/home');
       } else {
         signUpErrorMessage = value['message'];
       }
-    }).catchError((e) {
-      print(e);
+    } catch (err) {
+      print(err);
       print("ss");
-    });
+    }
+
     savingUser = false;
     notifyListeners();
   }
