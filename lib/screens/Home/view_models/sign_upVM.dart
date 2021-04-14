@@ -118,7 +118,7 @@ class SignUpVM extends BaseProviderModel {
     notifyListeners();
   }
 
-  register(BeneficiaryUserModel model, BuildContext context) async {
+  register(BeneficiaryUser model, BuildContext context) async {
     // model.profile_pic = profilePicture;
     savingUser = true;
     signUpErrorMessage = '';

@@ -5,20 +5,17 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class AuthenticationService extends BaseService {
-  Future<Map<String, dynamic>> register(BeneficiaryUserModel userObj) async {
+  Future<Map<String, dynamic>> register(BeneficiaryUser userObj) async {
     try {
-      final response = await http.post("$authUrl/register",
+      // Register User
+      await http.post("$authUrl/register",
           body: userObj.toJson(), headers: header);
       if (kDebugMode) {
-        print({
-          "REGISTERING USER",
-          response.body,
-          userObj.toJson(),
-          'User Object'
-        });
+        print({"REGISTERING USER", userObj.toJson(), 'User Object'});
       }
-      print(jsonDecode(response.body));
-      return jsonDecode(response.body);
+      // Log user in
+      final response = await this.login(userObj.email, userObj.password);
+      // return jsonDecode(response.body);
     } catch (e) {
       print(e);
       return null;

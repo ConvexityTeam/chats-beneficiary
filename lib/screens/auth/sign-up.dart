@@ -7,6 +7,7 @@ import 'package:CHATS/utils/otp_pin.dart';
 import 'package:CHATS/utils/text.dart';
 import 'package:CHATS/utils/ui_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class SignUpView extends StatefulWidget {
   @override
@@ -14,6 +15,8 @@ class SignUpView extends StatefulWidget {
 }
 
 class _SignUpViewState extends State<SignUpView> {
+  String _genderDropdownValue = 'Male';
+  String _selectedDate = '';
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -115,9 +118,6 @@ class _SignUpViewState extends State<SignUpView> {
           ),
           CustomTextField(
             controller: firstNameController,
-            onSaved: (val) {
-              userModel.first_name = val;
-            },
             validateFn: (val) {
               if (val.isEmpty) return 'Cannot be empty';
             },
@@ -130,9 +130,6 @@ class _SignUpViewState extends State<SignUpView> {
           ),
           CustomTextField(
             controller: lastNameController,
-            onSaved: (val) {
-              userModel.last_name = val;
-            },
             label: CustomText(
               text: 'Last Name',
               fontSize: 16,
@@ -145,9 +142,6 @@ class _SignUpViewState extends State<SignUpView> {
           ),
           CustomTextField(
             controller: emailController,
-            onSaved: (val) {
-              userModel.email = val;
-            },
             label: CustomText(
               text: 'Email',
               fontSize: 16,
@@ -160,9 +154,6 @@ class _SignUpViewState extends State<SignUpView> {
           ),
           CustomTextField(
             controller: phoneController,
-            onSaved: (val) {
-              userModel.phone = val;
-            },
             label: CustomText(
               text: 'Phone Number',
               fontSize: 16,
@@ -175,9 +166,6 @@ class _SignUpViewState extends State<SignUpView> {
           ),
           CustomTextField(
             controller: phoneController,
-            onSaved: (val) {
-              userModel.phone = val;
-            },
             label: CustomText(
               text: 'Password',
               fontSize: 16,
@@ -188,6 +176,49 @@ class _SignUpViewState extends State<SignUpView> {
             },
             hintText: 'Vend3cret',
           ),
+          DropdownButton<String>(
+            value: _genderDropdownValue,
+            icon: const Icon(Icons.arrow_downward),
+            iconSize: 24,
+            elevation: 16,
+            style: const TextStyle(color: Colors.green),
+            underline: Container(
+              height: 2,
+              color: Colors.green,
+            ),
+            onChanged: (String newValue) {
+              setState(() {
+                _genderDropdownValue = newValue;
+              });
+            },
+            items: <String>[
+              'Male',
+              'Female',
+            ].map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+          ),
+          FlatButton(
+              onPressed: () {
+                DatePicker.showDatePicker(context,
+                    showTitleActions: true,
+                    minTime: DateTime(1940, 3, 5),
+                    maxTime: DateTime.now(),
+                    onChanged: (date) {}, onConfirm: (date) {
+                  print('change $date');
+
+                  setState(() {
+                    // _selectedDate =;
+                  });
+                }, currentTime: DateTime.now(), locale: LocaleType.en);
+              },
+              child: Text(
+                'Pick Birthday',
+                style: TextStyle(color: Colors.blue),
+              )),
           CustomButton(
               children: [
                 CustomText(
@@ -289,7 +320,16 @@ class _SignUpViewState extends State<SignUpView> {
                           !model.savingUser ? Constants.purple : Colors.black)))
             ],
             onTap: () {
-              model.register(userModel, context);
+              model.register(
+                  BeneficiaryUser(
+                      firstName: firstNameController.text,
+                      lastName: lastNameController.text,
+                      email: emailController.text,
+                      phone: phoneController.text,
+                      password: passwordController.text,
+                      gender: _genderDropdownValue,
+                      dob: _selectedDate),
+                  context);
             },
             mainAxisAlignment: model.savingUser
                 ? MainAxisAlignment.end
@@ -364,8 +404,6 @@ class _SignUpViewState extends State<SignUpView> {
   TextEditingController phoneController = new TextEditingController(text: '');
   TextEditingController passwordController =
       new TextEditingController(text: '');
-
-  BeneficiaryUserModel userModel = new BeneficiaryUserModel();
 
   final myKey = GlobalKey<FormState>();
   int _formStage = 1;
