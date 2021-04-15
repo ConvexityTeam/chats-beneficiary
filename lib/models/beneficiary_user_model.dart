@@ -27,15 +27,15 @@ class BeneficiaryUser {
         email = parsedJson['email'],
         gender = parsedJson['gender'],
         dob = parsedJson['dob'],
-        lastName = parsedJson['lastName ='];
+        lastName = parsedJson['lastName'];
 
-  Map<String, dynamic> toJson() => {
-        'firstName': firstName,
+  Map<String, String> toJson() => {
+        'first_name': firstName,
         'email': email,
         'gender': gender,
         'password': password,
         'dob': dob,
-        'lastName': lastName,
+        'last_name': lastName,
         'phone': phone,
       };
 }
