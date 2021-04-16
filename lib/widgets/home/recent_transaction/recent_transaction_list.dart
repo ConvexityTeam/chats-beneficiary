@@ -15,11 +15,12 @@ class RecentTransactionsList extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return CircularProgressIndicator();
         }
+        print({'recent transactions', snapshot.data});
 
         if (snapshot.hasError) {
           return Container(
             child: Text(
-                "Sorry if looks like we weren't able to retrieve your transactions"),
+                "Sorry it looks like we weren't able to retrieve your transactions"),
           );
         }
 
@@ -29,6 +30,7 @@ class RecentTransactionsList extends StatelessWidget {
           );
         }
 
+        print({'recent transactions', snapshot.data});
         return Column(
             children: snapshot.data
                 .map((transcation) => RecentTransactionItem())

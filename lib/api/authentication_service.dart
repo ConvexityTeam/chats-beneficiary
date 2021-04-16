@@ -1,5 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:CHATS/domain/locator.dart';
+import 'package:CHATS/domain/user_service.dart';
+import 'package:CHATS/models/api.dart';
 import 'package:CHATS/models/beneficiary_user_model.dart';
 import 'package:CHATS/services/base_service.dart';
 import 'package:dio/dio.dart';
@@ -8,26 +11,25 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
 class AuthenticationService extends BaseService {
-  Future<Map<String, String>> register(
-      BeneficiaryUser userObj, File profilePic) async {
+  Future<void> register(BeneficiaryUser userObj, File profilePic) async {
     try {
+      if (kDebugMode) {
+        print({
+          "REGISTERING USER with endpoint '$authUrl/self-registration'",
+          userObj,
+          'User Object'
+        });
+      }
       var profilePicBytes = await profilePic.readAsBytes();
       var formData = FormData.fromMap({
         ...userObj.toJson(),
         'profile_pic': MultipartFile.fromBytes(
           profilePicBytes,
-          filename: 'test.jpg',
+          filename: '${userObj.firstName + userObj.lastName}.jpg',
           contentType: new MediaType("image", "jpeg"), //add this
         ),
       });
       // DEBUG REQUEST
-      if (kDebugMode) {
-        print({
-          "REGISTERING USER with endpoint '$authUrl/self-registration'",
-          userObj.toJson(),
-          'User Object'
-        });
-      }
 
       Response registrationResponse = await Dio().post(
         '$authUrl/self-registration',
@@ -36,12 +38,6 @@ class AuthenticationService extends BaseService {
 
       if (kDebugMode)
         print('Tried to register user ... \n${registrationResponse.data}');
-
-      // Log user in
-      Map<String, dynamic> response =
-          await this.login(userObj.email, userObj.password);
-
-      return response;
     } on DioError catch (e) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx and is also not 304.
@@ -51,6 +47,7 @@ class AuthenticationService extends BaseService {
         print(e.response.request);
       } else {
         // Something happened in setting up or sending the request that triggered an Error
+        throw e;
         print(e.request);
         print(e.message);
       }
@@ -63,8 +60,9 @@ class AuthenticationService extends BaseService {
           body: jsonEncode({"email": email, "password": password}),
           headers: header);
 
-      print(jsonDecode(response.body));
-      return jsonDecode(response.body)['token'];
+      String token = jsonDecode(response.body)['data']['token'];
+      locator<UserService>().token = token;
+      return jsonDecode(response.body);
     } catch (e) {
       return e;
     }

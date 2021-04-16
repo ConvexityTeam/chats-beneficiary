@@ -1,15 +1,26 @@
-import 'dart:convert';
 import 'dart:io';
 // import 'dart:io';
 import 'package:CHATS/models/beneficiary_user_model.dart';
 import 'package:CHATS/providers/base_provider_model.dart';
 import 'package:CHATS/api/authentication_service.dart';
+import 'package:CHATS/router.dart';
 import 'package:CHATS/services/local_storage_service.dart';
 import 'package:CHATS/domain/locator.dart';
 import 'package:CHATS/utils/ui_helper.dart';
 import 'package:flutter/widgets.dart';
 
 class SignUpVM extends BaseProviderModel {
+  bool get loading {
+    return _loading;
+  }
+
+  bool _loading = false;
+
+  toggleLoader() {
+    _loading = !_loading;
+    notifyListeners();
+  }
+
   List<String> imageList = [
     'assets/onboard2.jpeg',
     'assets/onboard3.jpeg',
@@ -105,8 +116,9 @@ class SignUpVM extends BaseProviderModel {
     notifyListeners();
     await _authenticationService.login(email, password).then((value) {
       // Sends user to homepage if credentials are correct
+      print({value, 'value'});
       if (value['code'] == 200) {
-        Navigator.pushReplacementNamed(context, '/home');
+        Navigator.pushReplacementNamed(context, home);
       } else {
         errorMessage = value['message'];
         print(value['code']);
@@ -119,19 +131,14 @@ class SignUpVM extends BaseProviderModel {
   }
 
   BeneficiaryUser user;
-  register(BuildContext context) async {
+  Future register(BuildContext context) async {
     savingUser = true;
     signUpErrorMessage = '';
     notifyListeners();
     try {
-      Map<String, dynamic> value =
-          await AuthenticationService().register(user, this.profilePicture);
-
-      // if (value['code'] == 201) {
-      //   Navigator.pushReplacementNamed(context, '/home');
-      // } else {
-      //   signUpErrorMessage = value['message'];
-      // }
+      await AuthenticationService().register(user, this.profilePicture);
+      await AuthenticationService().login(user.email, user.password);
+      Navigator.pushReplacementNamed(context, home);
     } catch (err) {
       print(err);
       print("ss");
@@ -143,6 +150,7 @@ class SignUpVM extends BaseProviderModel {
 
   bool isBusy = false;
   bool savingUser = false;
+  bool otpVerified = false;
   String errorMessage = '';
   String signUpErrorMessage = '';
 

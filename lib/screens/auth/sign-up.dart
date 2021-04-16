@@ -23,9 +23,16 @@ class _SignUpViewState extends State<SignUpView> {
   String _selectedDate = '';
 
   ///a void function to verify if the Data provided is true
-  void verify(String pin) {
-    print(EmailAuth.validate(
-        receiverMail: emailController.value.text, userOTP: pin));
+  Null Function(String) verify(SignUpVM model) {
+    return (String pin) {
+      bool validation = EmailAuth.validate(
+          receiverMail: emailController.value.text, userOTP: pin);
+      if (validation) {
+        model.otpVerified = true;
+      } else {
+        model.otpVerified = false;
+      }
+    };
   }
 
   ///a void funtion to send the OTP to the user
@@ -305,7 +312,7 @@ class _SignUpViewState extends State<SignUpView> {
             padding: EdgeInsets.only(top: height * 5, bottom: height * 5),
             child: OTPPin(
               showFieldAsBox: false,
-              onSubmit: verify,
+              onSubmit: verify(model),
               fields: 6,
             )),
         Padding(
@@ -347,15 +354,19 @@ class _SignUpViewState extends State<SignUpView> {
                           !model.savingUser ? Constants.purple : Colors.black)))
             ],
             onTap: () {
-              model.user = BeneficiaryUser(
-                  firstName: firstNameController.text,
-                  lastName: lastNameController.text,
-                  email: emailController.text,
-                  phone: phoneController.text,
-                  password: passwordController.text,
-                  gender: _genderDropdownValue.toLowerCase(),
-                  dob: _selectedDate);
-              Navigator.pushNamed(context, personalInfo);
+              if (model.otpVerified) {
+                model.user = BeneficiaryUser(
+                    firstName: firstNameController.text,
+                    lastName: lastNameController.text,
+                    email: emailController.text,
+                    phone: phoneController.text,
+                    password: passwordController.text,
+                    gender: _genderDropdownValue.toLowerCase(),
+                    dob: _selectedDate);
+                Navigator.pushNamed(context, personalInfo);
+              } else {
+                model.errorMessage = 'Error OTP not verified';
+              }
             },
             mainAxisAlignment: model.savingUser
                 ? MainAxisAlignment.end
@@ -398,7 +409,7 @@ class _SignUpViewState extends State<SignUpView> {
                     border: Border.all(style: BorderStyle.none),
                     color: Constants.purple),
               )
-            : Text(''),
+            : const Text(''),
         subtitle: CustomText(
             text: body, fontSize: 12, color: Color.fromRGBO(85, 85, 85, 1)),
       ),

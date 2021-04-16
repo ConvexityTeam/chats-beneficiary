@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 class HomeView extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
+  void initState() {}
+  @override
   Widget build(BuildContext context) {
     return WillPopScope(
       // ignore: missing_return

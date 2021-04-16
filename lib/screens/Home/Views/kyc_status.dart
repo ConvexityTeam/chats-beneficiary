@@ -72,7 +72,7 @@ class _KYCstatusState extends State<KYCstatus> {
                 pictureUploaded),
             onTap: () async {
               var file =
-                  await ImagePicker.pickImage(source: ImageSource.gallery);
+                  await ImagePicker.pickImage(source: ImageSource.camera);
               if (file != null) {
                 setState(() {
                   // pictureUploaded = true;
@@ -201,7 +201,7 @@ class _KYCstatusState extends State<KYCstatus> {
 
 
 
-=======
+
           onTap: () => showDialog(
               context: context,
               builder: (BuildContext context) {

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:CHATS/router.dart';
 import 'package:CHATS/screens/home/view_models/base_view_model.dart';
 import 'package:CHATS/screens/home/view_models/sign_upVM.dart';
 import 'package:CHATS/utils/text.dart';
@@ -55,13 +56,21 @@ class _PersonalInfoState extends State<PersonalInfo> {
                   ),
                 ),
                 buildIdentityVerification(smallH),
-                CustomButton(
-                    children: [
-                      CustomText(color: Colors.white, text: 'Register')
-                    ],
-                    onTap: () {
-                      provider.register(context);
-                    })
+                provider.loading
+                    ? CircularProgressIndicator()
+                    : CustomButton(
+                        children: [
+                            CustomText(color: Colors.white, text: 'Register')
+                          ],
+                        onTap: () async {
+                          try {
+                            provider.toggleLoader();
+                            await provider.register(context);
+                            provider.toggleLoader();
+                          } catch (err) {
+                            provider.toggleLoader();
+                          }
+                        })
               ],
             ),
           ),
@@ -72,6 +81,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
 
   bool pictureUploaded = false;
   bool idUploaded = false;
+
   Widget buildIdentityVerification(double height) {
     return BaseViewModel<SignUpVM>(
         providerReady: (model) => {},
@@ -84,7 +94,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CustomText(
-                    text: 'Identity Verification',
+                    text: '',
                     fontFamily: 'Gilroy-bold',
                     fontSize: height,
                     edgeInset: EdgeInsets.only(bottom: height * 2, top: height),
@@ -98,16 +108,16 @@ class _PersonalInfoState extends State<PersonalInfo> {
                           height,
                           pictureUploaded),
                       onTap: () async {
-                        var file = await ImagePicker.pickImage(
-                            source: ImageSource.gallery);
+                        var file = await ImagePicker()
+                            .getImage(source: ImageSource.camera);
                         if (file != null) {
                           setState(() {
                             pictureUploaded = true;
-                            userImage = file;
+                            userImage = File(file.path);
                           });
-                          String base64Image =
-                              base64Encode(file.readAsBytesSync());
-                          provider.profilePicture = file;
+                          // String base64Image =
+                          //     base64Encode(file.readAsBytesSync());
+                          provider.profilePicture = userImage;
                         } else {
                           // User canceled the picker
                         }

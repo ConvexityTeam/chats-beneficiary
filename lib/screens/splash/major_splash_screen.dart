@@ -12,14 +12,7 @@ class _MajorSplashScreenState extends State<MajorSplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 6), _checkUserStatus);
-  }
-
-  _checkUserStatus() async {
-    LocalStorage localStorage = new LocalStorage();
-    String user = await localStorage.checkUserType();
-    Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (_) => HomeView()));
+    Future.delayed(Duration(seconds: 6));
   }
 
 //provider.startUp,
