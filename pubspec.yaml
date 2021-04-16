@@ -22,23 +22,15 @@ dependencies:
   dotted_border: ^1.0.5
   provider: ^4.1.2
   pin_entry_text_field: ^0.1.4
-
   shared_preferences: ^0.5.8
-
   cupertino_icons: ^1.0.0
-
   build_runner: ^1.11.1
   json_serializable: ^3.5.1
-
   date_format: ^1.0.8
-  # file_picker: ^2.1.4
   local_auth: ^0.6.3+4
-
   carousel_slider: ^2.3.1
-
   get_it: ^4.0.2
   image_picker: ^0.6.7+4
-  # file_picker: ^2.1.4
   path_provider: ^1.6.11
   flutter_spinkit: ^4.1.2+1
   flutter_barcode_scanner: ^1.0.2
