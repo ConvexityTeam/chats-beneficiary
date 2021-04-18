@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:CHATS/domain/locator.dart';
 import 'package:CHATS/domain/user_service.dart';
-import 'package:CHATS/models/beneficiary_user_model.dart';
 import 'package:CHATS/services/base_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';

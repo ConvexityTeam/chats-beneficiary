@@ -48,7 +48,6 @@ class AuthenticationService extends BaseService {
       } else {
         // Something happened in setting up or sending the request that triggered an Error
         throw e;
-        print(e.request);
         print(e.message);
       }
     }
@@ -56,15 +55,34 @@ class AuthenticationService extends BaseService {
 
   Future<Map<String, dynamic>> login(String email, String password) async {
     try {
-      final response = await http.post("$authUrl/login",
-          body: jsonEncode({"email": email, "password": password}),
-          headers: header);
+      final response = await Dio()
+          .post("$authUrl/login", data: {'email': email, 'password': password});
 
-      String token = jsonDecode(response.body)['data']['token'];
+      if (kDebugMode)
+        print({
+          "SENDING REQUEST TO API.... TO LOGIN",
+          response.data['data']['token']
+        });
+      String token = response.data['data']['token'];
+      if (kDebugMode) {
+        print({response.data.keys, 'This API response keys!'});
+        print({token, 'This is the users API token!'});
+      }
       locator<UserService>().token = token;
-      return jsonDecode(response.body);
-    } catch (e) {
-      return e;
+      return response.data;
+    } on DioError catch (e) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx and is also not 304.
+      if (e.response != null) {
+        print(e.response.data);
+        print(e.response.headers);
+        print(e.response.request);
+      } else {
+        // Something happened in setting up or sending the request that triggered an Error
+        throw e;
+        print(e.request);
+        print(e.message);
+      }
     }
   }
 
