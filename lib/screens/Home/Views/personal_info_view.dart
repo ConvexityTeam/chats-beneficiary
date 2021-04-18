@@ -108,7 +108,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                           height,
                           pictureUploaded),
                       onTap: () async {
-                        var file = await ImagePicker()
+                        PickedFile file = await ImagePicker()
                             .getImage(source: ImageSource.camera);
                         if (file != null) {
                           setState(() {
