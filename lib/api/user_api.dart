@@ -1,17 +1,17 @@
-import 'dart:convert';
 import 'package:CHATS/domain/locator.dart';
 import 'package:CHATS/services/user_service.dart';
+import 'package:CHATS/models/wallet.dart';
 import 'package:CHATS/services/base_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
 
-class TransactionAPI extends BaseService {
-  String _transcationsURL =
-      BaseService.rootApi + '/users/recent_transactions/7';
-  Future<List> recentTransactions() async {
+class UserAPI {
+  String _userURL =
+      BaseService.rootApi + '/beneficiaries/user/${locator<UserService>().id}';
+
+  getUserDetailsAndWallet() async {
     try {
-      final response = await Dio().get("$_transcationsURL",
+      final response = await Dio().get("$_userURL",
           options: Options(headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
@@ -20,10 +20,10 @@ class TransactionAPI extends BaseService {
 
       if (kDebugMode)
         print({
-          "SENDING REQUEST TO API.... FOR RECENT TRANSACTIONS",
-          response.data
+          "SENDING REQUEST TO API.... FOR Details and Wallet",
+          Wallet.fromJson(response.data['data']['user'])
         });
-      return response.data['data'];
+      return response.data['data']['user'];
     } on DioError catch (e) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx and is also not 304.
@@ -31,31 +31,13 @@ class TransactionAPI extends BaseService {
         print(e.response.data);
         print(e.response.headers);
         print(e.response.request);
+        print(e.response.statusMessage);
       } else {
         // Something happened in setting up or sending the request that triggered an Error
         throw e;
         print(e.request);
         print(e.message);
       }
-    }
-  }
-
-  Future<List> allTransactions() async {
-    try {
-      final response = await http.get("$_transcationsURL", headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        // 'Authorization': 'Bearer $_bearerToken',
-      });
-
-      if (kDebugMode)
-        print({
-          "SENDING REQUEST TO API.... FOR RECENT TRANSACTIONS",
-          jsonDecode(response.body)
-        });
-      return jsonDecode(response.body);
-    } catch (e) {
-      throw 'There was an error with our system trying to retrieve transactions';
     }
   }
 }

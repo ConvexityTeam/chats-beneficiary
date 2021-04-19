@@ -102,7 +102,7 @@ class WalletView extends StatelessWidget {
                       children: [
                         SizedBox(width: 10),
                         Text(
-                          "Recent Transactions",
+                          "All Transactions",
                           style: TextStyle(
                             color: Color(0xff333333),
                             fontSize: 16,

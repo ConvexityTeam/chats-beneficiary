@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:CHATS/domain/locator.dart';
-import 'package:CHATS/domain/user_service.dart';
+import 'package:CHATS/services/user_service.dart';
 import 'package:CHATS/models/api.dart';
 import 'package:CHATS/models/beneficiary_user_model.dart';
 import 'package:CHATS/services/base_service.dart';
@@ -64,11 +64,14 @@ class AuthenticationService extends BaseService {
           response.data['data']['token']
         });
       String token = response.data['data']['token'];
+      String userID = response.data['data']['user']['id'].toString();
       if (kDebugMode) {
         print({response.data.keys, 'This API response keys!'});
         print({token, 'This is the users API token!'});
       }
       locator<UserService>().token = token;
+      locator<UserService>().id = userID;
+
       return response.data;
     } on DioError catch (e) {
       // The request was made and the server responded with a status code

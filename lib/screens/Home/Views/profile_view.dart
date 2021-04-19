@@ -1,3 +1,5 @@
+import 'package:CHATS/domain/locator.dart';
+import 'package:CHATS/services/user_service.dart';
 import 'package:CHATS/screens/home/views/drawer_view.dart';
 import 'package:CHATS/utils/ui_helper.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +78,8 @@ class ProfileView extends StatelessWidget {
                           width: 110,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage("assets/Ellipse 4.png"),
+                              image: NetworkImage(
+                                  locator<UserService>().data.profilePic),
                               fit: BoxFit.cover,
                             ),
                             shape: BoxShape.circle,
@@ -86,7 +89,7 @@ class ProfileView extends StatelessWidget {
                           height: 10,
                         ),
                         Text(
-                          "Yasmine Hardy",
+                          "${locator<UserService>().data.firstName} ${locator<UserService>().data.lastName}",
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.black,

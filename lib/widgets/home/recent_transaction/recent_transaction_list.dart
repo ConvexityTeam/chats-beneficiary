@@ -26,7 +26,13 @@ class RecentTransactionsList extends StatelessWidget {
 
         if (snapshot.data.isEmpty) {
           return Container(
-            child: Text("You don't have any transactions yet."),
+            margin: EdgeInsets.only(top: 25),
+            child: Column(
+              children: [
+                Icon(Icons.receipt_long),
+                Text("You don't have any transactions yet."),
+              ],
+            ),
           );
         }
 
