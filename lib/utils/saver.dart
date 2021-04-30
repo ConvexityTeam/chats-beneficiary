@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Saver {
   static String token;
-  static BeneficiaryUserModel user;
+  static BeneficiaryUser user;
   static bool isNewlyInstalled = true;
 
   static saveToken(String token) async {

@@ -113,10 +113,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                                             ? Constants.purple
                                                             : Colors.black)))
                                       ],
-                                      onTap: () {
+                                      onTap: () async {
                                         if (myKey.currentState.validate()) {
-                                          provider.login(emailController.text,
-                                              passController.text, context);
+                                          await provider.login(
+                                              emailController.text,
+                                              passController.text,
+                                              context);
                                         }
                                       },
                                       mainAxisAlignment: provider.isBusy

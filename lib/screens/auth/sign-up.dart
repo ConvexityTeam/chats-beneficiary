@@ -1,4 +1,5 @@
 import 'package:CHATS/models/beneficiary_user_model.dart';
+import 'package:CHATS/router.dart';
 import 'package:CHATS/screens/home/view_models/base_view_model.dart';
 import 'package:CHATS/screens/home/view_models/sign_upVM.dart';
 import 'package:CHATS/widgets/custom_btn.dart';
@@ -6,7 +7,11 @@ import 'package:CHATS/utils/custom_text_field.dart';
 import 'package:CHATS/utils/otp_pin.dart';
 import 'package:CHATS/utils/text.dart';
 import 'package:CHATS/utils/ui_helper.dart';
+import 'package:email_auth/email_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:intl/intl.dart';
 
 class SignUpView extends StatefulWidget {
   @override
@@ -14,6 +19,34 @@ class SignUpView extends StatefulWidget {
 }
 
 class _SignUpViewState extends State<SignUpView> {
+  String _genderDropdownValue = 'Male';
+  String _selectedDate = '';
+
+  ///a void function to verify if the Data provided is true
+  Null Function(String) verify(SignUpVM model) {
+    return (String pin) {
+      bool validation = EmailAuth.validate(
+          receiverMail: emailController.value.text, userOTP: pin);
+      if (validation) {
+        model.otpVerified = true;
+      } else {
+        model.otpVerified = false;
+      }
+    };
+  }
+
+  ///a void funtion to send the OTP to the user
+  void sendOtp() async {
+    EmailAuth.sessionName = "Company Name";
+    bool result =
+        await EmailAuth.sendOtp(receiverMail: emailController.value.text);
+    if (result) {
+      // setState(() {
+      //   submitValid = true;
+      // });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -115,9 +148,6 @@ class _SignUpViewState extends State<SignUpView> {
           ),
           CustomTextField(
             controller: firstNameController,
-            onSaved: (val) {
-              userModel.first_name = val;
-            },
             validateFn: (val) {
               if (val.isEmpty) return 'Cannot be empty';
             },
@@ -130,9 +160,6 @@ class _SignUpViewState extends State<SignUpView> {
           ),
           CustomTextField(
             controller: lastNameController,
-            onSaved: (val) {
-              userModel.last_name = val;
-            },
             label: CustomText(
               text: 'Last Name',
               fontSize: 16,
@@ -145,9 +172,6 @@ class _SignUpViewState extends State<SignUpView> {
           ),
           CustomTextField(
             controller: emailController,
-            onSaved: (val) {
-              userModel.email = val;
-            },
             label: CustomText(
               text: 'Email',
               fontSize: 16,
@@ -160,9 +184,6 @@ class _SignUpViewState extends State<SignUpView> {
           ),
           CustomTextField(
             controller: phoneController,
-            onSaved: (val) {
-              userModel.phone = val;
-            },
             label: CustomText(
               text: 'Phone Number',
               fontSize: 16,
@@ -173,6 +194,63 @@ class _SignUpViewState extends State<SignUpView> {
             },
             hintText: '09065233507',
           ),
+          CustomTextField(
+            controller: passwordController,
+            label: CustomText(
+              text: 'Password',
+              fontSize: 16,
+              fontFamily: 'Gilroy-Medium',
+            ),
+            validateFn: (val) {
+              if (val.isEmpty) return 'Cannot be empty';
+            },
+            hintText: 'Vend3cret',
+          ),
+          DropdownButton<String>(
+            value: _genderDropdownValue,
+            icon: const Icon(Icons.arrow_downward),
+            iconSize: 24,
+            elevation: 16,
+            style: const TextStyle(color: Colors.green),
+            underline: Container(
+              height: 2,
+              color: Colors.green,
+            ),
+            onChanged: (String newValue) {
+              setState(() {
+                _genderDropdownValue = newValue;
+              });
+            },
+            items: <String>[
+              'Male',
+              'Female',
+            ].map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+          ),
+          FlatButton(
+              onPressed: () {
+                DatePicker.showDatePicker(context,
+                    showTitleActions: true,
+                    minTime: DateTime(1940, 3, 5),
+                    maxTime: DateTime.now(),
+                    onChanged: (date) {}, onConfirm: (date) {
+                  print('change $date');
+
+                  setState(() {
+                    DateFormat dateFormat = DateFormat('MMMM-d-yyyy');
+                    var formattedDate = dateFormat.format(date);
+                    _selectedDate = formattedDate;
+                  });
+                }, currentTime: DateTime.now(), locale: LocaleType.en);
+              },
+              child: Text(
+                _selectedDate.isEmpty ? 'Pick Birthday' : _selectedDate,
+                style: TextStyle(color: Colors.blue),
+              )),
           CustomButton(
               children: [
                 CustomText(
@@ -188,6 +266,7 @@ class _SignUpViewState extends State<SignUpView> {
                   setState(() {
                     _formStage = 2;
                   });
+                  sendOtp();
                 }
               }),
           Row(
@@ -223,7 +302,7 @@ class _SignUpViewState extends State<SignUpView> {
               edgeInset: EdgeInsets.only(bottom: height * 1.3),
             ),
             CustomText(
-              text: 'Enter the OTP sent to ********353',
+              text: 'Enter the OTP sent to your email',
               fontWeight: FontWeight.w300,
               edgeInset: EdgeInsets.only(bottom: height * 1.3),
             ),
@@ -233,6 +312,7 @@ class _SignUpViewState extends State<SignUpView> {
             padding: EdgeInsets.only(top: height * 5, bottom: height * 5),
             child: OTPPin(
               showFieldAsBox: false,
+              onSubmit: verify(model),
               fields: 6,
             )),
         Padding(
@@ -274,7 +354,19 @@ class _SignUpViewState extends State<SignUpView> {
                           !model.savingUser ? Constants.purple : Colors.black)))
             ],
             onTap: () {
-              model.register(userModel, context);
+              if (model.otpVerified) {
+                model.user = BeneficiaryUser(
+                    firstName: firstNameController.text,
+                    lastName: lastNameController.text,
+                    email: emailController.text,
+                    phone: phoneController.text,
+                    password: passwordController.text,
+                    gender: _genderDropdownValue.toLowerCase(),
+                    dob: _selectedDate);
+                Navigator.pushNamed(context, personalInfo);
+              } else {
+                model.errorMessage = 'Error OTP not verified';
+              }
             },
             mainAxisAlignment: model.savingUser
                 ? MainAxisAlignment.end
@@ -294,8 +386,6 @@ class _SignUpViewState extends State<SignUpView> {
       case 2:
         return buildOtp(height, model);
         break;
-      default:
-        return personInformation(height);
     }
   }
 
@@ -319,7 +409,7 @@ class _SignUpViewState extends State<SignUpView> {
                     border: Border.all(style: BorderStyle.none),
                     color: Constants.purple),
               )
-            : Text(''),
+            : const Text(''),
         subtitle: CustomText(
             text: body, fontSize: 12, color: Color.fromRGBO(85, 85, 85, 1)),
       ),
@@ -349,9 +439,7 @@ class _SignUpViewState extends State<SignUpView> {
   TextEditingController phoneController = new TextEditingController(text: '');
   TextEditingController passwordController =
       new TextEditingController(text: '');
-
-  BeneficiaryUserModel userModel = new BeneficiaryUserModel();
-
+  TextEditingController otpController = new TextEditingController(text: '');
   final myKey = GlobalKey<FormState>();
   int _formStage = 1;
 }

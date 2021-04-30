@@ -1,3 +1,4 @@
+import 'package:CHATS/services/user_service.dart';
 import 'package:CHATS/screens/home/view_models/sign_upVM.dart';
 import 'package:CHATS/screens/home/view_models/splash_screenVM.dart';
 import 'package:get_it/get_it.dart';
@@ -11,6 +12,7 @@ void setUpLocator() {
   locator.registerFactory(() => SharedPref());
   locator.registerLazySingleton(() => SplashScreenViewModel());
   locator.registerLazySingleton(() => SignUpVM());
+  locator.registerLazySingleton(() => UserService());
 }
 
 // LOCATOR FROM BENEFICIARY APP

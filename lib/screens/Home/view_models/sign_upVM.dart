@@ -1,14 +1,26 @@
-import 'dart:convert';
+import 'dart:io';
 // import 'dart:io';
 import 'package:CHATS/models/beneficiary_user_model.dart';
 import 'package:CHATS/providers/base_provider_model.dart';
-import 'package:CHATS/services/authentication_service.dart';
+import 'package:CHATS/api/authentication_service.dart';
+import 'package:CHATS/router.dart';
 import 'package:CHATS/services/local_storage_service.dart';
 import 'package:CHATS/domain/locator.dart';
 import 'package:CHATS/utils/ui_helper.dart';
 import 'package:flutter/widgets.dart';
 
 class SignUpVM extends BaseProviderModel {
+  bool get loading {
+    return _loading;
+  }
+
+  bool _loading = false;
+
+  toggleLoader() {
+    _loading = !_loading;
+    notifyListeners();
+  }
+
   List<String> imageList = [
     'assets/onboard2.jpeg',
     'assets/onboard3.jpeg',
@@ -104,8 +116,9 @@ class SignUpVM extends BaseProviderModel {
     notifyListeners();
     await _authenticationService.login(email, password).then((value) {
       // Sends user to homepage if credentials are correct
+      print({value, 'value'});
       if (value['code'] == 200) {
-        Navigator.pushReplacementNamed(context, '/');
+        Navigator.pushReplacementNamed(context, home);
       } else {
         errorMessage = value['message'];
         print(value['code']);
@@ -117,33 +130,33 @@ class SignUpVM extends BaseProviderModel {
     notifyListeners();
   }
 
-  register(BeneficiaryUserModel model, BuildContext context) async {
-    // model.profile_pic = profilePicture;
+  BeneficiaryUser user;
+  Future register(BuildContext context) async {
     savingUser = true;
     signUpErrorMessage = '';
     notifyListeners();
-    await _authenticationService.register(model).then((value) {
-      if (value['code'] == 201) {
-        Navigator.pushReplacementNamed(context, '/');
-      } else {
-        signUpErrorMessage = value['message'];
-      }
-    }).catchError((e) {
-      print(e);
+    try {
+      await AuthenticationService().register(user, this.profilePicture);
+      await AuthenticationService().login(user.email, user.password);
+      Navigator.pushReplacementNamed(context, home);
+    } catch (err) {
+      print(err);
       print("ss");
-    });
+    }
+
     savingUser = false;
     notifyListeners();
   }
 
   bool isBusy = false;
   bool savingUser = false;
+  bool otpVerified = false;
   String errorMessage = '';
   String signUpErrorMessage = '';
 
   AuthenticationService _authenticationService = new AuthenticationService();
 
-  String profilePicture;
+  File profilePicture;
 
   String validId;
 }

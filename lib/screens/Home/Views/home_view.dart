@@ -1,12 +1,24 @@
+import 'package:CHATS/api/transactions.dart';
+import 'package:CHATS/domain/locator.dart';
+import 'package:CHATS/services/user_service.dart';
+import 'package:CHATS/models/beneficiary_user_model.dart';
 import 'package:CHATS/screens/home/Views/drawer_view.dart';
 import 'package:CHATS/utils/colors.dart';
+import 'package:CHATS/widgets/home/recent_transaction/recent_transaction_list.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
+  @override
+  _HomeViewState createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
+    BeneficiaryUser user = locator<UserService>().data;
     return WillPopScope(
       // ignore: missing_return
       onWillPop: () {
@@ -34,208 +46,131 @@ class HomeView extends StatelessWidget {
         );
       },
       child: SafeArea(
-        child: Scaffold(
-          key: scaffoldKey,
-          appBar: AppBar(
-            elevation: 0,
-            backgroundColor: Colors.white,
-            leading: GestureDetector(
-                onTap: () {
-                  scaffoldKey.currentState.openDrawer();
-                },
-                child: Image.asset("assets/Group.png")),
-            title: Text(
-              "Home",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontFamily: "Gilroy-medium",
-              ),
-            ),
-            actions: [
-              Container(
-                height: 45,
-                width: 45,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: AssetImage("assets/Ellipse 17.jpg"),
-                      fit: BoxFit.contain,
-                    )),
-              ),
-              SizedBox(width: 15),
-            ],
-          ),
-          drawer: AppDrawer(),
-          body: Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            margin: const EdgeInsets.symmetric(horizontal: 10),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(height: 20),
-                  Container(
-                    height: 145,
-                    width: double.infinity,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: FutureBuilder(
+            future: locator<UserService>().setUserData(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator();
+              }
+              return Scaffold(
+                key: scaffoldKey,
+                appBar: AppBar(
+                  elevation: 0,
+                  backgroundColor: Colors.white,
+                  leading: GestureDetector(
+                      onTap: () {
+                        scaffoldKey.currentState.openDrawer();
+                      },
+                      child: Image.asset('assets/Group.png')),
+                  title: Text(
+                    "Home",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontFamily: "Gilroy-medium",
+                    ),
+                  ),
+                  actions: [
+                    Container(
+                      height: 45,
+                      width: 45,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image:
+                                NetworkImage(
+                                    locator<UserService>().data.profilePic),
+                            fit: BoxFit.contain,
+                          )),
+                    ),
+                    SizedBox(width: 15),
+                  ],
+                ),
+                drawer: AppDrawer(),
+                body: Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  child: SingleChildScrollView(
+                    child: Column(
                       children: [
-                        buildAccountDetailsCard(
-                            amount: "\$${25},000",
-                            percentage: "2.5%",
-                            title: "Total Balance"),
-                        buildAccountDetailsCard(
-                            amount: "\$${25},000",
-                            percentage: "2.5%",
-                            title: "Monthly Income"),
-                        buildAccountDetailsCard(
-                            amount: "\$${25},000",
-                            percentage: "2.5%",
-                            title: "Monthly Expenses")
+                        SizedBox(height: 20),
+                        Container(
+                          height: 145,
+                          width: double.infinity,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            children: [
+                              buildAccountDetailsCard(
+                                  amount: locator<UserService>()
+                                      .data
+                                      .wallet
+                                      .balance
+                                      .toString(),
+                                  percentage: "2.5%",
+                                  title: "Total Balance"),
+                              buildAccountDetailsCard(
+                                  amount: "\$${25},000",
+                                  percentage: "2.5%",
+                                  title: "Monthly Income"),
+                              buildAccountDetailsCard(
+                                  amount: "\$${25},000",
+                                  percentage: "2.5%",
+                                  title: "Monthly Expenses")
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        buildDateRow(),
+                                               Container(
+                                                 padding: EdgeInsets.all(5.0),
+                                                 child: Text('Weekly Transactions Chart')),
+
+                        Container(
+                          height: 250,
+                          width: MediaQuery.of(context).size.width * 0.98,
+                          // color: primaryColor,
+                          child: LineChart(
+                            sampleData1(),
+                            swapAnimationDuration:
+                                const Duration(milliseconds: 250),
+                          ),
+                        ),
+                        SizedBox(height: 30),
+                        SizedBox(width: 20),
+                        Row(
+                          children: [
+                            SizedBox(width: 10),
+                            Text(
+                              "Recent Transactions",
+                              style: TextStyle(
+                                  color: Color(0xff333333),
+                                  fontSize: 16,
+                                  fontFamily: "Gilroy-medium"),
+                            ),
+                            Spacer(),
+                            Text(
+                              "See all",
+                              style: TextStyle(
+                                  color: Color(0xff333333),
+                                  fontSize: 14,
+                                  fontFamily: "Gilroy-medium"),
+                            ),
+                            SizedBox(width: 10),
+                          ],
+                        ),
+                        RecentTransactionsList()
                       ],
                     ),
                   ),
-                  SizedBox(height: 20),
-                  buildDateRow(),
-                  SizedBox(height: 10),
-                  buildRow(),
-                  SizedBox(height: 10),
-                  Row(
-                    children: [
-                      SizedBox(width: 10),
-                      Text(
-                        "Total Balance",
-                        style:
-                            TextStyle(color: Color(0xff333333), fontSize: 13),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 30),
-                  Container(
-                    height: 250,
-                    width: MediaQuery.of(context).size.width * 0.98,
-                    // color: primaryColor,
-                    child: LineChart(
-                      sampleData1(),
-                      swapAnimationDuration: const Duration(milliseconds: 250),
-                    ),
-                  ),
-                  SizedBox(height: 30),
-                  SizedBox(width: 20),
-                  Row(
-                    children: [
-                      SizedBox(width: 10),
-                      Text(
-                        "Recent Transactions",
-                        style: TextStyle(
-                            color: Color(0xff333333),
-                            fontSize: 16,
-                            fontFamily: "Gilroy-medium"),
-                      ),
-                      Spacer(),
-                      Text(
-                        "See all",
-                        style: TextStyle(
-                            color: Color(0xff333333),
-                            fontSize: 14,
-                            fontFamily: "Gilroy-medium"),
-                      ),
-                      SizedBox(width: 10),
-                    ],
-                  ),
-                  Column(
-                      children: List.generate(
-                    10,
-                    (index) => buildDetails(),
-                  ))
-                ],
-              ),
-            ),
-          ),
-        ),
+                ),
+              );
+            }),
       ),
     );
   }
 
-  Widget buildDetails() {
-    return Padding(
-      padding: const EdgeInsets.all(3.0),
-      child: ListTile(
-        leading: Container(
-          decoration: BoxDecoration(
-              color: Color.fromRGBO(240, 240, 240, 0.4),
-              borderRadius: BorderRadius.all(
-                Radius.circular(5),
-              )),
-          height: 62,
-          width: 62,
-          child: Center(
-            child: Text(
-              "C",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 18,
-                fontFamily: "Gilroy-medium",
-              ),
-            ),
-          ),
-        ),
-        title: Text(
-          "Dangote Nigeria",
-          style: TextStyle(
-            fontFamily: "Gilroy-medium",
-          ),
-        ),
-        trailing: Text(
-          "-\$${1},500.75",
-          style: TextStyle(
-            color: Color(0xffc20000),
-            fontFamily: "Gilroy-medium",
-          ),
-        ),
-        subtitle: Text(
-          "25 Nov 2020",
-          style: TextStyle(
-            color: Color(0xff333333),
-            fontSize: 13,
-            fontFamily: "Gilroy-medium",
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget buildRow() {
-    return Row(
-      children: [
-        SizedBox(width: 10),
-        Text(
-          "\$${12},500.",
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 21,
-            fontFamily: "Gilroy-Regular",
-          ),
-        ),
-        SizedBox(width: 5),
-        // Text(
-        //   "2.5%",
-        //   style: TextStyle(
-        //       color: Color(0xff00c2a8),
-        //       fontSize: 13,
-        //       fontFamily: "Gilroy-Regular"),
-        // ),
-        // SizedBox(width: 2),
-        // Icon(
-        //   Icons.arrow_upward,
-        //   size: 9,
-        //   color: Color(0xff00c2a8),
-        // ),
-      ],
-    );
-  }
 
   Widget buildAccountDetailsCard(
       {@required String title,

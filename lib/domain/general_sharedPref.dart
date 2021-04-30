@@ -33,19 +33,4 @@ class GSharedPref extends GBaseProviderModel {
     // });
     notifyListeners();
   }
-
-  // void _saveToDisk<T>(String key, T coFntent) {
-  //   if (content is String) {
-  //     _pref?.setString(key, content);
-  //   }
-  //   if (content is bool) {
-  //     _pref.setBool(key, content);
-  //   }
-  //   if (content is int) {
-  //     _pref?.setInt(key, content);
-  //   }
-  //   if (content is double) {
-  //     _pref?.setDouble(key, content);
-  //   }
-  // }
 }

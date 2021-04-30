@@ -9,7 +9,6 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   newSetUpLocator();
   setUpLocator();
-  // setUpVendorLocator();
   runApp(MyApp());
 }
 
@@ -24,8 +23,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
       ),
-      // initialRoute: 'home',
-      home: HomeView(),
+      initialRoute: 'onboard',
+      home: MajorSplashScreen(),
     );
   }
 }
