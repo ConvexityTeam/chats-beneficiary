@@ -3,8 +3,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class SliderImages extends StatefulWidget {
-  final List<String> imageList;
-  final List<Widget> scrollText;
+  final List<String>? imageList;
+  final List<Widget>? scrollText;
 
   SliderImages({@required this.imageList, this.scrollText});
   @override
@@ -13,13 +13,13 @@ class SliderImages extends StatefulWidget {
   }
 }
 
-int tracker;
+int? tracker;
 
 class _SliderImagesState extends State<SliderImages> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    List<Widget> imageSliders = widget.imageList
+    List<Widget> imageSliders = widget.imageList!
         .map((imageUrl) => Image.asset(
               imageUrl,
               fit: BoxFit.cover,
@@ -52,12 +52,12 @@ class _SliderImagesState extends State<SliderImages> {
                 margin: EdgeInsets.zero,
                 height: 100,
                 width: size.width,
-                child: widget.scrollText[tracker ?? 0]),
+                child: widget.scrollText![tracker ?? 0]),
             Container(
               height: 50,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(widget.imageList.length, (int j) {
+                children: List.generate(widget.imageList!.length, (int j) {
                   return Container(
                     width: 15,
                     height: 4,

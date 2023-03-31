@@ -40,10 +40,14 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Explain why your app uses photo library</string>
+	<string>This app uses the photo library to enable to the user pick an image</string>
 	<key>NSFaceIDUsageDescription</key>
-<string>Why is my app authenticating using face id?</string>
+	<string>Face ID authentication required for securing access to your account on this device</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera permission is required for barcode scanning.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>The app requires location services to function properly</string>
 </dict>
 </plist>

@@ -7,7 +7,7 @@ class GSharedPref extends GBaseProviderModel {
     setupShared();
     getUserOption();
   }
-  Future<SharedPreferences> pref;
+  Future<SharedPreferences>? pref;
 
   static const selected_option = 'selected_option';
 
@@ -16,16 +16,16 @@ class GSharedPref extends GBaseProviderModel {
     notifyListeners();
   }
 
-  Future<String> myOption;
+  Future<String>? myOption;
 
   getUserOption() {
-    myOption = pref.then((value) {
+    myOption = pref!.then((value) {
       return value.getString(selected_option) ?? 'non';
     });
   }
 
   setUserOption(String content) async {
-    final SharedPreferences preferences = await pref;
+    final SharedPreferences preferences = await pref!;
     preferences.setString(selected_option, content);
     // myOption = preferences.setString(selected_option, content).then((value) {
     //   print(content);

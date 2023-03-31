@@ -1,269 +1,263 @@
+// import 'dart:io' show Platform;
+// import 'package:CHATS/router.dart';
+// import 'package:CHATS/domain/locator.dart';
+// import 'package:CHATS/models/beneficiary_user_model.dart';
+import 'package:CHATS/domain/locator.dart';
+import 'package:CHATS/router.dart';
+import 'package:CHATS/services/user_service.dart';
+import 'package:CHATS/theme_changer.dart';
+import 'package:CHATS/utils/colors.dart';
+// import 'package:CHATS/services/user_service.dart';
+import 'package:CHATS/utils/text.dart';
+import 'package:CHATS/utils/ui_helper.dart';
+// import 'package:CHATS/utils/ui_helper.dart';
 import 'package:CHATS/widgets/custom_btn.dart';
+import 'package:CHATS/widgets/error_widget_handler.dart';
 import 'package:flutter/material.dart';
+// import 'package:flutter/services.dart';
+// import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+// import 'package:barcode_scan2/barcode_scan2.dart';
 
-class PaymentConfirmationView extends StatelessWidget {
+class PaymentConfirmationView extends StatefulWidget {
+  const PaymentConfirmationView({Key? key, this.qrReference}) : super(key: key);
+
+  final String? qrReference;
+  @override
+  _PaymentConfirmationViewState createState() =>
+      _PaymentConfirmationViewState();
+}
+
+class _PaymentConfirmationViewState extends State<PaymentConfirmationView> {
+  // ScanResult? _result;
   @override
   Widget build(BuildContext context) {
+    // double width = MediaQuery.of(context).size.width;
+    // var orientation = MediaQuery.of(context).orientation;
+    // BeneficiaryUser? user = locator<UserService>().data;
+    print({"Reference", widget.qrReference});
     return WillPopScope(
-      // ignore: missing_return
-      onWillPop: () {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) => AlertDialog(
-            title: Text("Exit Application ?"),
-            content: Text(
-                "Are you sure you want to exit this application ? click No to cancel, and Yes to continue."),
-            actions: [
-              FlatButton(
-                child: Text("Yes"),
-                onPressed: () {
-                  Navigator.of(context).pop(false);
-                },
-              ),
-              FlatButton(
-                child: Text("No"),
-                onPressed: () {
-                  Navigator.of(context).pop(true);
-                },
-              ),
-            ],
+      onWillPop: () => onBackPressed(context),
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: false,
+          elevation: 0,
+          backgroundColor:
+              ThemeBuilder.of(context)!.getCurrentTheme() == Brightness.light
+                  ? Colors.white
+                  : primaryColorDarkMode,
+          title: CustomText(
+            text: 'Payment Confirmation',
+            fontFamily: 'Gilroy-medium',
+            fontSize: 22,
+            edgeInset: EdgeInsets.only(top: 3),
+            color:
+                ThemeBuilder.of(context)!.getCurrentTheme() == Brightness.light
+                    ? Colors.black
+                    : Colors.white,
           ),
-        );
-      },
-      child: SafeArea(
-        child: Scaffold(
-            appBar: AppBar(
-              elevation: 0,
-              backgroundColor: Colors.white,
-              leading: GestureDetector(
-                  child: Image.asset("assets/icons/arrow_back.png"),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  }),
-              title: Text(
-                "Payment Confirmation",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontFamily: "Gilroy-medium",
-                ),
-              ),
+          leading: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: ThemeBuilder.of(context)!.getCurrentTheme() ==
+                      Brightness.light
+                  ? Colors.black
+                  : Colors.white,
             ),
-            body: Column(children: [
-              Container(
-                // height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                height: 550,
-                color: Color(0xff492954).withOpacity(0.05),
-                margin: const EdgeInsets.symmetric(horizontal: 24),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SizedBox(height: 10),
-                      Text(
-                        "AMOUNT TO BE PAID",
-                        style: TextStyle(
-                          color: Color(0xff222222),
-                          fontSize: 12,
-                          fontFamily: "Gilroy-Regular",
-                        ),
-                      ),
-                      Text(
-                        "\$${7500.00}",
-                        style: TextStyle(
-                          color: Color(0xff222222),
-                          fontSize: 16,
-                          fontFamily: "Gilroy-medium",
-                        ),
-                      ),
-                      Text(
-                        "VENDOR",
-                        style: TextStyle(
-                          fontFamily: "Gilroy-Regular",
-                          color: Color(0xff222222),
-                          fontSize: 12,
-                        ),
-                      ),
-                      Text(
-                        "Cadbury Nigeria",
-                        style: TextStyle(
-                          color: Color(0xff222222),
-                          fontFamily: "Gilroy-medium",
-                          fontSize: 16,
-                        ),
-                      ),
-                      Text(
-                        "PENDING BALANCE",
-                        style: TextStyle(
-                          color: Color(0xff222222),
-                          fontFamily: "Gilroy-Regular",
-                          fontSize: 12,
-                        ),
-                      ),
-                      Text(
-                        "\$${7},${500.00}",
-                        style: TextStyle(
-                          color: Color(0xff222222),
-                          fontSize: 16,
-                          fontFamily: "Gilroy-medium",
-                        ),
-                      ),
-                      Text(
-                        "GENERATED ON",
-                        style: TextStyle(
-                          color: Color(0xff222222),
-                          fontFamily: "Gilroy-Regular",
-                          fontSize: 12,
-                        ),
-                      ),
-                      Text(
-                        "03 Dec, 2020. 12:45 pm",
-                        style: TextStyle(
-                          color: Color(0xff222222),
-                          fontFamily: "Gilroy-medium",
-                          fontSize: 16,
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      // !End of Column
-                    ]),
-              ),
-              buildExpanded()
-            ])),
-      ),
-    );
-  }
+          ),
+        ),
+        body: FutureBuilder(
+          future: locator<UserService>().getOrder(widget.qrReference!),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator.adaptive());
+            }
 
-  Widget buildExpanded() {
-    return Expanded(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(height: 10),
-          Center(
-            child: CustomButton(
-              onTap: () {
-                print("Confirmation");
-              },
-              children: [Text("Confirm Transaction")],
-            ),
-          )
-        ],
-      ),
-    );
-  }
+            if (snapshot.hasError) {
+              return ErrorWidgetHandler(onTap: () {
+                setState(() {});
+              });
+            }
 
-  Widget paymentDetails() {
-    return Column(
-      children: [
-        SizedBox(height: 30),
-        Column(
-          children: [
-            Text(
-              "AMOUNT TO BE PAID",
-              style: TextStyle(
-                color: Color(0xff222222),
-                fontSize: 12,
-                fontFamily: "Gilroy-Regular",
+            if (snapshot.data is String) {
+              return ErrorWidgetHandler(onTap: () {
+                setState(() {});
+              });
+            }
+
+            return Container(
+              color: ThemeBuilder.of(context)!.getCurrentTheme() ==
+                      Brightness.light
+                  ? Colors.white
+                  : primaryColorDarkMode,
+              padding: EdgeInsets.only(left: 20, right: 20, top: 75),
+              child: Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(
+                        style: BorderStyle.solid,
+                        color: Color.fromRGBO(124, 141, 181, 1),
+                      ),
+                      color: Color.fromRGBO(245, 246, 248, 1),
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomText(
+                                  text: 'AMOUNT TO BE PAID',
+                                  fontSize: 12,
+                                  fontFamily: 'Gilroy-regular',
+                                  textAlign: TextAlign.left,
+                                  color: Color.fromRGBO(124, 141, 181, 1),
+                                ),
+                                CustomText(
+                                  text:
+                                      '${locator<UserService>().order!.totalCost.toString()}',
+                                  fontSize: 18,
+                                  fontFamily: 'Gilroy-medium',
+                                  textAlign: TextAlign.left,
+                                  color: Color.fromRGBO(37, 57, 111, 1),
+                                ),
+                              ],
+                            ),
+                            SizedBox(width: 55),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomText(
+                                  text: 'VENDOR',
+                                  fontSize: 12,
+                                  fontFamily: 'Gilroy-regular',
+                                  textAlign: TextAlign.left,
+                                  color: Color.fromRGBO(124, 141, 181, 1),
+                                ),
+                                CustomText(
+                                  text:
+                                      '${locator<UserService>().order!.order!.vendor!.store!.storeName ?? ''}',
+                                  fontSize: 18,
+                                  fontFamily: 'Gilroy-medium',
+                                  textAlign: TextAlign.left,
+                                  color: Color.fromRGBO(37, 57, 111, 1),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 24),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomText(
+                                  text: 'CURRENT BALANCE',
+                                  fontSize: 12,
+                                  fontFamily: 'Gilroy-regular',
+                                  textAlign: TextAlign.left,
+                                  color: Color.fromRGBO(124, 141, 181, 1),
+                                ),
+                                CustomText(
+                                  text:
+                                      'NGN ${locator<UserService>().data!.totalWalletBalance.toString()}',
+                                  fontSize: 18,
+                                  fontFamily: 'Gilroy-medium',
+                                  textAlign: TextAlign.left,
+                                  color: Color.fromRGBO(37, 57, 111, 1),
+                                ),
+                              ],
+                            ),
+                            SizedBox(width: 62),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomText(
+                                  text: 'PENDING BALANCE',
+                                  fontSize: 12,
+                                  fontFamily: 'Gilroy-regular',
+                                  textAlign: TextAlign.left,
+                                  color: Color.fromRGBO(124, 141, 181, 1),
+                                ),
+                                CustomText(
+                                  text:
+                                      'NGN ${(locator<UserService>().data!.totalWalletBalance! - locator<UserService>().order!.totalCost!).toString()}',
+                                  fontSize: 18,
+                                  fontFamily: 'Gilroy-medium',
+                                  textAlign: TextAlign.left,
+                                  color: Color.fromRGBO(37, 57, 111, 1),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 24),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomText(
+                                  text: 'GENERATED ON',
+                                  fontSize: 12,
+                                  fontFamily: 'Gilroy-regular',
+                                  textAlign: TextAlign.left,
+                                  color: Color.fromRGBO(124, 141, 181, 1),
+                                ),
+                                CustomText(
+                                  text:
+                                      '${DateTime.parse(locator<UserService>().order!.order!.createdAt!).day} / ${DateTime.parse(locator<UserService>().order!.order!.createdAt!).month}, ${DateTime.parse(locator<UserService>().order!.order!.createdAt!).year}. ${DateTime.parse(locator<UserService>().order!.order!.createdAt!).hour}:${DateTime.parse(locator<UserService>().order!.order!.createdAt!).minute}',
+                                  fontSize: 18,
+                                  fontFamily: 'Gilroy-medium',
+                                  textAlign: TextAlign.left,
+                                  color: Color.fromRGBO(37, 57, 111, 1),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 70),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 58,
+                    child: CustomButton(
+                      margin: EdgeInsets.zero,
+                      onTap: () {
+                        print('Go to enter transaction PIN screen');
+                        Navigator.pushNamed(context, transactionPin,
+                            arguments: widget.qrReference);
+                      },
+                      children: [
+                        CustomText(
+                          color: Colors.white,
+                          text: "Confirm Transaction",
+                          fontSize: 18,
+                          fontFamily: 'Gilroy-bold',
+                          edgeInset: EdgeInsets.zero,
+                        ),
+                      ],
+                      // style: ButtonStyle(),
+                    ),
+                  ),
+                ],
               ),
-            ),
-            Text(
-              "\$${7500.00}",
-              style: TextStyle(
-                color: Color(0xff222222),
-                fontSize: 16,
-                fontFamily: "Gilroy-medium",
-              ),
-            ),
-            SizedBox(height: 10)
-          ],
+            );
+          },
         ),
-        Column(
-          children: [
-            Text(
-              "VENDOR",
-              style: TextStyle(
-                fontFamily: "Gilroy-Regular",
-                color: Color(0xff222222),
-                fontSize: 12,
-              ),
-            ),
-            Text(
-              "Cadbury Nigeria",
-              style: TextStyle(
-                color: Color(0xff222222),
-                fontFamily: "Gilroy-medium",
-                fontSize: 16,
-              ),
-            ),
-            SizedBox(height: 10)
-          ],
-        ),
-        Column(
-          children: [
-            Text(
-              "CURRENT BALANCE",
-              style: TextStyle(
-                color: Color(0xff222222),
-                fontFamily: "Gilroy-Regular",
-                fontSize: 12,
-              ),
-            ),
-            Text(
-              "\$${12},${500.00}",
-              style: TextStyle(
-                color: Color(0xff222222),
-                fontSize: 16,
-                fontFamily: "Gilroy-medium",
-              ),
-            ),
-            SizedBox(height: 10)
-          ],
-        ),
-        Column(
-          children: [
-            Text(
-              "PENDING BALANCE",
-              style: TextStyle(
-                color: Color(0xff222222),
-                fontFamily: "Gilroy-Regular",
-                fontSize: 12,
-              ),
-            ),
-            Text(
-              "\$${7},${500.00}",
-              style: TextStyle(
-                color: Color(0xff222222),
-                fontSize: 16,
-                fontFamily: "Gilroy-medium",
-              ),
-            ),
-            SizedBox(height: 10)
-          ],
-        ),
-        Column(
-          children: [
-            Text(
-              "GENERATED ON",
-              style: TextStyle(
-                color: Color(0xff222222),
-                fontFamily: "Gilroy-Regular",
-                fontSize: 12,
-              ),
-            ),
-            Text(
-              "03 Dec, 2020. 12:45 pm",
-              style: TextStyle(
-                color: Color(0xff222222),
-                fontFamily: "Gilroy-medium",
-                fontSize: 16,
-              ),
-            ),
-            SizedBox(height: 20),
-          ],
-        ),
-        SizedBox(height: 70),
-      ],
+      ),
     );
   }
 }

@@ -39,3 +39,9 @@ app.*.symbols
 
 # Obfuscation related
 app.*.map.json
+
+#private files
+/android/key.properties
+
+#playstore deploy creds
+deploy-cred.json

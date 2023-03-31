@@ -1,8 +1,12 @@
-import 'package:CHATS/screens/home/view_models/base_view_model.dart';
-import 'package:CHATS/screens/home/view_models/sign_upVM.dart';
+import 'package:CHATS/router.dart';
+import 'package:CHATS/screens/Home/view_models/base_view_model.dart';
+import 'package:CHATS/screens/Home/view_models/sign_upVM.dart';
+import 'package:CHATS/theme_changer.dart';
+import 'package:CHATS/utils/colors.dart';
 import 'package:CHATS/utils/custom_carousel.dart';
-import 'package:CHATS/utils/rectanguler_round.dart';
+import 'package:CHATS/utils/text.dart';
 import 'package:CHATS/utils/ui_helper.dart';
+import 'package:CHATS/widgets/custom_btn.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -13,68 +17,84 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
+    print('Onboard our');
     final size = MediaQuery.of(context).size;
     final smallH = size.height / 36;
     final smallW = size.height / 46;
     return BaseViewModel<SignUpVM>(
-        providerReady: (provider) => provider.startUp(context),
-        builder: (context, provider, child) => Scaffold(
-              body: Container(
-                  height: size.height,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: size.height / 20,
-                      ),
-                      Center(
-                        child: Container(
-                          child: Image.asset(
-                            'assets/logo.png',
-                            width: smallW * 10,
-                          ),
-                          margin: EdgeInsets.only(bottom: smallH * 1.2),
+      providerReady: (provider) => {},
+      builder: (context, provider, child) => Scaffold(
+        body: Container(
+          color: ThemeBuilder.of(context)!.getCurrentTheme() == Brightness.light
+              ? Colors.white
+              : primaryColorDarkMode,
+          height: size.height,
+          child: Column(
+            children: [
+              SizedBox(
+                height: size.height / 10,
+              ),
+              Center(
+                child: Container(
+                  child: Image.asset(
+                    'assets/logo.png',
+                    width: smallW * 10,
+                  ),
+                  margin: EdgeInsets.only(bottom: smallH * 1.2),
+                ),
+              ),
+              Expanded(
+                child: SliderImages(
+                  imageList: provider.imageList,
+                  scrollText: provider.scrollText,
+                ),
+              ),
+              // SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    CustomButton(
+                      height: 52,
+                      children: [
+                        CustomText(
+                          text: 'Sign Up',
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontFamily: 'Gilroy-medium',
                         ),
-                      ),
-                      Expanded(
-                        child: SliderImages(
-                          imageList: provider.imageList,
-                          scrollText: provider.scrollText,
+                      ],
+                      onTap: () {
+                        print('Enter signup from onboard');
+                        Navigator.pushNamed(context, signUp);
+                      },
+                    ),
+                    SizedBox(height: 10),
+                    CustomButton(
+                      height: 52,
+                      bgColor: Colors.white,
+                      borderColor: Constants.usedGreen,
+                      children: [
+                        CustomText(
+                          text: 'Log In',
+                          color: Constants.usedGreen,
+                          fontSize: 16,
+                          fontFamily: 'Gilroy-medium',
                         ),
-                      ),
-                      // SizedBox(height: 20),
-                      RoundRectangularButton(
-                          radius: 10.0,
-                          color: Constants.kgreen2,
-                          onPressed: () =>
-                              Navigator.pushNamed(context, 'signUp'),
-                          text: Text(
-                            'Sign Up',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontFamily: 'Gilroy-Regular'),
-                          )),
-                      SizedBox(height: 10),
-                      Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(),
-                            borderRadius: BorderRadius.circular(10.0)),
-                        child: RoundRectangularButton(
-                            radius: 10.0,
-                            color: Color(0xFFE5E5E5),
-                            onPressed: () =>
-                                Navigator.pushNamed(context, 'login'),
-                            text: Text(
-                              'Log In',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontFamily: 'Gilroy-Regular'),
-                            )),
-                      ),
-                      SizedBox(height: 20),
-                    ],
-                  )),
-            ));
+                      ],
+                      onTap: () {
+                        print('Enter signup from onboard');
+                        Navigator.pushNamed(context, login);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 40),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

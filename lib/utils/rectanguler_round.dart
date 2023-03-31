@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class RoundRectangularButton extends StatelessWidget {
-  final Widget text;
+  final Widget? text;
   final radius;
   final color;
-  final Function onPressed;
+  final Function? onPressed;
   RoundRectangularButton(
       {@required this.radius,
       @required this.color,
@@ -17,7 +17,7 @@ class RoundRectangularButton extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(radius),
       ),
-      onPressed: onPressed,
+      onPressed: () => onPressed,
       child: text,
       fillColor: color,
       constraints: BoxConstraints.tightFor(

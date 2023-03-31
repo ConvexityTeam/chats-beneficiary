@@ -38,7 +38,7 @@ Data _$DataFromJson(Map<String, dynamic> json) {
     marital_status: json['marital_status'] as String,
     gender: json['gender'] as String,
     status: json['status'] as String,
-    balance: (json['balance'] as num)?.toDouble(),
+    balance: (json['balance'] as num).toDouble(),
     location: json['location'] as String,
     pin: json['pin'] as String,
     blockchain_address: json['blockchain_address'] as String,

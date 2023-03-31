@@ -1,5 +1,5 @@
-import 'package:CHATS/screens/home/view_models/base_view_model.dart';
-import 'package:CHATS/screens/home/view_models/sign_upVM.dart';
+import 'package:CHATS/screens/Home/view_models/base_view_model.dart';
+import 'package:CHATS/screens/Home/view_models/sign_upVM.dart';
 import 'package:CHATS/utils/text.dart';
 import 'package:CHATS/utils/ui_helper.dart';
 import 'package:CHATS/widgets/custom_btn.dart';
