@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class RecentTransactionItem extends StatelessWidget {
   const RecentTransactionItem({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

@@ -1,6 +1,8 @@
-import 'package:CHATS/general_base_view_model.dart';
-import 'package:CHATS/domain/local_storage.dart';
-import 'package:CHATS/screens/home/views/home_view.dart';
+// import 'package:CHATS/general_base_view_model.dart';
+import 'package:CHATS/screens/Home/view_models/base_view_model.dart';
+import 'package:CHATS/screens/Home/view_models/splash_screenVM.dart';
+// import 'package:CHATS/domain/local_storage.dart';
+// import 'package:CHATS/screens/Home/views/home_view.dart';
 import 'package:flutter/material.dart';
 
 class MajorSplashScreen extends StatefulWidget {
@@ -15,11 +17,11 @@ class _MajorSplashScreenState extends State<MajorSplashScreen> {
     Future.delayed(Duration(seconds: 6));
   }
 
-//provider.startUp,
+// provider.startUp,
   @override
   Widget build(BuildContext context) {
-    return GBaseViewModel(
-      providerReady: (provider) => {},
+    return BaseViewModel<SplashScreenViewModel>(
+      providerReady: (provider) => provider.startUp(context),
       builder: (context, provider, child) => Scaffold(
         backgroundColor: Colors.black,
         body: Container(

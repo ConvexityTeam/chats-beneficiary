@@ -1,183 +1,223 @@
 import 'package:CHATS/router.dart';
-import 'package:CHATS/screens/home/views/drawer_view.dart';
+import 'package:CHATS/screens/Home/views/drawer_view.dart';
+import 'package:CHATS/theme_changer.dart';
+import 'package:CHATS/utils/colors.dart';
+import 'package:CHATS/utils/text.dart';
 import 'package:CHATS/utils/ui_helper.dart';
+import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+// import 'package:nfc_manager/nfc_manager.dart';
+import 'package:snack/snack.dart';
 
-import '../../../utils/colors.dart';
+// import '../../../utils/colors.dart';
 
-class ScanNFCOrQRView extends StatelessWidget {
+class ScanNFCOrQRView extends StatefulWidget {
+  @override
+  _ScanNFCOrQRViewState createState() => _ScanNFCOrQRViewState();
+}
+
+class _ScanNFCOrQRViewState extends State<ScanNFCOrQRView> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  ScanResult? _result;
+
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    var orientation = MediaQuery.of(context).orientation;
+    // double width = MediaQuery.of(context).size.width;
+    // var orientation = MediaQuery.of(context).orientation;
     return WillPopScope(
       // ignore: missing_return
-      onWillPop: () {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) => AlertDialog(
-            title: Text("Exit Application ?"),
-            content: Text(
-                "Are you sure you want to exit this application ? click No to cancel, and Yes to continue."),
-            actions: [
-              FlatButton(
-                child: Text("Yes"),
-                onPressed: () {
-                  Navigator.of(context).pop(true);
-                },
-              ),
-              FlatButton(
-                child: Text("No"),
-                onPressed: () {
-                  Navigator.of(context).pop(false);
-                },
-              ),
-            ],
-          ),
-        );
-      },
-      child: SafeArea(
-        child: Scaffold(
-          key: scaffoldKey,
-          appBar: AppBar(
-            elevation: 0,
-            backgroundColor: Colors.white,
-            leading: GestureDetector(
-              onTap: () {
-                scaffoldKey.currentState.openDrawer();
-              },
-              child: Image.asset("assets/Group.png"),
-            ),
-            title: Text(
-              "Scan QR Code",
-              style: TextStyle(
-                color: Colors.black,
-                fontFamily: "Gilroy-medium",
-                fontSize: 20,
-              ),
+      onWillPop: () => onBackPressed(context),
+      child: Scaffold(
+        key: scaffoldKey,
+        appBar: AppBar(
+          centerTitle: false,
+          elevation: 0,
+          backgroundColor:
+              ThemeBuilder.of(context)!.getCurrentTheme() == Brightness.light
+                  ? Colors.white
+                  : primaryColorDarkMode,
+          leading: GestureDetector(
+            onTap: () {
+              scaffoldKey.currentState!.openDrawer();
+            },
+            child: Image.asset(
+              "assets/Group.png",
+              color: ThemeBuilder.of(context)!.getCurrentTheme() ==
+                      Brightness.light
+                  ? Colors.black
+                  : Colors.white,
             ),
           ),
-          drawer: AppDrawer(),
-          body: Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            margin: UIHelper.sidePadding,
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: 246,
-                        width: 150,
-                        margin: EdgeInsets.all(20),
+          title: CustomText(
+            text: 'Scan QR Code',
+            fontFamily: 'Gilroy-medium',
+            fontSize: 22,
+            edgeInset: EdgeInsets.only(top: 3),
+            color:
+                ThemeBuilder.of(context)!.getCurrentTheme() == Brightness.light
+                    ? Colors.black
+                    : Colors.white,
+          ),
+        ),
+        drawer: AppDrawer(),
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          margin: UIHelper.sidePadding,
+          color: ThemeBuilder.of(context)!.getCurrentTheme() == Brightness.light
+              ? Colors.white
+              : primaryColorDarkMode,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              InkWell(
+                onTap: () async {
+                  // Navigator.pushNamed(context, scanCode);
+                  await _scan();
+                  print({
+                    _result!.format,
+                    _result!.formatNote,
+                    _result!.rawContent,
+                    _result!.type,
+                  });
+
+                  if (_result!.rawContent is String) {
+                    Navigator.pushNamed(context, paymentConfirmation,
+                        arguments: _result!.rawContent);
+                  } else {
+                    var snackBar = SnackBar(
+                      content: CustomText(
+                        text: 'There was an issue getting the QR code result',
+                        color: ThemeBuilder.of(context)!.getCurrentTheme() ==
+                                Brightness.light
+                            ? Colors.black
+                            : Colors.white,
+                      ),
+                    );
+                    snackBar.show(context);
+                    return;
+                  }
+                },
+                child: Container(
+                  margin: EdgeInsets.all(20),
+                  padding: EdgeInsets.all(20),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Color.fromRGBO(245, 246, 248, 1),
+                    borderRadius: UIHelper.borderRadius,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // SizedBox(height: 20),
+                      Container(
+                        height: 50,
+                        width: 50,
                         decoration: BoxDecoration(
-                          borderRadius: UIHelper.borderRadius,
-                          color: backgroundColor,
+                          shape: BoxShape.circle,
+                          color: Colors.white,
                         ),
-                        child: Column(
-                          children: [
-                            SizedBox(height: 20),
-                            Container(
-                              height: 45,
-                              width: 45,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white,
-                              ),
-                              child: Center(
-                                child: Image.asset(
-                                  "assets/barcode.png",
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              "   Scan\nNFC Card",
-                              style: TextStyle(
-                                fontSize: 17,
-                                color: Colors.black,
-                                fontFamily: "Gilroy-medium",
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              "Scan a customer\n  NFC Card",
-                              style: TextStyle(
-                                fontSize: 13,
-                                // fontFamily: "Gilroy-medium",
-                                color: Color(0xff4F4F4F),
-                              ),
-                            ),
-                            Expanded(
-                              child: SizedBox(),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    // SizedBox(width: 5),
-                    Expanded(
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, scanCode);
-                        },
-                        child: Container(
-                          margin: EdgeInsets.all(20),
-                          height: 246,
-                          width: 150,
-                          decoration: BoxDecoration(
-                            color: backgroundColor,
-                            borderRadius: UIHelper.borderRadius,
-                          ),
-                          child: Column(
-                            children: [
-                              SizedBox(height: 20),
-                              Container(
-                                height: 45,
-                                width: 45,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                ),
-                                child: Center(
-                                    child: Image.asset("assets/qr code.png",
-                                        fit: BoxFit.cover)),
-                              ),
-                              SizedBox(height: 10),
-                              Text(
-                                "  Scan\nQR Code",
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  color: Colors.black,
-                                  fontFamily: "Gilroy-medium",
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              Text(
-                                "    Complete a\npayment with an\nalready created\n   QR code.",
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  color: Color(0xff4F4F4F),
-                                  // fontFamily: "Gilroy-medium",
-                                ),
-                              ),
-                              Expanded(
-                                child: SizedBox(),
-                              )
-                            ],
+                        child: Center(
+                          child: Image.asset(
+                            "assets/scan_code.png",
+                            width: 18,
+                            height: 18,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                )
-              ],
-            ),
+                      SizedBox(height: 20),
+                      CustomText(
+                        text: "Scan QR Code",
+                        fontSize: 22,
+                        color: Colors.black,
+                        fontFamily: "Gilroy-medium",
+                      ),
+                      SizedBox(height: 10),
+                      CustomText(
+                        text:
+                            "Complete a payment with an already\n created QR code.",
+                        textAlign: TextAlign.center,
+                        // fontSize: 18,
+                        color: Color(0xff4F4F4F),
+                        fontFamily: 'Gilroy-regular',
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              // InkWell(
+              //   onTap: () async {
+              //     // Start NFC reader
+              //     // Check availability
+              //     bool isAvailable = await NfcManager.instance.isAvailable();
+              //     if (isAvailable) {
+              //       print({"NFC is available"});
+              //     }
+
+              //     // Start Session
+              //     NfcManager.instance.startSession(
+              //       onDiscovered: (NfcTag tag) async {
+              //         // Do something with an NfcTag instance.
+              //         print({"Tag read", tag});
+              //         Ndef? ndef = Ndef.from(tag);
+
+              //         if (ndef == null) {
+              //           print('Tag is not compatible with NDEF');
+              //           return;
+              //         }
+
+              //         // Do something with an Ndef instance
+              //         print({"Ndef", ndef});
+              //       },
+              //     );
+
+              //     // Stop Session
+              //     NfcManager.instance.stopSession();
+              //   },
+              //   child: Container(
+              //     child: Text('READ NFC CARD'),
+              //   ),
+              // )
+            ],
           ),
         ),
       ),
     );
+  }
+
+  Future<void> _scan() async {
+    try {
+      final result = await BarcodeScanner.scan(
+        options: ScanOptions(
+          strings: {
+            'cancel': 'Cancel Scan',
+            'flash_on': 'Flash On',
+            'flash_off': 'Flash Off',
+          },
+          // restrictFormat: selectedFormats,
+          useCamera: -1,
+          autoEnableFlash: false,
+          // android: AndroidOptions(
+          //   aspectTolerance: _aspectTolerance,
+          //   useAutoFocus: _useAutoFocus,
+          // ),
+        ),
+      );
+      // return result;
+      setState(() => _result = result);
+    } on PlatformException catch (e) {
+      setState(() {
+        _result = ScanResult(
+          type: ResultType.Error,
+          format: BarcodeFormat.unknown,
+          rawContent: e.code == BarcodeScanner.cameraAccessDenied
+              ? 'The user did not grant the camera permission!'
+              : 'Unknown error: $e',
+        );
+      });
+    }
   }
 }

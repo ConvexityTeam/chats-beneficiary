@@ -1,13 +1,13 @@
-import 'dart:convert';
+// import 'dart:convert';
 import 'package:CHATS/domain/locator.dart';
 import 'package:CHATS/services/user_service.dart';
 import 'package:CHATS/services/base_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
+// import 'package:http/http.dart' as http;
 
 class NotificationAPI extends BaseService {
-  Future<List> recentTransactions() async {
+  Future<List?>? recentTransactions() async {
     try {
       final response = await Dio().get("$_transcationsURL",
           options: Options(headers: {
@@ -26,14 +26,14 @@ class NotificationAPI extends BaseService {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx and is also not 304.
       if (e.response != null) {
-        print(e.response.data);
-        print(e.response.headers);
-        print(e.response.request);
+        print(e.response!.data);
+        print(e.response!.headers);
+        // print(e.response.request);
       } else {
         // Something happened in setting up or sending the request that triggered an Error
-        throw e;
-        print(e.request);
+        // print(e.request);
         print(e.message);
+        throw e;
       }
     }
   }

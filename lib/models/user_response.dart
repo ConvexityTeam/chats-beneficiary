@@ -3,9 +3,9 @@ part 'user_response.g.dart';
 
 @JsonSerializable()
 class UserResponseModel {
-  String status;
-  String message;
-  Data userObj;
+  String? status;
+  String? message;
+  Data? userObj;
   UserResponseModel({this.status, this.message, this.userObj});
 
   factory UserResponseModel.fromJson(Map<String, dynamic> json) =>
@@ -16,41 +16,41 @@ class UserResponseModel {
 
 @JsonSerializable()
 class Data {
-  int id = 0;
-  String referal_id = '';
-  int RoleId = 0;
-  String OrganisationId = '';
-  String first_name = '';
-  String last_name = '';
-  String email = '';
-  String password = '';
-  String phone = '';
-  String bvn = '';
-  String marital_status = '';
-  String gender = '';
-  String status = '';
-  double balance = 0.0;
-  String location = '';
-  String pin = '';
-  String blockchain_address = '';
-  String address = '';
-  bool is_email_verified;
-  bool is_phone_verified;
-  bool is_bvn_verified;
-  bool is_self_signup;
-  bool is_public;
-  bool is_tfa_enabled;
-  String tfa_secret;
-  bool is_organisation;
-  String last_login;
-  String long;
-  String lat;
-  String profile_pic;
-  String nfc;
-  String right_fingers;
-  String left_fingers;
-  String createdAt;
-  String updatedAt;
+  int? id = 0;
+  String? referal_id = '';
+  int? RoleId = 0;
+  String? OrganisationId = '';
+  String? first_name = '';
+  String? last_name = '';
+  String? email = '';
+  String? password = '';
+  String? phone = '';
+  String? bvn = '';
+  String? marital_status = '';
+  String? gender = '';
+  String? status = '';
+  double? balance = 0.0;
+  String? location = '';
+  String? pin = '';
+  String? blockchain_address = '';
+  String? address = '';
+  bool? is_email_verified;
+  bool? is_phone_verified;
+  bool? is_bvn_verified;
+  bool? is_self_signup;
+  bool? is_public;
+  bool? is_tfa_enabled;
+  String? tfa_secret;
+  bool? is_organisation;
+  String? last_login;
+  String? long;
+  String? lat;
+  String? profile_pic;
+  String? nfc;
+  String? right_fingers;
+  String? left_fingers;
+  String? createdAt;
+  String? updatedAt;
   Data({
     this.id,
     this.referal_id,

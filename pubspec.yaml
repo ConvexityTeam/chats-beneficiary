@@ -3,47 +3,75 @@ description: A new Flutter project.
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+1
+version: 1.0.0+50 #Always change build number to a new number before building for release
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.16.2 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
   email_auth: ^0.0.1+2
-  http_parser: ^3.1.4
-  dio: ^3.0.10
-  intl: ^0.16.1
-  json_annotation: ^3.0.1
-  flutter_datetime_picker: ^1.3.8
-  font_awesome_flutter: ^8.8.1
-  dotted_border: ^1.0.5
-  provider: ^4.1.2
-  pin_entry_text_field: ^0.1.4
-  shared_preferences: ^0.5.8
+  http_parser: ^4.0.0
+  dio: ^4.0.0
+  intl: ^0.17.0
+  json_annotation: ^4.0.1
+  flutter_datetime_picker: ^1.5.1
+  font_awesome_flutter: ^9.1.0
+  dotted_border: ^2.0.0
+  provider: ^5.0.0
+  # pin_entry_text_field: ^0.1.4
+  shared_preferences: ^2.0.6
   cupertino_icons: ^1.0.0
-  build_runner: ^1.11.1
-  json_serializable: ^3.5.1
-  date_format: ^1.0.8
-  local_auth: ^0.6.3+4
-  carousel_slider: ^2.3.1
-  get_it: ^4.0.2
-  image_picker: ^0.6.7+4
-  path_provider: ^1.6.11
-  flutter_spinkit: ^4.1.2+1
-  flutter_barcode_scanner: ^1.0.2
-  fl_chart: ^0.12.1
+  build_runner: ^2.0.4
+  json_serializable: ^4.1.3
+  date_format: ^2.0.2
+  # local_auth: ^1.1.6
+  carousel_slider: ^4.0.0
+  get_it: ^7.1.3
+  image_picker: ^0.8.0+4
+  path_provider: ^2.0.2
+  flutter_spinkit: ^5.0.0
+  flutter_barcode_scanner: ^2.0.0
+  fl_chart: ^0.36.2
 
   path:
 
-  google_fonts: ^1.1.0
-  analyzer: ^0.41.2
+  google_fonts: ^2.1.0
+  analyzer: ^1.7.1
+  barcode_scan2: ^4.1.3
+  snack: ^2.0.0
+  flutter_local_auth_invisible: ^2.2.0
+  location: ^4.4.0
+  # geolocator: ^6.2.1
+  geocoder: ^0.2.1
+  # nfc_manager: ^3.1.1
+  bottom_drawer: ^0.0.5
+  jiffy: ^5.0.0
+  url_launcher: ^6.1.4
+  liquid_pull_to_refresh: ^3.0.1
+  flutter_markdown: ^0.6.10+3
+  unique_identifier: ^0.2.2
+  device_info_plus: ^4.1.2
+  flutter_password_strength: ^0.1.6
+  rxdart: ^0.27.5
+  permission_handler: ^10.2.0
+  otp_text_field: ^1.1.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  flutter_launcher_icons: ^0.9.2
+
+scripts:
+  build_bundle: flutter build appbundle --release --no-sound-null-safety -v
+
+flutter_icons:
+  image_path: "assets/icons/chats_bene_app_icon_3.png"
+  android: "launcher_icon"
+  ios: true
 
 flutter:
   assets:
@@ -51,6 +79,11 @@ flutter:
     - icons/
     - assets/images/
     - assets/icons/
+    # - assets/icons/chats_bene_app_icon_2.png
+    - assets/icons/chats_bene_app_icon_3.png
+    - assets/images/chats_login_transparent.png
+    - assets/images/chats_login_transparent_green.png
+    - assets/CountryCodes.json
 
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:

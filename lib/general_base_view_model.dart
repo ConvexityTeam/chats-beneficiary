@@ -4,8 +4,9 @@ import 'providers/general_base_provider_model.dart';
 import 'domain/general_locator.dart';
 
 class GBaseViewModel<T extends GBaseProviderModel> extends StatefulWidget {
-  final Widget Function(BuildContext context, T provider, Widget child) builder;
-  final Function(T) providerReady;
+  final Widget Function(BuildContext context, T provider, Widget? child)?
+      builder;
+  final Function(T)? providerReady;
 
   GBaseViewModel({this.builder, this.providerReady});
 
@@ -20,7 +21,7 @@ class _BaseViewModelState<T extends GBaseProviderModel>
   @override
   void initState() {
     if (widget.providerReady != null) {
-      widget.providerReady(provider);
+      widget.providerReady!(provider);
     }
     super.initState();
   }
@@ -29,7 +30,7 @@ class _BaseViewModelState<T extends GBaseProviderModel>
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
       value: provider,
-      child: Consumer<T>(builder: widget.builder),
+      child: Consumer<T>(builder: widget.builder!),
     );
   }
 }

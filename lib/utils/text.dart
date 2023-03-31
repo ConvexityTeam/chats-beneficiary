@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomText extends StatelessWidget {
   CustomText(
-      {@required this.text,
+      {required this.text,
       this.color,
       this.fontSize,
       this.fontWeight,
@@ -12,23 +12,23 @@ class CustomText extends StatelessWidget {
       this.edgeInset,
       this.fontFamily});
 
-  final String text;
-  final double fontSize;
-  final Color color;
-  final FontWeight fontWeight;
+  final String? text;
+  final double? fontSize;
+  final Color? color;
+  final FontWeight? fontWeight;
 
-  final TextAlign textAlign;
-  final TextDecorationStyle textDecorationStyle;
-  final FontStyle fontStyle;
-  final EdgeInsets edgeInset;
-  final String fontFamily;
+  final TextAlign? textAlign;
+  final TextDecorationStyle? textDecorationStyle;
+  final FontStyle? fontStyle;
+  final EdgeInsets? edgeInset;
+  final String? fontFamily;
   @override
   Widget build(BuildContext context) {
-    Size screen = MediaQuery.of(context).size;
+    // Size screen = MediaQuery.of(context).size;
     return Padding(
-      padding: edgeInset ?? EdgeInsets.only(bottom: 8.0),
+      padding: edgeInset ?? EdgeInsets.zero,
       child: Text(
-        text,
+        text!,
         style: TextStyle(
             color: color ?? Colors.black,
             decorationStyle: textDecorationStyle ?? TextDecorationStyle.solid,
@@ -41,7 +41,7 @@ class CustomText extends StatelessWidget {
             ),
         softWrap: true,
         maxLines: 5,
-        overflow: TextOverflow.clip,
+        overflow: TextOverflow.ellipsis,
         textAlign: textAlign ?? TextAlign.left,
       ),
     );
